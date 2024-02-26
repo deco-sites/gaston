@@ -67,11 +67,9 @@ const manifest = {
   "sections": {
     "deco-sites/gaston/sections/Animation/Animation.tsx": $$$$$$0,
     "deco-sites/gaston/sections/Cards/IconCardsCarousel.tsx": $$$$$$1,
-    "deco-sites/gaston/sections/Cards/IconCardsCarouselWithImage.tsx":
-      $$$$$$2,
+    "deco-sites/gaston/sections/Cards/IconCardsCarouselWithImage.tsx": $$$$$$2,
     "deco-sites/gaston/sections/Cards/ImageCardsCarousel.tsx": $$$$$$3,
-    "deco-sites/gaston/sections/Cards/ImageCardsCarouselWithImage.tsx":
-      $$$$$$4,
+    "deco-sites/gaston/sections/Cards/ImageCardsCarouselWithImage.tsx": $$$$$$4,
     "deco-sites/gaston/sections/Category/CategoryBanner.tsx": $$$$$$5,
     "deco-sites/gaston/sections/Category/CategoryGrid.tsx": $$$$$$6,
     "deco-sites/gaston/sections/Category/CategoryList.tsx": $$$$$$7,
@@ -106,8 +104,7 @@ const manifest = {
     "deco-sites/gaston/sections/Miscellaneous/CookieConsent.tsx": $$$$$$36,
     "deco-sites/gaston/sections/Miscellaneous/Slide.tsx": $$$$$$37,
     "deco-sites/gaston/sections/Newsletter/Newsletter.tsx": $$$$$$38,
-    "deco-sites/gaston/sections/Product/ImageGalleryFrontBack.tsx":
-      $$$$$$39,
+    "deco-sites/gaston/sections/Product/ImageGalleryFrontBack.tsx": $$$$$$39,
     "deco-sites/gaston/sections/Product/ImageGallerySlider.tsx": $$$$$$40,
     "deco-sites/gaston/sections/Product/NotFound.tsx": $$$$$$41,
     "deco-sites/gaston/sections/Product/NotFoundChallenge.tsx": $$$$$$42,
