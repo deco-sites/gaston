@@ -9,6 +9,10 @@ import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx
 import * as $AddToCartButton_vnda from "./islands/AddToCartButton/vnda.tsx";
 import * as $AddToCartButton_vtex from "./islands/AddToCartButton/vtex.tsx";
 import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
+import * as $Gaston_Buttons from "./islands/Gaston/Buttons.tsx";
+import * as $Gaston_Drawers from "./islands/Gaston/Drawers.tsx";
+import * as $Gaston_LoginButton from "./islands/Gaston/LoginButton.tsx";
+import * as $Gaston_SearchBar from "./islands/Gaston/SearchBar.tsx";
 import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
 import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
 import * as $Header_Cart_nuvemshop from "./islands/Header/Cart/nuvemshop.tsx";
@@ -39,6 +43,10 @@ const manifest = {
     "./islands/AddToCartButton/vnda.tsx": $AddToCartButton_vnda,
     "./islands/AddToCartButton/vtex.tsx": $AddToCartButton_vtex,
     "./islands/AddToCartButton/wake.tsx": $AddToCartButton_wake,
+    "./islands/Gaston/Buttons.tsx": $Gaston_Buttons,
+    "./islands/Gaston/Drawers.tsx": $Gaston_Drawers,
+    "./islands/Gaston/LoginButton.tsx": $Gaston_LoginButton,
+    "./islands/Gaston/SearchBar.tsx": $Gaston_SearchBar,
     "./islands/Header/Buttons.tsx": $Header_Buttons,
     "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,
     "./islands/Header/Cart/nuvemshop.tsx": $Header_Cart_nuvemshop,

@@ -9,12 +9,24 @@ const displayCart = signal(false);
 const displayMenu = signal(false);
 const displaySearchPopup = signal(false);
 const displaySearchDrawer = signal(false);
+const displayMenuProducts = signal(false);
+const displayMenuProductsChild = signal(false);
+const productsChild = signal({ label: "", children: [], href: "" });
+const productsChild2 = signal({ label: "", children: [], href: "" });
+const userEmail = signal("");
+const userLogged = signal(false);
 
 const state = {
   displayCart,
   displayMenu,
   displaySearchPopup,
   displaySearchDrawer,
+  displayMenuProducts,
+  userEmail,
+  userLogged,
+  productsChild,
+  productsChild2,
+  displayMenuProductsChild,
 };
 
 // Keyboard event listeners
