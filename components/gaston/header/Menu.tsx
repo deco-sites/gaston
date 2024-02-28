@@ -8,10 +8,9 @@ import Icon from "deco-sites/gaston/components/ui/Icon.tsx";
 
 export interface Props {
   items: INavItem[];
-  paths: { loginHref: string; favouriteHref: string };
 }
 
-function Menu({ items, paths }: Props) {
+function Menu({ items }: Props) {
   const {
     displayMenuProducts,
     displayMenu,
@@ -85,7 +84,7 @@ function Menu({ items, paths }: Props) {
         <li>
           <a
             class="flex items-center gap-4 px-4 py-2 border-b-[1px]"
-            href={userLogged.value ? "/account" : paths.loginHref}
+            href={"/account"}
           >
             <div class="flex gap-2 items-center justify-center">
               <Icon id="User" strokeWidth={1} class="w-[22px] h-[22px]" />
@@ -108,7 +107,7 @@ function Menu({ items, paths }: Props) {
         <li>
           <a
             class="flex items-center gap-4 px-4 py-2 border-b-[1px]"
-            href={paths.favouriteHref}
+            href={"/account/wishlist"}
           >
             <div class="flex gap-2 items-center justify-center">
               <Icon id="headset" strokeWidth={1} class="w-5 h-5" />

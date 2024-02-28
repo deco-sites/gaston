@@ -6,6 +6,7 @@ import { AnalyticsItem } from "apps/commerce/types.ts";
 import CartItem, { Item, Props as ItemProps } from "./CartItem.tsx";
 import Coupon, { Props as CouponProps } from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
+import Icon from "deco-sites/gaston/components/ui/Icon.tsx";
 
 interface Props {
   items: Item[];
@@ -44,14 +45,13 @@ function Cart({
   return (
     <div
       class="flex flex-col justify-center items-center overflow-hidden"
-      style={{ minWidth: "calc(min(100vw, 425px))", maxWidth: "425px" }}
     >
       {isEmtpy
         ? (
-          <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-6 text-primary-content">
             <span class="font-medium text-2xl">Sua sacola está vazia</span>
             <Button
-              class="btn-outline"
+              class="btn-outline border-primary text-primary-content"
               onClick={() => {
                 displayCart.value = false;
               }}
@@ -63,7 +63,7 @@ function Cart({
         : (
           <>
             {/* Free Shipping Bar */}
-            <div class="px-2 py-4 w-full">
+            <div class="px-3.5 py-4 w-full">
               <FreeShippingProgressBar
                 total={total}
                 locale={locale}
@@ -75,7 +75,7 @@ function Cart({
             {/* Cart Items */}
             <ul
               role="list"
-              class="mt-6 px-2 flex-grow overflow-y-auto flex flex-col gap-6 w-full"
+              class="lg:scroll-menu mt-6 px-3.5 flex-grow overflow-y-auto flex flex-col gap-6 w-full"
             >
               {items.map((item, index) => (
                 <li key={index}>
@@ -95,43 +95,33 @@ function Cart({
             <footer class="w-full">
               {/* Subtotal */}
               <div class="border-t border-base-200 py-2 flex flex-col">
-                {discounts > 0 && (
-                  <div class="flex justify-between items-center px-4">
-                    <span class="text-sm">Descontos</span>
-                    <span class="text-sm">
-                      {formatPrice(discounts, currency, locale)}
-                    </span>
-                  </div>
-                )}
-                <div class="w-full flex justify-between px-4 text-sm">
-                  <span>Subtotal</span>
-                  <span>
-                    {formatPrice(subtotal, currency, locale)}
-                  </span>
-                </div>
                 {onAddCoupon && (
                   <Coupon onAddCoupon={onAddCoupon} coupon={coupon} />
                 )}
               </div>
-
+              {discounts > 0 && (
+                  <div class="flex justify-between items-center px-4">
+                    <span class="text-xs text-black opacity-60 font-semibold">Descontos</span>
+                    <span class="text-sm text-primary font-bold">
+                      {formatPrice(discounts, currency, locale)}
+                    </span>
+                  </div>
+                )}
               {/* Total */}
               <div class="border-t border-base-200 pt-4 flex flex-col justify-end items-end gap-2 mx-4">
                 <div class="flex justify-between items-center w-full">
-                  <span>Total</span>
-                  <span class="font-medium text-xl">
+                <span class={`text-xs text-black opacity-60 font-semibold`}>TOTAL (SEM FRETE)</span>
+                  <span class={`text-sm text-primary font-bold`}>
                     {formatPrice(total, currency, locale)}
                   </span>
                 </div>
-                <span class="text-sm text-base-300">
-                  Taxas e fretes serão calculados no checkout
-                </span>
               </div>
 
-              <div class="p-4">
+              <div class="p-4 flex flex-col items-center justify-center gap-2">
                 <a class="inline-block w-full" href={checkoutHref}>
                   <Button
                     data-deco="buy-button"
-                    class="btn-primary btn-block"
+                    class="btn-accent rounded-[500px] text-white flex gap-4 items-center justify-center w-full"
                     disabled={loading || isEmtpy}
                     onClick={() => {
                       sendEvent({
@@ -147,9 +137,16 @@ function Cart({
                       });
                     }}
                   >
-                    Fechar pedido
+                    <Icon id="bagBuyBtn" width={14} height={16} />
+                    <span class={`leading-none text-sm`}>FINALIZAR COMPRA</span>
                   </Button>
                 </a>
+                <Button class={`w-full h-12 border border-gray-200 rounded-[500px] text-primary-content`}
+                onClick={() => {
+                  displayCart.value = false;
+                }}
+                >
+                  CONTINUAR COMPRANDO</Button>
               </div>
             </footer>
           </>
