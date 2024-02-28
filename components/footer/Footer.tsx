@@ -11,6 +11,8 @@ import Newsletter from "$store/islands/Newsletter.tsx";
 import { clx } from "$store/sdk/clx.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
+import Image from "apps/website/components/Image.tsx";
+import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 export type Item = {
   label: string;
@@ -24,29 +26,14 @@ export type Section = {
 
 export interface SocialItem {
   label:
-    | "Discord"
     | "Facebook"
     | "Instagram"
-    | "Linkedin"
-    | "Tiktok"
-    | "Twitter";
+    | "Central";
   link: string;
 }
 
 export interface PaymentItem {
   label: "Diners" | "Elo" | "Mastercard" | "Pix" | "Visa";
-}
-
-export interface MobileApps {
-  /** @description Link to the app */
-  apple?: string;
-  /** @description Link to the app */
-  android?: string;
-}
-
-export interface RegionOptions {
-  currency?: Item[];
-  language?: Item[];
 }
 
 export interface NewsletterForm {
@@ -75,13 +62,16 @@ export interface Layout {
     sectionLinks?: boolean;
     socialLinks?: boolean;
     paymentMethods?: boolean;
-    mobileApps?: boolean;
-    regionOptions?: boolean;
     extraLinks?: boolean;
     backToTheTop?: boolean;
   };
 }
 
+interface logosSeguranca{
+  image: ImageWidget;
+  alt?: string;
+  href?: string;
+}
 export interface Props {
   logo?: {
     image: ImageWidget;
@@ -95,15 +85,20 @@ export interface Props {
   };
   sections?: Section[];
   social?: {
-    title?: string;
+    title?: HTMLWidget;
     items: SocialItem[];
   };
   payments?: {
     title?: string;
     items: PaymentItem[];
   };
-  mobileApps?: MobileApps;
-  regionOptions?: RegionOptions;
+  grupo:{
+    textFooter: HTMLWidget;
+    imageGrupo: ImageWidget;
+    alt?: string;
+  }
+  cnpjText: string;
+  logos: logosSeguranca[];
   extraLinks?: Item[];
   backToTheTop?: {
     text?: string;
@@ -161,14 +156,15 @@ function Footer({
   }],
   social = {
     title: "Redes sociais",
-    items: [{ label: "Instagram", link: "/" }, { label: "Tiktok", link: "/" }],
+    items: [{ label: "Instagram", link: "/" }],
   },
   payments = {
     title: "Formas de pagamento",
     items: [{ label: "Mastercard" }, { label: "Visa" }, { label: "Pix" }],
   },
-  mobileApps = { apple: "/", android: "/" },
-  regionOptions = { currency: [], language: [] },
+  grupo,
+  cnpjText,
+  logos,
   extraLinks = [],
   backToTheTop,
   layout = {
@@ -180,8 +176,6 @@ function Footer({
       sectionLinks: false,
       socialLinks: false,
       paymentMethods: false,
-      mobileApps: false,
-      regionOptions: false,
       extraLinks: false,
       backToTheTop: false,
     },
@@ -210,12 +204,6 @@ function Footer({
   const _payments = layout?.hide?.paymentMethods
     ? <></>
     : <PaymentMethods content={payments} />;
-  const _apps = layout?.hide?.mobileApps
-    ? <></>
-    : <MobileApps content={mobileApps} />;
-  const _region = layout?.hide?.regionOptions
-    ? <></>
-    : <RegionSelector content={regionOptions} />;
   const _links = layout?.hide?.extraLinks
     ? <></>
     : <ExtraLinks content={extraLinks} />;
@@ -240,8 +228,6 @@ function Footer({
               {_payments}
               {_social}
               <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 lg:items-end">
-                {_apps}
-                {_region}
               </div>
             </div>
             <Divider />
@@ -258,8 +244,6 @@ function Footer({
                 {_logo}
                 {_social}
                 {_payments}
-                {_apps}
-                {_region}
               </div>
               <div class="flex flex-col gap-10 lg:gap-20 lg:w-1/2 lg:pr-10">
                 {_newsletter}
@@ -281,7 +265,6 @@ function Footer({
                 {_newsletter}
                 <div class="flex flex-col gap-10">
                   {_payments}
-                  {_apps}
                 </div>
               </div>
               <div class="flex flex-col gap-10 lg:gap-20 lg:w-3/5 lg:items-end">
@@ -289,7 +272,6 @@ function Footer({
                   {_sectionLinks}
                   {_social}
                 </div>
-                {_region}
               </div>
             </div>
             <Divider />
@@ -300,30 +282,78 @@ function Footer({
           </div>
         )}
         {layout?.variation == "Variation 4" && (
-          <div class="flex flex-col gap-10">
+          <div class="flex flex-col gap-6">
             {_newsletter}
             {layout?.hide?.newsletter ? <></> : <Divider />}
-            <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between">
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-0 lg:divide-x">
+              <div class={`flex flex-col items-center justify-center lg:max-w-[265px] lg:pr-10`}>
+                {_logo}
+                {_social}
+              </div>
               {_sectionLinks}
               <div class="flex flex-col md:flex-row lg:flex-col gap-10 lg:gap-10 lg:w-2/5 lg:pl-10">
-                <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
-                  <div class="lg:flex-auto">
-                    {_payments}
-                  </div>
-                  <div class="lg:flex-auto">
-                    {_social}
-                  </div>
-                </div>
-                <div class="flex flex-col gap-10 lg:gap-10">
-                  {_region}
-                  {_apps}
-                </div>
+                {_payments}
               </div>
             </div>
             <Divider />
-            <div class="flex flex-col md:flex-row md:justify-between gap-10 md:items-center">
-              {_logo}
-              <PoweredByDeco />
+            <div class={`flex flex-col gap-5 lg:flex-row`}>
+              <div class={`text-xs text-primary-content `} dangerouslySetInnerHTML={{ __html: grupo.textFooter }}/>
+              <div class={`flex items-center justify-center gap-2 bg-[#F7F7F7] py-1.5 px-4 rounded-lg lg:w-full`}>
+                <div class={`text-sm text-primary-content font-normal`}>
+                  UMA EMPRESA INTEGRANTE
+                </div>
+                <Image
+                  loading="lazy"
+                  src={grupo?.imageGrupo}
+                  alt={grupo?.alt}
+                  width={103}
+                  height={44}
+                />
+              </div>
+            </div>
+            <Divider />
+            <div class={`flex flex-col gap-4 lg:flex-row`}>
+              <div class={`text-sm text-primary-content `} dangerouslySetInnerHTML={{ __html: cnpjText }}/>
+              <div class={`flex gap-4`}>
+                {logos.map((item) => {
+                  return(
+                    <a href={item.href}>
+                      <Image
+                        loading="lazy"
+                        src={item?.image}
+                        alt={item?.alt}
+                        width={66}
+                        />
+                    </a>
+                  )
+                })}
+              </div>
+            </div>
+            <Divider />
+            <div class="flex flex-col md:flex-row lg:justify-start gap-10 md:items-center">
+              <a href="" class={`flex gap-2 tems-center justify-start text-primary-content`}>
+                Tecnologia de e-commerce 
+                <img
+                  loading="lazy"
+                  src="/image/logo-vtex.png"
+                  alt={"Logo Vtex"}
+                  width={83}
+                  height={30}
+                />
+              </a>
+              <a href="" class={`flex gap-2 h-[18px] items-center justify-start text-primary-content`}>
+                Desenvolvido por 
+                <img
+                  loading="lazy"
+                  src="/image/logo-tec.png"
+                  alt={"Logo Vtex"}
+                  width={88}
+                  height={18}
+                />
+              </a>
+              <div class={`flex gap-2 items-center justify-start text-primary-content`}>
+                Powered by <PoweredByDeco color="Black" />
+              </div>
             </div>
           </div>
         )}
@@ -337,7 +367,6 @@ function Footer({
               <div class="flex flex-col gap-10 md:w-2/5 lg:pl-10">
                 {_payments}
                 {_social}
-                {_apps}
               </div>
             </div>
             <Divider />
@@ -345,7 +374,6 @@ function Footer({
               <PoweredByDeco />
               <div class="flex flex-col md:flex-row gap-10 md:items-center">
                 {_links}
-                {_region}
               </div>
             </div>
           </div>
