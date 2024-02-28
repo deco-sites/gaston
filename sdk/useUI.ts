@@ -12,7 +12,11 @@ const displaySearchDrawer = signal(false);
 const displayMenuProducts = signal(false);
 const displayMenuProductsChild = signal(false);
 const productsChild = signal({ label: "", children: [], href: "" });
-const productsChild2 = signal({ label: "", children: [], href: "" });
+const productsChild2 = signal({
+  label: "",
+  children: [{ type: "", label: "", href: "" }],
+  href: "",
+});
 const userEmail = signal("");
 const userLogged = signal(false);
 

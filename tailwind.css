@@ -39,6 +39,29 @@
     @apply border-l border-transparent duration-200 whitespace-pre-line text-center;
     @apply flex flex-col items-center justify-start gap-8 py-10 px-8 lg:px-12;
   }
+
+  .menu-hover-desktop:hover ul{
+    display: flex;
+  }
+  .menu-divide::after{
+    content: "";
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    opacity: 12%;
+  }
+  .scroll-menu::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .scroll-menu::-webkit-scrollbar-thumb {
+    background-color: #E30613;
+    border-radius: 20px;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {

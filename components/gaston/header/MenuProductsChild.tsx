@@ -7,18 +7,38 @@ function MenuProducts() {
 
   return (
     <div>
-      <ul class="w-full h-full bg-white">
+      <ul
+        class={`bg-white ${
+          productsChild2.value.children[0].type == "sizeItem"
+            ? "flex flex-wrap gap-2 w-11/12 m-auto h-auto"
+            : "w-full h-full"
+        }`}
+      >
         {productsChild2.value.children.map((node: any) => (
-          <li class="w-full">
+          <li
+            class={`${
+              node.type == "navItem"
+                ? "w-full"
+                : "w-[55px] h-[55px] bg-[#F7F7F7] rounded-full border border-black border-opacity-10 flex items-center justify-center"
+            }`}
+          >
             <a
               href={node.href}
-              class="flex items-center justify-between w-full text-primary-content uppercase px-4 py-4 border-b-[1px] font-medium text-sm border-black border-opacity-10"
+              class={`${
+                node.type == "navItem"
+                  ? "flex items-center justify-between w-full text-primary-content uppercase px-4 py-4 border-b-[1px] font-medium text-sm border-black border-opacity-10"
+                  : "text-black"
+              }`}
             >
               {node.label}
             </a>
           </li>
         ))}
-        <li class="w-full">
+        <li
+          class={`w-full ${
+            productsChild2.value.children[0].type == "sizeItem" && "hidden"
+          }`}
+        >
           <Button
             class="py-3 border-none uppercase w-full text-primary-content bg-white hover:bg-inherit text-left"
             onClick={() => {

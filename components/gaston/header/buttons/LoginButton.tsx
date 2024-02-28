@@ -1,5 +1,5 @@
 import { useUI } from "$store/sdk/useUI.ts";
-import IconUser from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/user.tsx";
+import Icon from "deco-sites/gaston/components/ui/Icon.tsx";
 
 export interface Props {
   loginHref: string;
@@ -14,14 +14,14 @@ export default function LoginButton({ loginHref }: Props) {
       href={userLogged.value ? "/account" : loginHref}
       aria-label="Entre ou Cadastre-se"
     >
-      <div class="bg-primary-content p-1 rounded-full">
-        <IconUser class="w-6 h-6 text-base-300" />
+      <div class="text-primary p-1 rounded-full">
+        <Icon id="User" strokeWidth={1} class="w-[24px] h-[24px]" />
       </div>
-      <p class="text-[1rem] text-base-300">
+      <p class="text-base text-primary-content">
         {!userLogged.value
           ? (
             <>
-              Entre ou <br /> Cadastre-se
+              Entre ou cadastre-se
             </>
           )
           : (

@@ -21,7 +21,7 @@ export default function CartButton() {
         </span>
       )}
       <Button
-        class="btn-circle btn-sm btn-ghost p-1"
+        class="btn-circle btn-sm p-1 lg:bg-base-content"
         aria-label="open cart"
         data-deco={displayCart.value && "open-cart"}
         loading={loading.value}

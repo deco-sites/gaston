@@ -59,14 +59,14 @@ function Navbar({ paths, logo }: {
           <a
             href="/"
             aria-label="Store logo"
-            class="flex items-center py-3 h-[42px] w-[238px]"
+            class="flex items-center py-3 h-[30px] w-[117px]"
           >
             <ImageComponent
               class="w-full"
               src={logo.src}
               alt={logo.alt}
-              width={238}
-              height={42}
+              width={117}
+              height={30}
             />
           </a>
         )}
@@ -74,15 +74,26 @@ function Navbar({ paths, logo }: {
           action="/s"
           method="GET"
           id={id}
-          class="flex-grow rounded-2xl border-[1px] border-gray-300 text-xs py-2 pl-2"
+          class="min-h-[40px] relative w-1/2"
         >
           <input
+            className="w-full p-2 text-base text-black h-[51px] bg-base-300 rounded-full border border-solid border-gray-200"
             type="text"
-            placeholder="O que você procura? Nós podemos te ajudar!"
-            name="q"
-            class="w-full border-none"
+            name="q" // Adicione o atributo 'name' com o valor 'q'
+            placeholder="Busque por tênis, mochila..."
+          />
+          <button
+            type="submit"
+            aria-label="Search"
+            class={`absolute right-8 top-3.5`}
           >
-          </input>
+            <Icon
+              id={"MagnifyingGlass"}
+              size={17}
+              strokeWidth={1}
+              class="text-primary-content"
+            />
+          </button>
         </form>
         <script
           src={scriptAsDataURI((id: string) => {
@@ -102,11 +113,11 @@ function Navbar({ paths, logo }: {
         <div class="flex items-center gap-6">
           <LoginButton loginHref={paths.loginHref} />
           <a
-            class="btn btn-circle btn-sm btn-ghost bg-primary-content p-1 w-9 h-9"
+            class="text-primary"
             href={paths.favouriteHref}
             aria-label="Wishlist"
           >
-            <IconHeart class="w-6 h-6 text-base-300" />
+            <Icon id="Heart" strokeWidth={1} class="w-5 h-[19px]" />
           </a>
           <CartButton />
         </div>

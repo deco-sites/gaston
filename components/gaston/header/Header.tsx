@@ -3,7 +3,6 @@ import Drawers from "$store/islands/Gaston/Drawers.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import Image from "apps/website/components/Image.tsx";
 import IconBrandInstagram from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/brand-instagram.tsx";
 import IconBrandLine from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/brand-line.tsx";
 import IconPhone from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/phone.tsx";
@@ -13,21 +12,21 @@ import NavBar from "./NavBar.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import NavItem from "./NavItem.tsx";
 
-export interface NavItem {
+export interface lastChild {
+  type: "navItem" | "sizeItem";
   label: string;
   href?: string;
-  children?: Array<{
-    label: string;
-    href?: string;
-    children?: Array<{
-      label: string;
-      href?: string;
-    }>;
-  }>;
-  image?: {
-    src?: ImageWidget;
-    alt?: string;
-  };
+}
+interface INavItem {
+  label: string;
+  href?: string;
+  children?: lastChild[];
+}
+export interface MenuNavItem {
+  label: string;
+  href?: string;
+  children?: INavItem[];
+  destaque?: boolean;
 }
 
 export interface Social {
@@ -49,7 +48,7 @@ export interface Props {
    * @title Navigation items
    * @description Navigation items used both on mobile and desktop menus
    */
-  navItems: NavItem[];
+  navItems: MenuNavItem[];
 
   /** @title Logo */
   logo?: { src: ImageWidget; alt: string };
@@ -70,7 +69,7 @@ function Header({
   const id = useId();
   return (
     <>
-      <header class="xl:h-[151px] h-[160px]">
+      <header class="xl:h-[155px] h-[160px]">
         <Drawers
           menu={{ items: navItems }}
           logo={logo}
@@ -144,7 +143,7 @@ function Header({
             </div>
             {navItems.length > 0 &&
               (
-                <ul class="hidden xl:flex justify-center m-auto w-11/12 max-w-[1300px] text-[#541693] uppercase items-center text-sm gap-5 min-h-[35px]">
+                <ul class="hidden xl:flex justify-center w-full items-center text-base min-h-[50px] bg-primary">
                   {navItems.map((item, index) => (
                     <NavItem
                       item={item}
