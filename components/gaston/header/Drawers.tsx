@@ -1,12 +1,11 @@
 import Button from "$store/components/gaston/ui/Button.tsx";
-import type { Props as MenuProps } from "$store/components/header/Menu.tsx";
+import type { Props as MenuProps } from "$store/components/gaston/header/Menu.tsx";
 import Drawer from "$store/components/ui/Drawer.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 import { useCart } from "apps/vtex/hooks/useCart.ts";
 import type { ImageWidget as LiveImage } from "apps/admin/widgets.ts";
 import ImageComponent from "apps/website/components/Image.tsx";
-import IconChevronLeft from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/chevron-left.tsx";
 import IconX from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/x.tsx";
 import type { ComponentChildren } from "preact";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
@@ -35,7 +34,6 @@ export interface Props {
    * @ignore_gen true
    */
   children?: ComponentChildren;
-  paths: { loginHref: string; favouriteHref: string };
   platform: ReturnType<typeof usePlatform>;
 }
 
@@ -67,7 +65,7 @@ const Aside = (
   <div class="bg-white grid grid-rows-[auto_1fr] max-w-[425px] w-11/12 min-h-[100%] max-h-[100vh] overflow-y-auto">
     <div
       class={`${
-        !displayMenu || isMiniCart ? "" : "bg-base-100"
+        !displayMenu || isMiniCart ? "bg-[#F7F7F7] py-4 border-b border-black border-opacity-10" : "bg-base-100"
       } relative flex flex-col`}
     >
       <div
@@ -121,18 +119,18 @@ const Aside = (
         {isMiniCart && onClose && (
           <>
             <button
-              class="btn-ghost rounded-full flex justify-between items-center bg-white bg-opacity-10 h-[40px] w-[40px]"
+              class="rounded-full flex justify-center items-center bg-base-content h-[40px] w-[40px]"
               onClick={onClose}
             >
               <Icon
                 id="XMark"
-                class="w-[15px] h-5"
+                class="w-5 h-5"
+                size={20}
                 strokeWidth={1}
               />
             </button>
-            <Icon id="sacola" class="mx-4" width={14} height={16} />
-            <div>
-              <span class="leading-5 text-[18px] text-white font-bold">
+            <div class={`ml-4`}>
+              <span class="leading-5 text-base text-primary-content font-bold">
                 {title}
                 <strong class="font-medium">{subtitle}</strong>
               </span>
@@ -191,7 +189,7 @@ const Aside = (
   </div>
 );
 
-function Drawers({ menu, logo, children, paths, platform }: Props) {
+function Drawers({ menu, logo, children, platform }: Props) {
   const {
     displayMenu,
     displayMenuProducts,
@@ -227,7 +225,7 @@ function Drawers({ menu, logo, children, paths, platform }: Props) {
           }}
           id={id}
         >
-          {displayMenu.value && <Menu {...menu} paths={paths} />}
+          {displayMenu.value && <Menu {...menu} />}
           {displayMenuProductsChild.value && <MenuProductsChild />}
         </Aside>
       }
@@ -257,10 +255,10 @@ function Drawers({ menu, logo, children, paths, platform }: Props) {
           onClose={() => displayCart.value = false}
           aside={
             <Aside
-              title="SEU CARRINHO: "
-              subtitle={`${items.length} ${
-                items.length > 1 ? "ITENS" : "ITEM"
-              }`}
+              title="Seu carrinho "
+              subtitle={`(${items.length} ${
+                items.length > 1 ? "items" : "item"
+              })`}
               chevronClick={() => displayCart.value = false}
               onClose={() => displayCart.value = false}
               displayMenu={displayCart.value}

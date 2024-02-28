@@ -16,7 +16,7 @@ export default function CartButton() {
   return (
     <div class="indicator">
       {totalItems && (
-        <span class="indicator-item badge badge-secondary badge-sm">
+        <span class="indicator-item badge badge-primary badge-sm p-2 top-[5px] text-white">
           {totalItems > 9 ? "9+" : totalItems}
         </span>
       )}
