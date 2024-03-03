@@ -72,10 +72,10 @@ function Header({
   paths,
   ShippingPrice,
   device,
-}: SectionProps<typeof loader>){
+}: SectionProps<typeof loader>) {
   const platform = usePlatform();
   const id = useId();
-  console.log(device)
+  console.log(device);
   return (
     <>
       <header class="xl:h-[173px] h-[160px]">
@@ -138,44 +138,44 @@ function Header({
                 </ScrollableContainer>
               )}
             {device === "mobile" &&
-              <div className="w-[100%] xl:hidden relative px-4 py-1.5 border-b-[1px] border-solid border-gray-200">
-                <form
-                  action="/s"
-                  method="GET"
-                  id={id}
-                  class="min-h-[40px] "
-                >
-                  <input
-                    className="w-full p-2 text-base text-black h-[41px] bg-base-300 rounded-full border border-solid border-gray-200"
-                    type="text"
-                    name="q" // Adicione o atributo 'name' com o valor 'q'
-                    placeholder="Busque por tênis, mochila..."
-                  />
-                  <button type="submit" aria-label="Search">
-                    <IconSearch
-                      className="w-5 h-5 right-[33px] absolute -top-[1px] bottom-0 m-auto text-[#1e1e1e]"
-                      style={{ position: "absolute" }}
+              (
+                <div className="w-[100%] xl:hidden relative px-4 py-1.5 border-b-[1px] border-solid border-gray-200">
+                  <form
+                    action="/s"
+                    method="GET"
+                    id={id}
+                    class="min-h-[40px] "
+                  >
+                    <input
+                      className="w-full p-2 text-base text-black h-[41px] bg-base-300 rounded-full border border-solid border-gray-200"
+                      type="text"
+                      name="q" // Adicione o atributo 'name' com o valor 'q'
+                      placeholder="Busque por tênis, mochila..."
                     />
-                  </button>
-                </form>
-                <script
-                  src={scriptAsDataURI((id: string) => {
-                    const elem = document.getElementById(id);
-                    if (!elem) return;
-                    // deno-lint-ignore no-explicit-any
-                    elem.addEventListener("submit", (e: any) => {
-                      window.DECO.events.dispatch({
-                        name: "search",
-                        params: {
-                          search_term: e.currentTarget.elements["q"].value,
-                        },
+                    <button type="submit" aria-label="Search">
+                      <IconSearch
+                        className="w-5 h-5 right-[33px] absolute -top-[1px] bottom-0 m-auto text-[#1e1e1e]"
+                        style={{ position: "absolute" }}
+                      />
+                    </button>
+                  </form>
+                  <script
+                    src={scriptAsDataURI((id: string) => {
+                      const elem = document.getElementById(id);
+                      if (!elem) return;
+                      // deno-lint-ignore no-explicit-any
+                      elem.addEventListener("submit", (e: any) => {
+                        window.DECO.events.dispatch({
+                          name: "search",
+                          params: {
+                            search_term: e.currentTarget.elements["q"].value,
+                          },
+                        });
                       });
-                    });
-                  }, id)}
-                />
-              </div>
-            }
-            
+                    }, id)}
+                  />
+                </div>
+              )}
           </div>
         </Drawers>
       </header>

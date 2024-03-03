@@ -15,7 +15,7 @@ function Navbar({ paths, logo, device }: {
 }) {
   const id = useId();
 
-  if(device === "mobile"){
+  if (device === "mobile") {
     return (
       <>
         {/* Mobile Version */}
@@ -56,7 +56,7 @@ function Navbar({ paths, logo, device }: {
           </div>
         </div>
       </>
-    )
+    );
   }
   // Desktop Version
   return (

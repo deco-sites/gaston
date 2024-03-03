@@ -205,8 +205,8 @@ function Drawers({ menu, logo, children, platform, device }: Props) {
   const { items } = cart.value ?? { items: [] };
   const id = useId();
 
-  if(device === "mobile"){
-    return(
+  if (device === "mobile") {
+    return (
       <>
         <Drawer
           class={`fixed z-50 w-full`}
@@ -281,7 +281,7 @@ function Drawers({ menu, logo, children, platform, device }: Props) {
           </Drawer>
         </Drawer>
       </>
-    )
+    );
   }
 
   return (
