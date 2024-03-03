@@ -1,3 +1,5 @@
+import { AppContext } from "$store/apps/site.ts";
+import type { SectionProps } from "deco/types.ts";
 import Icon from "$store/components/ui/Icon.tsx";
 import Drawers from "$store/islands/Gaston/Drawers.tsx";
 import { useId } from "$store/sdk/useId.ts";
@@ -69,9 +71,11 @@ function Header({
   social,
   paths,
   ShippingPrice,
-}: Props) {
+  device,
+}: SectionProps<typeof loader>){
   const platform = usePlatform();
   const id = useId();
+  console.log(device)
   return (
     <>
       <header class="xl:h-[173px] h-[160px]">
@@ -80,6 +84,7 @@ function Header({
           logo={logo}
           ShippingPrice={ShippingPrice}
           platform={platform}
+          device={device}
         >
           <div class="bg-base-100 w-full z-20 h-auto border-b border-[#552B9A1A] border-opacity-10 xl:relative">
             <ScrollableContainer type="Alert">
@@ -117,9 +122,9 @@ function Header({
             </ScrollableContainer>
 
             <div class="w-full lg:relative lg:bg-white lg:z-20">
-              <NavBar paths={paths} logo={logo} />
+              <NavBar paths={paths} logo={logo} device={device} />
             </div>
-            {navItems.length > 0 &&
+            {navItems.length > 0 && device == "desktop" &&
               (
                 <ScrollableContainer type="Menu">
                   <ul class="hidden xl:flex justify-center w-full items-center text-base min-h-[50px] bg-primary">
@@ -132,47 +137,54 @@ function Header({
                   </ul>
                 </ScrollableContainer>
               )}
-            <div className="w-[100%] xl:hidden relative px-4 py-1.5 border-b-[1px] border-solid border-gray-200">
-              <form
-                action="/s"
-                method="GET"
-                id={id}
-                class="min-h-[40px] "
-              >
-                <input
-                  className="w-full p-2 text-base text-black h-[41px] bg-base-300 rounded-full border border-solid border-gray-200"
-                  type="text"
-                  name="q" // Adicione o atributo 'name' com o valor 'q'
-                  placeholder="Busque por tênis, mochila..."
-                />
-                <button type="submit" aria-label="Search">
-                  <IconSearch
-                    className="w-5 h-5 right-[33px] absolute -top-[1px] bottom-0 m-auto text-[#1e1e1e]"
-                    style={{ position: "absolute" }}
+            {device === "mobile" &&
+              <div className="w-[100%] xl:hidden relative px-4 py-1.5 border-b-[1px] border-solid border-gray-200">
+                <form
+                  action="/s"
+                  method="GET"
+                  id={id}
+                  class="min-h-[40px] "
+                >
+                  <input
+                    className="w-full p-2 text-base text-black h-[41px] bg-base-300 rounded-full border border-solid border-gray-200"
+                    type="text"
+                    name="q" // Adicione o atributo 'name' com o valor 'q'
+                    placeholder="Busque por tênis, mochila..."
                   />
-                </button>
-              </form>
-              <script
-                src={scriptAsDataURI((id: string) => {
-                  const elem = document.getElementById(id);
-                  if (!elem) return;
-                  // deno-lint-ignore no-explicit-any
-                  elem.addEventListener("submit", (e: any) => {
-                    window.DECO.events.dispatch({
-                      name: "search",
-                      params: {
-                        search_term: e.currentTarget.elements["q"].value,
-                      },
+                  <button type="submit" aria-label="Search">
+                    <IconSearch
+                      className="w-5 h-5 right-[33px] absolute -top-[1px] bottom-0 m-auto text-[#1e1e1e]"
+                      style={{ position: "absolute" }}
+                    />
+                  </button>
+                </form>
+                <script
+                  src={scriptAsDataURI((id: string) => {
+                    const elem = document.getElementById(id);
+                    if (!elem) return;
+                    // deno-lint-ignore no-explicit-any
+                    elem.addEventListener("submit", (e: any) => {
+                      window.DECO.events.dispatch({
+                        name: "search",
+                        params: {
+                          search_term: e.currentTarget.elements["q"].value,
+                        },
+                      });
                     });
-                  });
-                }, id)}
-              />
-            </div>
+                  }, id)}
+                />
+              </div>
+            }
+            
           </div>
         </Drawers>
       </header>
     </>
   );
 }
+
+export const loader = (props: Props, _req: Request, ctx: AppContext) => {
+  return { ...props, device: ctx.device };
+};
 
 export default Header;
