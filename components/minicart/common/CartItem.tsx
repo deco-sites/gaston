@@ -91,7 +91,7 @@ function CartItem(
               });
             })}
           >
-            <Icon id="Trash" size={24} class={`text-primary`}/>
+            <Icon id="Trash" size={24} class={`text-primary`} />
           </Button>
         </div>
         <div class="flex items-center gap-2">
@@ -104,7 +104,7 @@ function CartItem(
         </div>
         <div class={`hidden lg:flex items-center justify-between gap-2`}>
           <span class={`font-semibold text-sm text-primary-content`}>
-            QUANTIDADE: 
+            QUANTIDADE:
           </span>
           <QuantitySelector
             disabled={loading || isGift}
@@ -127,30 +127,32 @@ function CartItem(
           />
         </div>
       </div>
-      <div class={`grid col-start-1 col-end-3 lg:hidden grid-cols-auto-1 items-center gap-4`}>
+      <div
+        class={`grid col-start-1 col-end-3 lg:hidden grid-cols-auto-1 items-center gap-4`}
+      >
         <span class={`font-semibold text-xs text-primary-content`}>
-          QUANTIDADE: 
+          QUANTIDADE:
         </span>
-          <QuantitySelector
-            disabled={loading || isGift}
-            quantity={quantity}
-            onChange={withLoading(async (quantity) => {
-              const analyticsItem = itemToAnalyticsItem(index);
-              const diff = quantity - item.quantity;
+        <QuantitySelector
+          disabled={loading || isGift}
+          quantity={quantity}
+          onChange={withLoading(async (quantity) => {
+            const analyticsItem = itemToAnalyticsItem(index);
+            const diff = quantity - item.quantity;
 
-              await onUpdateQuantity(quantity, index);
+            await onUpdateQuantity(quantity, index);
 
-              if (analyticsItem) {
-                sendEvent({
-                  name: diff < 0 ? "remove_from_cart" : "add_to_cart",
-                  params: {
-                    items: [{ ...analyticsItem, quantity: Math.abs(diff) }],
-                  },
-                });
-              }
-            })}
-          />
-        </div>
+            if (analyticsItem) {
+              sendEvent({
+                name: diff < 0 ? "remove_from_cart" : "add_to_cart",
+                params: {
+                  items: [{ ...analyticsItem, quantity: Math.abs(diff) }],
+                },
+              });
+            }
+          })}
+        />
+      </div>
     </div>
   );
 }

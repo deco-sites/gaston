@@ -2,49 +2,47 @@ import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import Icon from "$store/components/ui/Icon.tsx";
+import { ImageWidget } from "apps/admin/widgets.ts";
+import ImageComponent from "apps/website/components/Image.tsx";
 
+interface links {
+  logo: ImageWidget;
+  alt: string;
+  href: string;
+}
 export interface Props {
-  alerts: string[];
-  /**
-   * @title Autoplay interval
-   * @description time (in seconds) to start the carousel autoplay
-   */
-  interval?: number;
+  alerts: links[];
 }
 
-function Alert({ alerts = [], interval = 5 }: Props) {
+function Alert({ alerts }: Props) {
   const id = useId();
 
   return (
-    <div id={id} class="relative flex justify-center w-full xl:w-[50%]">
-      <div class="flex md:justify-center w-11/12  xl:w-[50%]">
-        <Slider class="carousel carousel-center bg-primary gap-6">
-          {alerts.map((alert, index) => (
-            <Slider.Item index={index} class="carousel-item w-full">
-              <span class="text-secondary-content flex justify-center items-center h-[30px] w-full relative text-[0.7em]">
-                {alert}
-              </span>
-            </Slider.Item>
-          ))}
-        </Slider>
-        <Slider.PrevButton class="bg-transparent absolute -left-4 my-auto mx-0 h-[30px]">
-          <Icon
-            class="text-base-100"
-            size={15}
-            id="ChevronLeft"
-            strokeWidth={3}
-          />
-        </Slider.PrevButton>
-        <Slider.NextButton class="bg-transparent absolute -right-4 my-auto mx-0 h-[30px]">
-          <Icon
-            class="text-base-100"
-            size={15}
-            id="ChevronRight"
-            strokeWidth={3}
-          />
-        </Slider.NextButton>
-        <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
-      </div>
+    <div
+      id={id}
+      class="relative flex items-center gap-2 justify-center w-full xl:w-[50%] lg:justify-start"
+    >
+      {alerts.map((item) => {
+        return (
+          <>
+            <div
+              class={`flex items-center justify-center h-full px-6 py-2.5 first:bg-white first:border-t-2 first:border-t-primary `}
+            >
+              <a
+                class={`flex items-center justify-center h-full`}
+                href={item.href}
+              >
+                <ImageComponent
+                  class="object-contain min-h-4 h-4 lg:h-[18px]"
+                  src={item.logo}
+                  alt={item.alt}
+                  width={65}
+                />
+              </a>
+            </div>
+          </>
+        );
+      })}
     </div>
   );
 }

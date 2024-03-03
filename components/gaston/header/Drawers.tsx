@@ -65,7 +65,9 @@ const Aside = (
   <div class="bg-white grid grid-rows-[auto_1fr] max-w-[425px] w-11/12 min-h-[100%] max-h-[100vh] overflow-y-auto">
     <div
       class={`${
-        !displayMenu || isMiniCart ? "bg-[#F7F7F7] py-4 border-b border-black border-opacity-10" : "bg-base-100"
+        !displayMenu || isMiniCart
+          ? "bg-[#F7F7F7] py-4 border-b border-black border-opacity-10"
+          : "bg-base-100"
       } relative flex flex-col`}
     >
       <div
@@ -204,6 +206,7 @@ function Drawers({ menu, logo, children, platform }: Props) {
 
   return (
     <Drawer
+      class={`fixed z-50 w-full`}
       open={displayMenu.value || displayMenuProductsChild.value}
       onClose={() => {
         displayMenu.value = false;

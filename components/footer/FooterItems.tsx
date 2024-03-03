@@ -32,7 +32,10 @@ export default function FooterItems(
                   <ul class={`flex flex-col gap-2 flex-wrap text-sm`}>
                     {section.items?.map((item) => (
                       <li>
-                        <a href={item.href} class="block py-1 link link-hover text-primary-content">
+                        <a
+                          href={item.href}
+                          class="block py-1 link link-hover text-primary-content"
+                        >
                           {item.label}
                         </a>
                       </li>
@@ -47,11 +50,16 @@ export default function FooterItems(
           <ul class="flex flex-col md:hidden gap-10">
             {sections.map((section) => (
               <li>
-                <span class={'text-base text-primary-content font-bold'}>{section.label}</span>
+                <span class={"text-base text-primary-content font-bold"}>
+                  {section.label}
+                </span>
                 <ul class={`flex flex-col gap-1 pt-2`}>
                   {section.items?.map((item) => (
                     <li>
-                      <a href={item.href} class="text-black opacity-60 font-thin text-base">
+                      <a
+                        href={item.href}
+                        class="text-black opacity-60 font-thin text-base"
+                      >
                         {item.label}
                       </a>
                     </li>
