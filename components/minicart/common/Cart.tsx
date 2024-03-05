@@ -43,9 +43,7 @@ function Cart({
   const isEmtpy = items.length === 0;
 
   return (
-    <div
-      class="flex flex-col justify-center items-center overflow-hidden"
-    >
+    <div class="flex flex-col justify-center items-center overflow-hidden">
       {isEmtpy
         ? (
           <div class="flex flex-col gap-6 text-primary-content">
@@ -100,17 +98,21 @@ function Cart({
                 )}
               </div>
               {discounts > 0 && (
-                  <div class="flex justify-between items-center px-4">
-                    <span class="text-xs text-black opacity-60 font-semibold">Descontos</span>
-                    <span class="text-sm text-primary font-bold">
-                      {formatPrice(discounts, currency, locale)}
-                    </span>
-                  </div>
-                )}
+                <div class="flex justify-between items-center px-4">
+                  <span class="text-xs text-black opacity-60 font-semibold">
+                    Descontos
+                  </span>
+                  <span class="text-sm text-primary font-bold">
+                    {formatPrice(discounts, currency, locale)}
+                  </span>
+                </div>
+              )}
               {/* Total */}
               <div class="border-t border-base-200 pt-4 flex flex-col justify-end items-end gap-2 mx-4">
                 <div class="flex justify-between items-center w-full">
-                <span class={`text-xs text-black opacity-60 font-semibold`}>TOTAL (SEM FRETE)</span>
+                  <span class={`text-xs text-black opacity-60 font-semibold`}>
+                    TOTAL (SEM FRETE)
+                  </span>
                   <span class={`text-sm text-primary font-bold`}>
                     {formatPrice(total, currency, locale)}
                   </span>
@@ -141,12 +143,14 @@ function Cart({
                     <span class={`leading-none text-sm`}>FINALIZAR COMPRA</span>
                   </Button>
                 </a>
-                <Button class={`w-full h-12 border border-gray-200 rounded-[500px] text-primary-content`}
-                onClick={() => {
-                  displayCart.value = false;
-                }}
+                <Button
+                  class={`w-full h-12 border border-gray-200 rounded-[500px] text-primary-content`}
+                  onClick={() => {
+                    displayCart.value = false;
+                  }}
                 >
-                  CONTINUAR COMPRANDO</Button>
+                  CONTINUAR COMPRANDO
+                </Button>
               </div>
             </footer>
           </>

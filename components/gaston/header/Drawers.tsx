@@ -35,6 +35,7 @@ export interface Props {
    */
   children?: ComponentChildren;
   platform: ReturnType<typeof usePlatform>;
+  device: "mobile" | "desktop" | "tablet";
 }
 
 const Aside = (
@@ -65,7 +66,9 @@ const Aside = (
   <div class="bg-white grid grid-rows-[auto_1fr] max-w-[425px] w-11/12 min-h-[100%] max-h-[100vh] overflow-y-auto">
     <div
       class={`${
-        !displayMenu || isMiniCart ? "bg-[#F7F7F7] py-4 border-b border-black border-opacity-10" : "bg-base-100"
+        !displayMenu || isMiniCart
+          ? "bg-[#F7F7F7] py-4 border-b border-black border-opacity-10"
+          : "bg-base-100"
       } relative flex flex-col`}
     >
       <div
@@ -189,7 +192,7 @@ const Aside = (
   </div>
 );
 
-function Drawers({ menu, logo, children, platform }: Props) {
+function Drawers({ menu, logo, children, platform, device }: Props) {
   const {
     displayMenu,
     displayMenuProducts,
@@ -202,50 +205,97 @@ function Drawers({ menu, logo, children, platform }: Props) {
   const { items } = cart.value ?? { items: [] };
   const id = useId();
 
-  return (
-    <Drawer
-      open={displayMenu.value || displayMenuProductsChild.value}
-      onClose={() => {
-        displayMenu.value = false;
-        displayMenuProductsChild.value = false;
-      }}
-      aside={
-        <Aside
-          displayMenu={displayMenu.value}
-          logo={logo}
+  if (device === "mobile") {
+    return (
+      <>
+        <Drawer
+          class={`fixed z-50 w-full`}
+          open={displayMenu.value || displayMenuProductsChild.value}
           onClose={() => {
             displayMenu.value = false;
             displayMenuProductsChild.value = false;
           }}
-          open={displayMenu.value || displayMenuProductsChild.value}
-          title={productsChild2.value.label}
-          chevronClick={() => {
-            displayMenuProductsChild.value = false;
-            displayMenuProducts.value = true;
-          }}
-          id={id}
+          aside={
+            <Aside
+              displayMenu={displayMenu.value}
+              logo={logo}
+              onClose={() => {
+                displayMenu.value = false;
+                displayMenuProductsChild.value = false;
+              }}
+              open={displayMenu.value || displayMenuProductsChild.value}
+              title={productsChild2.value.label}
+              chevronClick={() => {
+                displayMenuProductsChild.value = false;
+                displayMenuProducts.value = true;
+              }}
+              id={id}
+            >
+              {displayMenu.value && <Menu {...menu} />}
+              {displayMenuProductsChild.value && <MenuProductsChild />}
+            </Aside>
+          }
         >
-          {displayMenu.value && <Menu {...menu} />}
-          {displayMenuProductsChild.value && <MenuProductsChild />}
-        </Aside>
-      }
-    >
+          <Drawer
+            open={displayMenuProducts.value}
+            onClose={() => displayMenuProducts.value = false}
+            aside={
+              <Aside
+                displayMenu={displayMenu.value}
+                title={productsChild.value.label}
+                onClose={() => displayMenuProducts.value = false}
+                chevronClick={() => {
+                  displayMenuProducts.value = false;
+                  displayMenu.value = true;
+                }}
+                open={displayMenuProducts.value}
+                id={id}
+              >
+                <MenuProducts />
+              </Aside>
+            }
+          >
+            <Drawer // right drawer
+              class="drawer-end"
+              open={displayCart.value}
+              onClose={() => displayCart.value = false}
+              aside={
+                <Aside
+                  title="Seu carrinho "
+                  subtitle={`(${items.length} ${
+                    items.length > 1 ? "items" : "item"
+                  })`}
+                  chevronClick={() => displayCart.value = false}
+                  onClose={() => displayCart.value = false}
+                  displayMenu={displayCart.value}
+                  open={displayCart.value}
+                  id={id}
+                  isMiniCart={true}
+                >
+                  <Cart platform={platform} />
+                </Aside>
+              }
+            >
+              {children}
+            </Drawer>
+          </Drawer>
+        </Drawer>
+      </>
+    );
+  }
+
+  return (
+    <>
       <Drawer
-        open={displayMenuProducts.value}
-        onClose={() => displayMenuProducts.value = false}
+        class={`fixed z-50 w-full`}
         aside={
           <Aside
             displayMenu={displayMenu.value}
-            title={productsChild.value.label}
-            onClose={() => displayMenuProducts.value = false}
-            chevronClick={() => {
-              displayMenuProducts.value = false;
-              displayMenu.value = true;
-            }}
-            open={displayMenuProducts.value}
+            logo={logo}
+            open={displayMenu.value || displayMenuProductsChild.value}
             id={id}
           >
-            <MenuProducts />
+            {displayMenu.value && <Menu {...menu} />}
           </Aside>
         }
       >
@@ -273,7 +323,7 @@ function Drawers({ menu, logo, children, platform }: Props) {
           {children}
         </Drawer>
       </Drawer>
-    </Drawer>
+    </>
   );
 }
 

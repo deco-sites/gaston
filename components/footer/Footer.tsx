@@ -67,7 +67,7 @@ export interface Layout {
   };
 }
 
-interface logosSeguranca{
+interface logosSeguranca {
   image: ImageWidget;
   alt?: string;
   href?: string;
@@ -92,11 +92,11 @@ export interface Props {
     title?: string;
     items: PaymentItem[];
   };
-  grupo:{
+  grupo: {
     textFooter: HTMLWidget;
     imageGrupo: ImageWidget;
     alt?: string;
-  }
+  };
   cnpjText: string;
   logos: logosSeguranca[];
   extraLinks?: Item[];
@@ -286,7 +286,9 @@ function Footer({
             {_newsletter}
             {layout?.hide?.newsletter ? <></> : <Divider />}
             <div class="flex flex-col lg:flex-row gap-10 lg:gap-0 lg:divide-x">
-              <div class={`flex flex-col items-center justify-center lg:max-w-[265px] lg:pr-10`}>
+              <div
+                class={`flex flex-col items-center justify-center lg:max-w-[265px] lg:pr-10`}
+              >
                 {_logo}
                 {_social}
               </div>
@@ -297,8 +299,13 @@ function Footer({
             </div>
             <Divider />
             <div class={`flex flex-col gap-5 lg:flex-row`}>
-              <div class={`text-xs text-primary-content `} dangerouslySetInnerHTML={{ __html: grupo.textFooter }}/>
-              <div class={`flex items-center justify-center gap-2 bg-[#F7F7F7] py-1.5 px-4 rounded-lg lg:w-full`}>
+              <div
+                class={`text-xs text-primary-content `}
+                dangerouslySetInnerHTML={{ __html: grupo.textFooter }}
+              />
+              <div
+                class={`flex items-center justify-center gap-2 bg-[#F7F7F7] py-1.5 px-4 rounded-lg lg:w-full`}
+              >
                 <div class={`text-sm text-primary-content font-normal`}>
                   UMA EMPRESA INTEGRANTE
                 </div>
@@ -313,26 +320,32 @@ function Footer({
             </div>
             <Divider />
             <div class={`flex flex-col gap-4 lg:flex-row`}>
-              <div class={`text-sm text-primary-content `} dangerouslySetInnerHTML={{ __html: cnpjText }}/>
+              <div
+                class={`text-sm text-primary-content `}
+                dangerouslySetInnerHTML={{ __html: cnpjText }}
+              />
               <div class={`flex gap-4`}>
                 {logos.map((item) => {
-                  return(
+                  return (
                     <a href={item.href}>
                       <Image
                         loading="lazy"
                         src={item?.image}
                         alt={item?.alt}
                         width={66}
-                        />
+                      />
                     </a>
-                  )
+                  );
                 })}
               </div>
             </div>
             <Divider />
             <div class="flex flex-col md:flex-row lg:justify-start gap-10 md:items-center">
-              <a href="" class={`flex gap-2 tems-center justify-start text-primary-content`}>
-                Tecnologia de e-commerce 
+              <a
+                href=""
+                class={`flex gap-2 tems-center justify-start text-primary-content`}
+              >
+                Tecnologia de e-commerce
                 <img
                   loading="lazy"
                   src="/image/logo-vtex.png"
@@ -341,8 +354,11 @@ function Footer({
                   height={30}
                 />
               </a>
-              <a href="" class={`flex gap-2 h-[18px] items-center justify-start text-primary-content`}>
-                Desenvolvido por 
+              <a
+                href=""
+                class={`flex gap-2 h-[18px] items-center justify-start text-primary-content`}
+              >
+                Desenvolvido por
                 <img
                   loading="lazy"
                   src="/image/logo-tec.png"
@@ -351,7 +367,9 @@ function Footer({
                   height={18}
                 />
               </a>
-              <div class={`flex gap-2 items-center justify-start text-primary-content`}>
+              <div
+                class={`flex gap-2 items-center justify-start text-primary-content`}
+              >
                 Powered by <PoweredByDeco color="Black" />
               </div>
             </div>

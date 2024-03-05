@@ -1,4 +1,3 @@
-import type { INavItem } from "./NavItem.tsx";
 import Button from "$store/components/ui/Button.tsx";
 import IconHeart from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/heart.tsx";
 import IconUser from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/user.tsx";
@@ -6,8 +5,24 @@ import IconChevronRight from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/che
 import { useUI } from "$store/sdk/useUI.ts";
 import Icon from "deco-sites/gaston/components/ui/Icon.tsx";
 
+export interface lastChild {
+  type: "navItem" | "sizeItem";
+  label: string;
+  href?: string;
+}
+interface INavItem {
+  label: string;
+  href?: string;
+  children?: lastChild[];
+}
+export interface MenuNavItem {
+  label: string;
+  href?: string;
+  children?: INavItem[];
+  destaque?: boolean;
+}
 export interface Props {
-  items: INavItem[];
+  items: MenuNavItem[];
 }
 
 function Menu({ items }: Props) {

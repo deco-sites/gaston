@@ -12,6 +12,7 @@ import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
 import * as $Gaston_Buttons from "./islands/Gaston/Buttons.tsx";
 import * as $Gaston_Drawers from "./islands/Gaston/Drawers.tsx";
 import * as $Gaston_LoginButton from "./islands/Gaston/LoginButton.tsx";
+import * as $Gaston_ScrollableContainer from "./islands/Gaston/ScrollableContainer.tsx";
 import * as $Gaston_SearchBar from "./islands/Gaston/SearchBar.tsx";
 import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
 import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
@@ -46,6 +47,7 @@ const manifest = {
     "./islands/Gaston/Buttons.tsx": $Gaston_Buttons,
     "./islands/Gaston/Drawers.tsx": $Gaston_Drawers,
     "./islands/Gaston/LoginButton.tsx": $Gaston_LoginButton,
+    "./islands/Gaston/ScrollableContainer.tsx": $Gaston_ScrollableContainer,
     "./islands/Gaston/SearchBar.tsx": $Gaston_SearchBar,
     "./islands/Header/Buttons.tsx": $Header_Buttons,
     "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,

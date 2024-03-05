@@ -10,7 +10,7 @@ function MenuProducts() {
       <ul
         class={`bg-white ${
           productsChild2.value.children[0].type == "sizeItem"
-            ? "flex flex-wrap gap-2 w-11/12 m-auto h-auto"
+            ? "flex flex-wrap mt-4 gap-2 w-11/12 m-auto h-auto"
             : "w-full h-full"
         }`}
       >

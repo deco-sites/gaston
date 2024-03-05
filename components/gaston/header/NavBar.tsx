@@ -8,53 +8,60 @@ import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import LoginButton from "$store/islands/Gaston/LoginButton.tsx";
 import Icon from "deco-sites/gaston/components/ui/Icon.tsx";
 
-function Navbar({ paths, logo }: {
+function Navbar({ paths, logo, device }: {
   logo?: { src: LiveImage; alt: string };
   paths: { loginHref: string; favouriteHref: string };
+  device: "mobile" | "desktop" | "tablet";
 }) {
   const id = useId();
-  return (
-    <>
-      {/* Mobile Version */}
-      <div
-        style={{ height: navbarHeight }}
-        class="xl:hidden w-full text-primary"
-      >
-        <div class="w-11/12 m-auto flex flex-row justify-between items-center gap-4">
-          <MenuButton />
 
-          {logo && (
-            <a
-              href="/"
-              class="flex-grow justify-center flex items-center h-[42px] w-[238px] object-contain"
-              style={{ minHeight: navbarHeight }}
-              aria-label="Store logo"
-            >
-              <ImageComponent
-                class="object-contain"
-                src={logo.src}
-                alt={logo.alt}
-                width={110}
-                height={28}
-              />
-            </a>
-          )}
+  if (device === "mobile") {
+    return (
+      <>
+        {/* Mobile Version */}
+        <div
+          style={{ height: navbarHeight }}
+          class="xl:hidden w-full text-primary"
+        >
+          <div class="w-11/12 m-auto flex flex-row justify-between items-center gap-4">
+            <MenuButton />
 
-          <div class="flex gap-1">
-            <a
-              class="btn btn-circle btn-sm btn-ghost"
-              href={paths.favouriteHref}
-              aria-label="Wishlist"
-            >
-              <Icon id="Heart" strokeWidth={1} class="w-5 h-[19px]" />
-            </a>
-            <CartButton />
+            {logo && (
+              <a
+                href="/"
+                class="flex-grow justify-center flex items-center h-[42px] w-[238px] object-contain"
+                style={{ minHeight: navbarHeight }}
+                aria-label="Store logo"
+              >
+                <ImageComponent
+                  class="object-contain"
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={110}
+                  height={28}
+                />
+              </a>
+            )}
+
+            <div class="flex gap-1">
+              <a
+                class="btn btn-circle btn-sm btn-ghost"
+                href={paths.favouriteHref}
+                aria-label="Wishlist"
+              >
+                <Icon id="Heart" strokeWidth={1} class="w-5 h-[19px]" />
+              </a>
+              <CartButton />
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Desktop Version */}
-      <div class="hidden xl:flex py-4 items-center m-auto w-11/12  max-w-[1300px] justify-between gap-8 max-h-[75px]">
+      </>
+    );
+  }
+  // Desktop Version
+  return (
+    <>
+      <div class="hidden xl:flex py-4 items-center m-auto w-11/12  max-w-[1300px] justify-between gap-8 max-h-[85px]">
         {logo && (
           <a
             href="/"

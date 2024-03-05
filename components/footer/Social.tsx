@@ -45,11 +45,15 @@ export default function Social(
               );
             })}
           </ul>
-          {content.title && 
-          <>
-            <div class={`text-sm text-primary-content `} dangerouslySetInnerHTML={{ __html: content.title }}/>
-          </>
-          }
+          {content.title &&
+            (
+              <>
+                <div
+                  class={`text-sm text-primary-content `}
+                  dangerouslySetInnerHTML={{ __html: content.title }}
+                />
+              </>
+            )}
         </div>
       )}
     </>
