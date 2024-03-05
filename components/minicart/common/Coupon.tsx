@@ -54,7 +54,7 @@ function Coupon({ coupon, onAddCoupon }: Props) {
             width={18}
             height={17}
             strokeWidth={1}
-            class=""
+            class="text-white"
           />
         </Button>
       </form>

@@ -2,9 +2,11 @@ import { invoke } from "$store/runtime.ts";
 import { clx } from "$store/sdk/clx.ts";
 import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
+import Icon from "deco-sites/gaston/components/ui/Icon.tsx";
 
 export interface Form {
-  placeholder?: string;
+  placeholderEmail?: string;
+  placeholderNome?: string;
   buttonText?: string;
   /** @format html */
   helpText?: string;
@@ -47,33 +49,49 @@ function Newsletter(
     <div
       class={clx(
         "flex flex-col gap-4",
-        tiled && "lg:flex-row lg:w-full lg:justify-between",
+        tiled &&
+          "lg:flex-row lg:w-full lg:justify-between text-primary-content border border-black border-opacity-[12%] rounded-3xl p-4 lg:p-10",
       )}
     >
       <div class="flex flex-col gap-4">
         {content?.title && (
-          <h4 class={tiled ? "text-2xl lg:text-3xl" : "text-lg"}>
+          <h4 class={tiled ? "text-2xl font-bold lg:text-3xl" : "text-lg"}>
             {content?.title}
           </h4>
         )}
-        {content?.description && <div>{content?.description}</div>}
+        {content?.description && (
+          <p class={`text-sm font-normal`}>{content?.description}</p>
+        )}
       </div>
       <div class="flex flex-col gap-4">
         <form
           class="form-control"
           onSubmit={handleSubmit}
         >
-          <div class="flex flex-wrap gap-3">
+          <div class="flex flex-wrap gap-3 justify-center lg:justify-start 2xl:flex-nowrap">
+            <input
+              name="name"
+              class="flex-auto md:flex-none input input-bordered border-black border-opacity-[12%] rounded-3xl md:w-[311px] text-base-content"
+              placeholder={content?.form?.placeholderNome || "Name"}
+            />
             <input
               name="email"
-              class="flex-auto md:flex-none input input-bordered md:w-80 text-base-content"
-              placeholder={content?.form?.placeholder || "Digite seu email"}
+              class="flex-auto md:flex-none input input-bordered border-black border-opacity-[12%] rounded-3xl md:w-[311px] text-base-content"
+              placeholder={content?.form?.placeholderEmail ||
+                "Digite seu email"}
             />
             <button
               type="submit"
-              class="btn disabled:loading"
+              class="disabled:loading flex gap-2 justify-center items-center px-8 py-2.5 border border-primary-content rounded-[500px] text-primary-content uppercase font-bold "
               disabled={loading}
             >
+              <Icon
+                id="arrowRight"
+                width={18}
+                height={17}
+                strokeWidth={1}
+                class="text-primary-content"
+              />
               {content?.form?.buttonText || "Inscrever"}
             </button>
           </div>
