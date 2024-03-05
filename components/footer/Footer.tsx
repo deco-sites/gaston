@@ -37,7 +37,8 @@ export interface PaymentItem {
 }
 
 export interface NewsletterForm {
-  placeholder?: string;
+  placeholderEmail?: string;
+  placeholderNome?: string;
   buttonText?: string;
   /** @format html */
   helpText?: string;
@@ -119,7 +120,12 @@ function Footer({
   newsletter = {
     title: "Newsletter",
     description: "",
-    form: { placeholder: "", buttonText: "", helpText: "" },
+    form: {
+      placeholderEmail: "",
+      placeholderNome: "",
+      buttonText: "",
+      helpText: "",
+    },
   },
   sections = [{
     "label": "Sobre",
@@ -284,7 +290,6 @@ function Footer({
         {layout?.variation == "Variation 4" && (
           <div class="flex flex-col gap-6">
             {_newsletter}
-            {layout?.hide?.newsletter ? <></> : <Divider />}
             <div class="flex flex-col lg:flex-row gap-10 lg:gap-0 lg:divide-x">
               <div
                 class={`flex flex-col items-center justify-center lg:max-w-[265px] lg:pr-10`}
