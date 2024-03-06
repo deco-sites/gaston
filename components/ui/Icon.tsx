@@ -53,6 +53,9 @@ export type AvailableIcons =
   | "Central"
   | "arrowRight"
   | "bagBuyBtn"
+  | "idCard"
+  | "credCard"
+  | "swapArrows"
   | "sacola";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
