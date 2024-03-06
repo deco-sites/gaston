@@ -75,7 +75,6 @@ function Header({
 }: SectionProps<typeof loader>) {
   const platform = usePlatform();
   const id = useId();
-  console.log(device);
   return (
     <>
       <header class="xl:h-[173px] h-[160px]">

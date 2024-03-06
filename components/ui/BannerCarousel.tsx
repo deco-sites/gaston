@@ -118,39 +118,23 @@ function BannerItem(
       aria-label={action?.label}
       class="relative overflow-y-hidden w-full"
     >
-      {action && (
-        <div class="absolute top-0 md:bottom-0 bottom-1/2 left-0 right-0 sm:right-auto max-w-[407px] flex flex-col justify-end gap-4 px-8 py-12">
-          <span class="text-2xl font-light text-base-100">
-            {action.title}
-          </span>
-          <span class="font-normal text-4xl text-base-100">
-            {action.subTitle}
-          </span>
-          <Button
-            class="bg-base-100 text-sm font-light py-4 px-6 w-fit"
-            aria-label={action.label}
-          >
-            {action.label}
-          </Button>
-        </div>
-      )}
       <Picture preload={lcp}>
         <Source
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={mobile}
-          width={430}
-          height={590}
+          width={375}
+          height={375}
         />
         <Source
           media="(min-width: 768px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={desktop}
           width={1440}
-          height={600}
+          height={480}
         />
         <img
-          class="object-cover w-full h-full"
+          class="object-cover w-full h-[calc(100vw*(375/375))] md:h-[calc(100vw*(480/1440))]"
           loading={lcp ? "eager" : "lazy"}
           src={desktop}
           alt={alt}
@@ -174,13 +158,13 @@ function Dots({ images, interval = 0 }: Props) {
           `,
         }}
       />
-      <ul class="carousel justify-center col-span-full gap-6 z-10 row-start-4">
+      <ul class="absolute bg-white bg-opacity-60 border border-white rounded-[500px] bottom-5 right-4 lg:right-16 carousel justify-center col-span-full gap-2 z-10 p-2.5 row-start-4">
         {images?.map((_, index) => (
           <li class="carousel-item">
             <Slider.Dot index={index}>
-              <div class="py-5">
+              <div class="">
                 <div
-                  class="w-16 sm:w-20 h-0.5 rounded group-disabled:animate-progress bg-gradient-to-r from-base-100 from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
+                  class="w-2.5 h-2.5 rounded-full bg-primary-content bg-opacity-30"
                   style={{ animationDuration: `${interval}s` }}
                 />
               </div>
@@ -195,17 +179,17 @@ function Dots({ images, interval = 0 }: Props) {
 function Buttons() {
   return (
     <>
-      <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
+      <div class="absolute top-[calc(50%-24px)] left-4 flex items-center justify-center z-10 col-start-1 row-start-2">
         <Slider.PrevButton class="btn btn-circle glass">
           <Icon
-            class="text-base-100"
+            class="text-white"
             size={24}
             id="ChevronLeft"
             strokeWidth={3}
           />
         </Slider.PrevButton>
       </div>
-      <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
+      <div class="absolute top-[calc(50%-24px)] right-4 flex items-center justify-center z-10 col-start-3 row-start-2">
         <Slider.NextButton class="btn btn-circle glass">
           <Icon
             class="text-base-100"
@@ -226,7 +210,7 @@ function BannerCarousel(props: Props) {
   return (
     <div
       id={id}
-      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min min-h-[660px]"
+      class="flex relative"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
         {images?.map((image, index) => {
