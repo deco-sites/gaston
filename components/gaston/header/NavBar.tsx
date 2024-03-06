@@ -61,7 +61,7 @@ function Navbar({ paths, logo, device }: {
   // Desktop Version
   return (
     <>
-      <div class="hidden xl:flex py-4 items-center m-auto w-11/12  max-w-[1300px] justify-between gap-8 max-h-[85px]">
+      <div class="hidden lg:flex py-4 items-center m-auto w-11/12  max-w-[1300px] justify-between gap-8 max-h-[85px]">
         {logo && (
           <a
             href="/"

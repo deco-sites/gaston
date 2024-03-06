@@ -90,7 +90,7 @@ function Header({
               <div class="w-full bg-base-300">
                 <div class="w-11/12 max-w-[1300px] gap-6 flex m-auto items-center justify-between">
                   <Alert alerts={alerts} />
-                  <ul class="hidden xl:flex items-center text-[0.56em] justify-end text-primary-content">
+                  <ul class="hidden lg:flex items-center text-[0.56em] justify-end text-primary-content">
                     {social.sociais.map((item) => {
                       return (
                         <>
@@ -126,7 +126,7 @@ function Header({
             {navItems.length > 0 && device == "desktop" &&
               (
                 <ScrollableContainer type="Menu">
-                  <ul class="hidden xl:flex justify-center w-full items-center text-base min-h-[50px] bg-primary">
+                  <ul class="hidden lg:flex justify-center w-full items-center text-base min-h-[50px] bg-primary">
                     {navItems.map((item, index) => (
                       <NavItem
                         item={item}
