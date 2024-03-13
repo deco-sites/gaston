@@ -54,7 +54,8 @@ function Result({
 
   return (
     <>
-      <div class="container px-4 sm:py-10">
+    <div class={`bg-base-300`}>
+      <div class="w-11/12 mx-auto sm:py-10 lg:max-w-[1300px] lg:px-0">
         <SearchControls
           sortOptions={sortOptions}
           filters={filters}
@@ -62,9 +63,9 @@ function Result({
           displayFilter={layout?.variant === "drawer"}
         />
 
-        <div class="flex flex-row">
+        <div class="flex flex-row gap-8">
           {layout?.variant === "aside" && filters.length > 0 && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
+            <aside class="hidden sm:block w-min min-w-[304px]">
               <Filters filters={filters} />
             </aside>
           )}
@@ -101,6 +102,7 @@ function Result({
           </div>
         </div>
       </div>
+    </div>
       <SendEventOnView
         id={id}
         event={{

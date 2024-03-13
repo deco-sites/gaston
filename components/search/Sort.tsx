@@ -41,12 +41,12 @@ function Sort({ sortOptions }: Props) {
 
   return (
     <>
-      <label for="sort" class="sr-only">Ordenar por</label>
+      <label for="sort" class="hidden lg:block text-base text-primary-content font-light">Ordenar por:</label>
       <select
         id="sort"
         name="sort"
         onInput={applySort}
-        class="w-min h-[36px] px-1 rounded m-2 text-base-content cursor-pointer outline-none"
+        class="w-min text-primary-content bg-white lg:bg-transparent lg:border-0  border border-black border-opacity-10 rounded-lg h-[36px] px-1 m-2 cursor-pointer outline-none"
       >
         {sortOptions.map(({ value, label }) => ({
           value,

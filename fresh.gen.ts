@@ -9,6 +9,7 @@ import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx
 import * as $AddToCartButton_vnda from "./islands/AddToCartButton/vnda.tsx";
 import * as $AddToCartButton_vtex from "./islands/AddToCartButton/vtex.tsx";
 import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
+import * as $FiltersSelected from "./islands/FiltersSelected.tsx";
 import * as $Gaston_Buttons from "./islands/Gaston/Buttons.tsx";
 import * as $Gaston_Drawers from "./islands/Gaston/Drawers.tsx";
 import * as $Gaston_LoginButton from "./islands/Gaston/LoginButton.tsx";
@@ -44,6 +45,7 @@ const manifest = {
     "./islands/AddToCartButton/vnda.tsx": $AddToCartButton_vnda,
     "./islands/AddToCartButton/vtex.tsx": $AddToCartButton_vtex,
     "./islands/AddToCartButton/wake.tsx": $AddToCartButton_wake,
+    "./islands/FiltersSelected.tsx": $FiltersSelected,
     "./islands/Gaston/Buttons.tsx": $Gaston_Buttons,
     "./islands/Gaston/Drawers.tsx": $Gaston_Drawers,
     "./islands/Gaston/LoginButton.tsx": $Gaston_LoginButton,
