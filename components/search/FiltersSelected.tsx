@@ -6,13 +6,12 @@ interface Props {
 }
 
 function FiltersSelected({ filters }: Props) {
-
   const filteredArrays = filters
-  .map((filter) => (filter.values as []).filter(({ selected }) => selected))
-  .filter((array) => array.length > 0);
-  
+    .map((filter) => (filter.values as []).filter(({ selected }) => selected))
+    .filter((array) => array.length > 0);
+
   const flatArray = [...filteredArrays.flat()];
-  
+
   const removeAllFilters = () => {
     try {
       const urlObject = new URL(window.location.href);
@@ -53,7 +52,7 @@ function FiltersSelected({ filters }: Props) {
           {flatArray.map(({ label, url }) => (
             <a href={url}>
               <span class="flex gap-2 items-center text-sm font-medium">
-              <Icon id="XMark" size={10} class="text-primary" />
+                <Icon id="XMark" size={10} class="text-primary" />
                 <p>
                   {label}
                 </p>
@@ -70,7 +69,6 @@ function FiltersSelected({ filters }: Props) {
         </div>
       )}
     </>
-
   );
 }
 

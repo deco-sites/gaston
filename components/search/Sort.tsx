@@ -41,7 +41,12 @@ function Sort({ sortOptions }: Props) {
 
   return (
     <>
-      <label for="sort" class="hidden lg:block text-base text-primary-content font-light">Ordenar por:</label>
+      <label
+        for="sort"
+        class="hidden lg:block text-base text-primary-content font-light"
+      >
+        Ordenar por:
+      </label>
       <select
         id="sort"
         name="sort"

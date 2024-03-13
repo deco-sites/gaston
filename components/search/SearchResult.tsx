@@ -54,55 +54,55 @@ function Result({
 
   return (
     <>
-    <div class={`bg-base-300`}>
-      <div class="w-11/12 mx-auto sm:py-10 lg:max-w-[1300px] lg:px-0">
-        <SearchControls
-          sortOptions={sortOptions}
-          filters={filters}
-          breadcrumb={breadcrumb}
-          displayFilter={layout?.variant === "drawer"}
-        />
+      <div class={`bg-base-300`}>
+        <div class="w-11/12 mx-auto sm:py-10 lg:max-w-[1300px] lg:px-0">
+          <SearchControls
+            sortOptions={sortOptions}
+            filters={filters}
+            breadcrumb={breadcrumb}
+            displayFilter={layout?.variant === "drawer"}
+          />
 
-        <div class="flex flex-row gap-8">
-          {layout?.variant === "aside" && filters.length > 0 && (
-            <aside class="hidden sm:block w-min min-w-[304px]">
-              <Filters filters={filters} />
-            </aside>
-          )}
-          <div class="flex-grow" id={id}>
-            <ProductGallery
-              products={products}
-              offset={offset}
-              layout={{ card: cardLayout, columns: layout?.columns }}
-            />
+          <div class="flex flex-row gap-8">
+            {layout?.variant === "aside" && filters.length > 0 && (
+              <aside class="hidden sm:block w-min min-w-[304px]">
+                <Filters filters={filters} />
+              </aside>
+            )}
+            <div class="flex-grow" id={id}>
+              <ProductGallery
+                products={products}
+                offset={offset}
+                layout={{ card: cardLayout, columns: layout?.columns }}
+              />
+            </div>
           </div>
-        </div>
 
-        <div class="flex justify-center my-4">
-          <div class="join">
-            <a
-              aria-label="previous page link"
-              rel="prev"
-              href={pageInfo.previousPage ?? "#"}
-              class="btn btn-ghost join-item"
-            >
-              <Icon id="ChevronLeft" size={24} strokeWidth={2} />
-            </a>
-            <span class="btn btn-ghost join-item">
-              Page {zeroIndexedOffsetPage + 1}
-            </span>
-            <a
-              aria-label="next page link"
-              rel="next"
-              href={pageInfo.nextPage ?? "#"}
-              class="btn btn-ghost join-item"
-            >
-              <Icon id="ChevronRight" size={24} strokeWidth={2} />
-            </a>
+          <div class="flex justify-center my-4">
+            <div class="join">
+              <a
+                aria-label="previous page link"
+                rel="prev"
+                href={pageInfo.previousPage ?? "#"}
+                class="btn btn-ghost join-item"
+              >
+                <Icon id="ChevronLeft" size={24} strokeWidth={2} />
+              </a>
+              <span class="btn btn-ghost join-item">
+                Page {zeroIndexedOffsetPage + 1}
+              </span>
+              <a
+                aria-label="next page link"
+                rel="next"
+                href={pageInfo.nextPage ?? "#"}
+                class="btn btn-ghost join-item"
+              >
+                <Icon id="ChevronRight" size={24} strokeWidth={2} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
       <SendEventOnView
         id={id}
         event={{

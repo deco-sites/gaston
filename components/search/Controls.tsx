@@ -28,7 +28,9 @@ function SearchControls(
           <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden">
             <div class="flex justify-between items-center bg-base-300">
               <h3 class="px-4 py-3">
-                <span class="font-bold text-primary-content text-base">Filtros</span>
+                <span class="font-bold text-primary-content text-base">
+                  Filtros
+                </span>
               </h3>
               <Button class="btn btn-ghost" onClick={() => open.value = false}>
                 <Icon id="XMark" size={15} strokeWidth={2} />
@@ -48,7 +50,9 @@ function SearchControls(
 
         <div class="flex flex-row items-center justify-between border-b border-base-200 sm:border-none">
           <Button
-            class={`w-[164px] h-9 min-h-9 leading-none text-primary-content bg-white rounded-lg border border-black border-opacity-10 text-sm flex justify-between items-center px-4 py-2.5 ${displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"}`}
+            class={`w-[164px] h-9 min-h-9 leading-none text-primary-content bg-white rounded-lg border border-black border-opacity-10 text-sm flex justify-between items-center px-4 py-2.5 ${
+              displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"
+            }`}
             onClick={() => {
               open.value = true;
             }}
