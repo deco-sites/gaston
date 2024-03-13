@@ -7,6 +7,7 @@ import type {
   ProductListingPage,
 } from "apps/commerce/types.ts";
 import { parseRange } from "apps/commerce/utils/filters.ts";
+import FiltersSelected from "$store/components/search/FiltersSelected.tsx";
 
 interface Props {
   filters: ProductListingPage["filters"];
@@ -19,34 +20,35 @@ function ValueItem(
   { url, selected, label, quantity }: FilterToggleValue,
 ) {
   return (
-    <a href={url} rel="nofollow" class="flex items-center gap-2">
-      <div aria-checked={selected} class="checkbox" />
+    <a href={url} rel="nofollow" class="flex items-center gap-2 max-w-[230px]">
+      <div
+        aria-checked={selected}
+        class="checkbox border-black border-opacity-60 w-4 h-4 [--chkbg:theme(colors.primary)] [--chkfg:white]"
+      />
       <span class="text-sm">{label}</span>
-      {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>}
+      {quantity > 0 && (
+        <span class="text-sm text-primary-content">({quantity})</span>
+      )}
     </a>
   );
 }
 
 function FilterValues({ key, values }: FilterToggle) {
-  const flexDirection = key === "tamanho" || key === "cor"
-    ? "flex-row"
-    : "flex-col";
-
   return (
-    <ul class={`flex flex-wrap gap-2 ${flexDirection}`}>
+    <ul class={`collapse-content flex gap-3 flex-col`}>
       {values.map((item) => {
         const { url, selected, value, quantity } = item;
 
-        if (key === "cor" || key === "tamanho") {
-          return (
-            <a href={url} rel="nofollow">
-              <Avatar
-                content={value}
-                variant={selected ? "active" : "default"}
-              />
-            </a>
-          );
-        }
+        // if (key === "cor" || key === "tamanho") {
+        //   return (
+        //     <a href={url} rel="nofollow">
+        //       <Avatar
+        //         content={value}
+        //         variant={selected ? "active" : "default"}
+        //       />
+        //     </a>
+        //   );
+        // }
 
         if (key === "price") {
           const range = parseRange(item.value);
@@ -67,12 +69,21 @@ function FilterValues({ key, values }: FilterToggle) {
 
 function Filters({ filters }: Props) {
   return (
-    <ul class="flex flex-col gap-6 p-4">
+    <ul class="flex flex-col gap-6 p-4 text-primary-content lg:rounded-2xl bg-white lg:border lg:border-black lg:border-opacity-10 lg:drop-shadow-md">
+      <h3
+        class={`hidden lg:flex text-2xl font-bold leading-none text-primary-content`}
+      >
+        Filtros
+      </h3>
+      <FiltersSelected filters={filters} />
       {filters
         .filter(isToggle)
         .map((filter) => (
-          <li class="flex flex-col gap-4">
-            <span>{filter.label}</span>
+          <li class="collapse collapse-plus bg-base-200 border border-black border-opacity-10 rounded-lg">
+            <input type="checkbox" class={`h-10 min-h-10`} />
+            <span class={`collapse-title text-sm font-bold p-3 min-h-10`}>
+              {filter.label}
+            </span>
             <FilterValues {...filter} />
           </li>
         ))}

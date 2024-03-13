@@ -26,12 +26,14 @@ function SearchControls(
       aside={
         <>
           <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden">
-            <div class="flex justify-between items-center">
-              <h1 class="px-4 py-3">
-                <span class="font-medium text-2xl">Filtrar</span>
-              </h1>
+            <div class="flex justify-between items-center bg-base-300">
+              <h3 class="px-4 py-3">
+                <span class="font-bold text-primary-content text-base">
+                  Filtros
+                </span>
+              </h3>
               <Button class="btn btn-ghost" onClick={() => open.value = false}>
-                <Icon id="XMark" size={24} strokeWidth={2} />
+                <Icon id="XMark" size={15} strokeWidth={2} />
               </Button>
             </div>
             <div class="flex-grow overflow-auto">
@@ -41,14 +43,16 @@ function SearchControls(
         </>
       }
     >
-      <div class="flex flex-col justify-between mb-4 p-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px] sm:border-b sm:border-base-200">
+      <div class="flex flex-col justify-between mb-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px] sm:border-b sm:border-base-200">
         <div class="flex flex-row items-center sm:p-0 mb-2">
           <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
         </div>
 
-        <div class="flex flex-row items-center justify-between border-b border-base-200 sm:gap-4 sm:border-none">
+        <div class="flex flex-row items-center justify-between border-b border-base-200 sm:border-none">
           <Button
-            class={displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"}
+            class={`w-[164px] h-9 min-h-9 leading-none text-primary-content bg-white rounded-lg border border-black border-opacity-10 text-sm flex justify-between items-center px-4 py-2.5 ${
+              displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"
+            }`}
             onClick={() => {
               open.value = true;
             }}
