@@ -81,41 +81,41 @@ function Result({
           </div>
 
           <div class="flex justify-center py-10 mx-auto w-11/12 items-center">
-          <div class="flex gap-5 items-center justify-center">
-            <a
-              aria-label="previous page link"
-              rel="prev"
-              href={pageInfo.previousPage ?? "#"}
-              class="flex items-center justify-center p-3.5 rounded-full bg-white border border-black border-opacity-10"
-            >
-              <Icon
-                id="ChevronLeft"
-                size={20}
-                strokeWidth={1}
-                class="text-primary-content"
-              />
-            </a>
-            <span class="flex items-center text-primary-content justify-center px-4 gap-2">
-              Página{" "}
-              <strong class="text-primary">{pageInfo.currentPage}</strong>
-              {" "}
-              de <strong class="text-primary">{value}</strong>
-            </span>
-            <a
-              aria-label="next page link"
-              rel="next"
-              href={pageInfo.nextPage ?? "#"}
-              class="flex items-center justify-center p-3.5 rounded-full bg-white border border-black border-opacity-10"
-            >
-              <Icon
-                id="ChevronRightFilter"
-                size={20}
-                strokeWidth={2}
-                class="text-primary-content"
-              />
-            </a>
+            <div class="flex gap-5 items-center justify-center">
+              <a
+                aria-label="previous page link"
+                rel="prev"
+                href={pageInfo.previousPage ?? "#"}
+                class="flex items-center justify-center p-3.5 rounded-full bg-white border border-black border-opacity-10"
+              >
+                <Icon
+                  id="ChevronLeft"
+                  size={20}
+                  strokeWidth={1}
+                  class="text-primary-content"
+                />
+              </a>
+              <span class="flex items-center text-primary-content justify-center px-4 gap-2">
+                Página{" "}
+                <strong class="text-primary">{pageInfo.currentPage}</strong> de
+                {" "}
+                <strong class="text-primary">{value}</strong>
+              </span>
+              <a
+                aria-label="next page link"
+                rel="next"
+                href={pageInfo.nextPage ?? "#"}
+                class="flex items-center justify-center p-3.5 rounded-full bg-white border border-black border-opacity-10"
+              >
+                <Icon
+                  id="ChevronRightFilter"
+                  size={20}
+                  strokeWidth={2}
+                  class="text-primary-content"
+                />
+              </a>
+            </div>
           </div>
-        </div>
         </div>
       </div>
       <SendEventOnView
