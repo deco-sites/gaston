@@ -28,9 +28,11 @@ function ButtonCommon({
 
   return (
     <Button
-      class={`${variant === "icon"
-        ? "btn-circle btn-ghost gap-2"
-        : "btn-primary btn-outline gap-2"} bg-base-content h-[30px] min-h-[30px] w-[30px] lg:h-[42px] lg:min-h-[42px] lg:w-[42px]`}
+      class={`${
+        variant === "icon"
+          ? "btn-circle btn-ghost gap-2"
+          : "btn-primary btn-outline gap-2"
+      } bg-base-content h-[30px] min-h-[30px] w-[30px] lg:h-[42px] lg:min-h-[42px] lg:w-[42px]`}
       loading={fetching.value}
       aria-label="Add to wishlist"
       onClick={async (e) => {

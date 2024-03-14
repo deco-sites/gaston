@@ -108,7 +108,12 @@ function ProductCard({
       aria-label="view product"
       class="bg-accent flex gap-3 justify-center items-center duration-200 rounded-[500px] px-8 py-3.5 text-sm uppercase lg:hover-bag font-bold text-white lg:w-[165px] lg:bg-transparent lg:border lg:border-primary-content lg:text-primary-content lg:hover:bg-accent lg:hover:text-white lg:hover:border-accent"
     >
-      <Icon id="bagBuyBtn" width={14} height={16} class={`lg:text-primary-content duration-200`}/>
+      <Icon
+        id="bagBuyBtn"
+        width={14}
+        height={16}
+        class={`lg:text-primary-content duration-200`}
+      />
       {l?.basics?.ctaText || "Comprar"}
     </a>
   );
@@ -174,15 +179,16 @@ function ProductCard({
           {/* Discount % */}
           {!l?.hide?.discount && (
             <>
-             {listPrice && price && listPrice != price &&
-              <>
-                <div class="text-xs lg:text-sm bg-secondary py-1.5 px-2 lg:py-2 lg:px-3 rounded-[500px]">
-                  <span class="text-primary font-bold">
-                    {Math.round(((listPrice - price) / listPrice) * 100)}%
-                  </span>
-                </div>
-              </>
-              }
+              {listPrice && price && listPrice != price &&
+                (
+                  <>
+                    <div class="text-xs lg:text-sm bg-secondary py-1.5 px-2 lg:py-2 lg:px-3 rounded-[500px]">
+                      <span class="text-primary font-bold">
+                        {Math.round(((listPrice - price) / listPrice) * 100)}%
+                      </span>
+                    </div>
+                  </>
+                )}
             </>
           )}
         </div>
@@ -273,8 +279,16 @@ function ProductCard({
                 )
                 : (
                   <>
-                    <h2 class="lg:hidden text-base leading-5 min-h-12 text-primary-content font-normal">{name && name.length > 35 ? name?.slice(0, 30) + "...": name}</h2>
-                    <h2 class="hidden lg:flex text-base leading-5 min-h-12 text-primary-content font-normal">{name && name.length > 60 ? name?.slice(0, 60) + "...": name}</h2>
+                    <h2 class="lg:hidden text-base leading-5 min-h-12 text-primary-content font-normal">
+                      {name && name.length > 35
+                        ? name?.slice(0, 30) + "..."
+                        : name}
+                    </h2>
+                    <h2 class="hidden lg:flex text-base leading-5 min-h-12 text-primary-content font-normal">
+                      {name && name.length > 60
+                        ? name?.slice(0, 60) + "..."
+                        : name}
+                    </h2>
                   </>
                 )}
               {l?.hide?.productDescription
@@ -300,7 +314,11 @@ function ProductCard({
                   l?.basics?.oldPriceSize === "Normal"
                     ? "lg:flex-row-reverse lg:gap-2"
                     : ""
-                } ${align === "center" ? "justify-center" : "justify-start items-center"}`}
+                } ${
+                  align === "center"
+                    ? "justify-center"
+                    : "justify-start items-center"
+                }`}
               >
                 <div
                   class={`line-through text-primary-content text-sm font-medium ${
@@ -315,7 +333,8 @@ function ProductCard({
               </div>
             </div>
           )}
-          {/* {l?.hide?.installments
+        {
+          /* {l?.hide?.installments
                 ? (
                   ""
                 )
@@ -325,7 +344,8 @@ function ProductCard({
                       ou {installments}
                     </span>
                   </li>
-                )} */}
+                )} */
+        }
 
         {/* SKU Selector */}
         {l?.elementsPositions?.skuSelector === "Bottom" && (
@@ -335,7 +355,6 @@ function ProductCard({
                 align === "center" ? "justify-center" : "justify-between"
               } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
             >
-              
               {l?.hide?.skuSelector
                 ? (
                   ""
