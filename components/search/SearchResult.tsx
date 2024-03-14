@@ -46,7 +46,9 @@ function Result({
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
-
+  const records = pageInfo.records ?? products.length;
+  const recordPerPage = pageInfo.recordPerPage ?? 1;
+  const value = Math.ceil(records / recordPerPage);
   const id = useId();
 
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
@@ -78,29 +80,42 @@ function Result({
             </div>
           </div>
 
-          <div class="flex justify-center my-4">
-            <div class="join">
-              <a
-                aria-label="previous page link"
-                rel="prev"
-                href={pageInfo.previousPage ?? "#"}
-                class="btn btn-ghost join-item"
-              >
-                <Icon id="ChevronLeft" size={24} strokeWidth={2} />
-              </a>
-              <span class="btn btn-ghost join-item">
-                Page {zeroIndexedOffsetPage + 1}
-              </span>
-              <a
-                aria-label="next page link"
-                rel="next"
-                href={pageInfo.nextPage ?? "#"}
-                class="btn btn-ghost join-item"
-              >
-                <Icon id="ChevronRight" size={24} strokeWidth={2} />
-              </a>
-            </div>
+          <div class="flex justify-center py-10 mx-auto w-11/12 items-center">
+          <div class="flex gap-5 items-center justify-center">
+            <a
+              aria-label="previous page link"
+              rel="prev"
+              href={pageInfo.previousPage ?? "#"}
+              class="flex items-center justify-center p-3.5 rounded-full bg-white border border-black border-opacity-10"
+            >
+              <Icon
+                id="ChevronLeft"
+                size={20}
+                strokeWidth={1}
+                class="text-primary-content"
+              />
+            </a>
+            <span class="flex items-center text-primary-content justify-center px-4 gap-2">
+              Página{" "}
+              <strong class="text-primary">{pageInfo.currentPage}</strong>
+              {" "}
+              de <strong class="text-primary">{value}</strong>
+            </span>
+            <a
+              aria-label="next page link"
+              rel="next"
+              href={pageInfo.nextPage ?? "#"}
+              class="flex items-center justify-center p-3.5 rounded-full bg-white border border-black border-opacity-10"
+            >
+              <Icon
+                id="ChevronRightFilter"
+                size={20}
+                strokeWidth={2}
+                class="text-primary-content"
+              />
+            </a>
           </div>
+        </div>
         </div>
       </div>
       <SendEventOnView
