@@ -10,6 +10,7 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
 import { relative } from "$store/sdk/url.ts";
+import Icon from "$store/components/ui/Icon.tsx";
 
 export interface Layout {
   basics?: {
@@ -56,8 +57,8 @@ interface Props {
   platform?: Platform;
 }
 
-const WIDTH = 200;
-const HEIGHT = 279;
+const WIDTH = 304;
+const HEIGHT = 304;
 
 function ProductCard({
   product,
@@ -67,7 +68,8 @@ function ProductCard({
   platform,
   index,
 }: Props) {
-  const { url, productID, name, image: images, offers, isVariantOf } = product;
+  const { url, productID, image: images, offers, isVariantOf } = product;
+  const name = isVariantOf?.name;
   const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
@@ -104,16 +106,22 @@ function ProductCard({
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="btn btn-block"
+      class="bg-accent flex gap-3 justify-center items-center duration-200 rounded-[500px] px-8 py-3.5 text-sm uppercase lg:hover-bag font-bold text-white lg:w-[165px] lg:bg-transparent lg:border lg:border-primary-content lg:text-primary-content lg:hover:bg-accent lg:hover:text-white lg:hover:border-accent"
     >
-      {l?.basics?.ctaText || "Ver produto"}
+      <Icon
+        id="bagBuyBtn"
+        width={14}
+        height={16}
+        class={`lg:text-primary-content duration-200`}
+      />
+      {l?.basics?.ctaText || "Comprar"}
     </a>
   );
 
   return (
     <div
       id={id}
-      class={`card card-compact group w-full ${
+      class={`card card-compact group w-full text-primary-content ${
         align === "center" ? "text-center" : "text-start"
       } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
         ${
@@ -147,11 +155,11 @@ function ProductCard({
         {/* Wishlist button */}
 
         <div
-          class={`absolute top-2 z-10 flex items-center
+          class={`absolute top-2 lg:top-4 justify-between w-[90%] z-10 flex items-center
             ${
             l?.elementsPositions?.favoriteIcon === "Top left"
               ? "left-2"
-              : "right-2"
+              : "right-2 lg:right-3.5"
           }
             
           `}
@@ -167,23 +175,21 @@ function ProductCard({
                 productID={productID}
               />
             )}
-            {platform === "wake" && (
-              <WishlistButtonWake
-                productGroupID={productGroupID}
-                productID={productID}
-              />
-            )}
           </div>
           {/* Discount % */}
           {!l?.hide?.discount && (
-            <div class="text-sm bg-base-100 p-[10px]">
-              <span class="text-base-content font-bold">
-                {listPrice && price
-                  ? `${Math.round(((listPrice - price) / listPrice) * 100)}% `
-                  : ""}
-              </span>
-              OFF
-            </div>
+            <>
+              {listPrice && price && listPrice != price &&
+                (
+                  <>
+                    <div class="text-xs lg:text-sm bg-secondary py-1.5 px-2 lg:py-2 lg:px-3 rounded-[500px]">
+                      <span class="text-primary font-bold">
+                        {Math.round(((listPrice - price) / listPrice) * 100)}%
+                      </span>
+                    </div>
+                  </>
+                )}
+            </>
           )}
         </div>
 
@@ -198,7 +204,7 @@ function ProductCard({
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class={`bg-base-100 col-span-full row-span-full rounded w-full ${
+            class={`bg-base-100 rounded-2xl border border-black border-opacity-10 col-span-full row-span-full w-full ${
               l?.onMouseOver?.image == "Zoom image"
                 ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
                 : ""
@@ -215,7 +221,7 @@ function ProductCard({
               alt={back?.alternateName ?? front.alternateName}
               width={WIDTH}
               height={HEIGHT}
-              class="bg-base-100 col-span-full row-span-full transition-opacity rounded w-full opacity-0 lg:group-hover:opacity-100"
+              class="bg-base-100 rounded-2xl border border-black border-opacity-10 col-span-full row-span-full transition-opacity w-full opacity-0 lg:group-hover:opacity-100"
               sizes="(max-width: 640px) 50vw, 20vw"
               loading="lazy"
               decoding="async"
@@ -240,7 +246,7 @@ function ProductCard({
         </figcaption>
       </figure>
       {/* Prices & Name */}
-      <div class="flex-auto flex flex-col p-2 gap-3 lg:gap-2">
+      <div class="flex-auto flex flex-col p-2 gap-3">
         {/* SKU Selector */}
         {(!l?.elementsPositions?.skuSelector ||
           l?.elementsPositions?.skuSelector === "Top") && (
@@ -272,10 +278,18 @@ function ProductCard({
                   ""
                 )
                 : (
-                  <h2
-                    class="truncate text-base lg:text-lg text-base-content uppercase font-normal"
-                    dangerouslySetInnerHTML={{ __html: name ?? "" }}
-                  />
+                  <>
+                    <h2 class="lg:hidden text-base leading-5 min-h-12 text-primary-content font-normal">
+                      {name && name.length > 35
+                        ? name?.slice(0, 30) + "..."
+                        : name}
+                    </h2>
+                    <h2 class="hidden lg:flex text-base leading-5 min-h-12 text-primary-content font-normal">
+                      {name && name.length > 60
+                        ? name?.slice(0, 60) + "..."
+                        : name}
+                    </h2>
+                  </>
                 )}
               {l?.hide?.productDescription
                 ? (
@@ -296,35 +310,31 @@ function ProductCard({
           : (
             <div class="flex flex-col gap-2">
               <div
-                class={`flex flex-col gap-0 ${
+                class={`flex gap-2 ${
                   l?.basics?.oldPriceSize === "Normal"
                     ? "lg:flex-row-reverse lg:gap-2"
                     : ""
-                } ${align === "center" ? "justify-center" : "justify-end"}`}
+                } ${
+                  align === "center"
+                    ? "justify-center"
+                    : "justify-start items-center"
+                }`}
               >
                 <div
-                  class={`line-through text-base-300 text-xs font-light ${
+                  class={`line-through text-primary-content text-sm font-medium ${
                     l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
                   }`}
                 >
                   {formatPrice(listPrice, offers?.priceCurrency)}
                 </div>
-                <div class="text-base-content lg:text-sm font-light">
+                <div class="text-primary lg:text-xl font-bold">
                   {formatPrice(price, offers?.priceCurrency)}
                 </div>
               </div>
             </div>
           )}
-
-        {/* SKU Selector */}
-        {l?.elementsPositions?.skuSelector === "Bottom" && (
-          <>
-            <ul
-              class={`flex items-center gap-2 w-full ${
-                align === "center" ? "justify-center" : "justify-between"
-              } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
-            >
-              {l?.hide?.installments
+        {
+          /* {l?.hide?.installments
                 ? (
                   ""
                 )
@@ -334,7 +344,17 @@ function ProductCard({
                       ou {installments}
                     </span>
                   </li>
-                )}
+                )} */
+        }
+
+        {/* SKU Selector */}
+        {l?.elementsPositions?.skuSelector === "Bottom" && (
+          <>
+            <ul
+              class={`flex items-center gap-2 w-full ${
+                align === "center" ? "justify-center" : "justify-between"
+              } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
+            >
               {l?.hide?.skuSelector
                 ? (
                   ""

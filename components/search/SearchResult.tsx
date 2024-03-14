@@ -65,7 +65,7 @@ function Result({
 
           <div class="flex flex-row gap-8">
             {layout?.variant === "aside" && filters.length > 0 && (
-              <aside class="hidden sm:block w-min min-w-[304px]">
+              <aside class="hidden lg:block w-min min-w-[304px]">
                 <Filters filters={filters} />
               </aside>
             )}

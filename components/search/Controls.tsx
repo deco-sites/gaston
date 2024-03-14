@@ -51,7 +51,7 @@ function SearchControls(
         <div class="flex flex-row items-center justify-between border-b border-base-200 sm:border-none">
           <Button
             class={`w-[164px] h-9 min-h-9 leading-none text-primary-content bg-white rounded-lg border border-black border-opacity-10 text-sm flex justify-between items-center px-4 py-2.5 ${
-              displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"
+              displayFilter ? "btn-ghost" : "btn-ghost lg:hidden"
             }`}
             onClick={() => {
               open.value = true;
