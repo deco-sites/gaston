@@ -161,7 +161,7 @@ function Dots({ images, interval = 0 }: Props) {
       <ul class="absolute bg-white bg-opacity-60 border border-white rounded-[500px] bottom-5 right-4 lg:right-16 carousel justify-center col-span-full gap-2 z-10 p-2.5 row-start-4">
         {images?.map((_, index) => (
           <li class="carousel-item">
-            <Slider.Dot index={index}>
+            <Slider.Dot index={index} _class={`disabled:bg-primary-content`}>
               <div class="">
                 <div
                   class="w-2.5 h-2.5 rounded-full bg-primary-content bg-opacity-30"
