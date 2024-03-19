@@ -17,6 +17,8 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import { AppContext } from "$store/apps/site.ts";
+import type { SectionProps } from "deco/types.ts";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -30,7 +32,7 @@ interface Props {
   };
 }
 
-function ProductInfo({ page, layout }: Props) {
+function ProductInfo({ page, layout, device }: SectionProps<typeof loader>) {
   const platform = usePlatform();
   const id = useId();
 
@@ -38,7 +40,7 @@ function ProductInfo({ page, layout }: Props) {
     throw new Error("Missing Product Details Page Info");
   }
 
-  const { breadcrumbList, product } = page;
+  const { product } = page;
   const {
     productID,
     offers,
@@ -56,51 +58,33 @@ function ProductInfo({ page, layout }: Props) {
     availability,
   } = useOffer(offers);
   const productGroupID = isVariantOf?.productGroupID ?? "";
-  const breadcrumb = {
-    ...breadcrumbList,
-    itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
-    numberOfItems: breadcrumbList.numberOfItems - 1,
-  };
 
   const eventItem = mapProductToAnalyticsItem({
     product,
-    breadcrumbList: breadcrumb,
     price,
     listPrice,
   });
 
   return (
-    <div class="flex flex-col" id={id}>
-      <Breadcrumb itemListElement={breadcrumb.itemListElement} />
+    <div class="flex flex-col w-11/12 mx-auto" id={id}>
       {/* Code and name */}
-      <div class="mt-4 sm:mt-8">
-        <div>
-          {gtin && <span class="text-sm text-base-300">Cod. {gtin}</span>}
-        </div>
-        <h1>
-          <span class="font-medium text-xl capitalize">
-            {layout?.name === "concat"
-              ? `${isVariantOf?.name} ${name}`
-              : layout?.name === "productGroup"
-              ? isVariantOf?.name
-              : name}
-          </span>
-        </h1>
-      </div>
-      {/* Prices */}
-      <div class="mt-4">
-        <div class="flex flex-row gap-2 items-center">
-          {(listPrice ?? 0) > price && (
-            <span class="line-through text-base-300 text-xs">
-              {formatPrice(listPrice, offers?.priceCurrency)}
-            </span>
-          )}
-          <span class="font-medium text-xl text-secondary">
-            {formatPrice(price, offers?.priceCurrency)}
-          </span>
-        </div>
-        <span class="text-sm text-base-300">{installments}</span>
-      </div>
+      {device == "desktop" &&
+        (
+          <div class="mt-4 sm:mt-8">
+            <div>
+              {gtin && <span class="text-sm text-base-300">Cod. {gtin}</span>}
+            </div>
+            <h1>
+              <span class="font-medium text-xl capitalize">
+                {layout?.name === "concat"
+                  ? `${isVariantOf?.name} ${name}`
+                  : layout?.name === "productGroup"
+                  ? isVariantOf?.name
+                  : name}
+              </span>
+            </h1>
+          </div>
+        )}
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
         <ProductSelector product={product} />
@@ -168,6 +152,20 @@ function ProductInfo({ page, layout }: Props) {
           )
           : <OutOfStock productID={productID} />}
       </div>
+      {/* Prices */}
+      <div class="mt-4">
+        <div class="flex flex-row gap-2 items-center">
+          {(listPrice ?? 0) > price && (
+            <span class="line-through text-base-300 text-xs">
+              {formatPrice(listPrice, offers?.priceCurrency)}
+            </span>
+          )}
+          <span class="font-medium text-xl text-secondary">
+            {formatPrice(price, offers?.priceCurrency)}
+          </span>
+        </div>
+        <span class="text-sm text-base-300">{installments}</span>
+      </div>
       {/* Shipping Simulation */}
       <div class="mt-8">
         {platform === "vtex" && (
@@ -211,5 +209,9 @@ function ProductInfo({ page, layout }: Props) {
     </div>
   );
 }
+
+export const loader = (props: Props, _req: Request, ctx: AppContext) => {
+  return { ...props, device: ctx.device };
+};
 
 export default ProductInfo;
