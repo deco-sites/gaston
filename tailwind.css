@@ -71,6 +71,28 @@
   .hover-bag:hover svg{
     color: #fff;
   }
+  .bottomUnset{
+    bottom: unset;
+  }
+  .containerSection section{
+    width: 100%;
+    height: 100%;
+  }
+}
+@keyframes sliding {
+  0% {
+      transform: translateX(0);
+  }
+  100% {
+      transform: translateX(-50%);
+  }
+}
+.animate-slide{
+  animation: sliding 15s linear infinite;
+}
+
+.animate-slide:hover{
+  animation-play-state: paused;
 }
 
 .group:disabled .group-disabled\:animate-progress {

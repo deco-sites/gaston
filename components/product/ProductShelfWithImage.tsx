@@ -55,12 +55,15 @@ function ProductShelf({
     <div class="w-full mx-auto max-w-[1300px] flex flex-col gap-6 lg:h-full">
       <div
         id={id}
-        class={`flex relative items-center w-full lg:flex-col-reverse lg:justify-between lg:h-full`}>
+        class={`flex relative items-center w-full lg:flex-col-reverse lg:justify-between lg:h-full`}
+      >
         <Slider class="carousel carousel-center sm:carousel-end lg:w-full">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
-              class={`px-[3px] lg:px-4 ${slideMobile[layout?.numberOfSliders?.mobile ?? 1]} ${slideDesktop[layout?.numberOfSliders?.desktop ?? 3]}`}
+              class={`px-[3px] lg:px-4 ${
+                slideMobile[layout?.numberOfSliders?.mobile ?? 1]
+              } ${slideDesktop[layout?.numberOfSliders?.desktop ?? 3]}`}
             >
               <ProductCard
                 product={product}
@@ -71,38 +74,48 @@ function ProductShelf({
             </Slider.Item>
           ))}
         </Slider>
-        <div class={`absolute w-full lg:relative -bottom-[60px] left-1/2 -translate-x-1/2 flex items-center justify-between gap-2 lg:w-full lg:justify-between lg:bottomUnset lg:pl-4`}>
-        {layout?.showArrows && (
-          <>
-            <div class="block z-10 col-start-1 row-start-3">
-              <Slider.PrevButton class="bg-white w-12 h-12 flex justify-center items-center border border-black border-opacity-10 rounded-[500px]">
-                <Icon size={24} id="ChevronLeft" strokeWidth={3} class="w-5 text-primary-content text-opacity-60" />
-              </Slider.PrevButton>
-            </div>
-          </>
-        )}
-          <ul class="bg-white lg:hidden bg-opacity-60 border border-white rounded-[500px] bottom-5 right-4 lg:right-16 carousel justify-center col-span-full gap-2 z-10 p-2.5 row-start-4">
-          {products?.map((_, index) => (
-            <li class="carousel-item">
-              <Slider.Dot index={index} _class={`disabled:bg-primary`}>
-                <div class="">
-                  <div
-                    class="w-2.5 h-2.5 rounded-full bg-primary bg-opacity-30"
+        <div
+          class={`absolute w-full lg:relative -bottom-[60px] left-1/2 -translate-x-1/2 flex items-center justify-between gap-2 lg:w-full lg:justify-between lg:bottomUnset lg:pl-4`}
+        >
+          {layout?.showArrows && (
+            <>
+              <div class="block z-10 col-start-1 row-start-3">
+                <Slider.PrevButton class="bg-white w-12 h-12 flex justify-center items-center border border-black border-opacity-10 rounded-[500px]">
+                  <Icon
+                    size={24}
+                    id="ChevronLeft"
+                    strokeWidth={3}
+                    class="w-5 text-primary-content text-opacity-60"
                   />
-                </div>
-              </Slider.Dot>
-            </li>
-          ))}
+                </Slider.PrevButton>
+              </div>
+            </>
+          )}
+          <ul class="bg-white lg:hidden bg-opacity-60 border border-white rounded-[500px] bottom-5 right-4 lg:right-16 carousel justify-center col-span-full gap-2 z-10 p-2.5 row-start-4">
+            {products?.map((_, index) => (
+              <li class="carousel-item">
+                <Slider.Dot index={index} _class={`disabled:bg-primary`}>
+                  <div class="">
+                    <div class="w-2.5 h-2.5 rounded-full bg-primary bg-opacity-30" />
+                  </div>
+                </Slider.Dot>
+              </li>
+            ))}
           </ul>
-        {layout?.showArrows && (
-          <>
-            <div class="block z-10 col-start-3 row-start-3">
-              <Slider.NextButton class="bg-white w-12 h-12 flex justify-center items-center border border-black border-opacity-10 rounded-[500px]">
-                <Icon size={24} id="ChevronRightFilter" strokeWidth={3} class="w-5 text-primary-content text-opacity-60"/>
-              </Slider.NextButton>
-            </div>
-          </>
-        )}
+          {layout?.showArrows && (
+            <>
+              <div class="block z-10 col-start-3 row-start-3">
+                <Slider.NextButton class="bg-white w-12 h-12 flex justify-center items-center border border-black border-opacity-10 rounded-[500px]">
+                  <Icon
+                    size={24}
+                    id="ChevronRightFilter"
+                    strokeWidth={3}
+                    class="w-5 text-primary-content text-opacity-60"
+                  />
+                </Slider.NextButton>
+              </div>
+            </>
+          )}
         </div>
         <div class={`lg:absolute`}>
           <SliderJS rootId={id} />
