@@ -1,9 +1,11 @@
-import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
 
 export interface SlideProps {
-  label?: string;
-  repeat?: number;
-  icon?: AvailableIcons;
+  label: string;
+  image: ImageWidget;
+  alt?: string;
+  href?: string;
 }
 
 export interface Props {
@@ -11,39 +13,31 @@ export interface Props {
 }
 
 export default function Slide({
-  content = [
-    {
-      label: "Label",
-      repeat: 30,
-      icon: "ChevronRight",
-    },
-  ],
+  content,
 }: Props) {
-  const slideContent = content?.map(({ label, icon, repeat = 1 }) => {
+  const slideContent = content?.map(({ label, image, alt, href }) => {
     return (
-      <div class="flex items-center gap-x-10 mx-4">
-        {Array(repeat).fill(0).map(() => (
-          <>
-            <span class="text-sm font-extralight text-base-content whitespace-nowrap">
-              {label}
-            </span>
-            {icon && (
-              <Icon
-                id={icon}
-                name={icon}
-                width={24}
-                height={24}
-              />
-            )}
-          </>
-        ))}
-      </div>
+      <li class="flex items-center gap-x-10 mx-4">
+        <a href={href}>
+          <Image
+            class="min-w-[120px] min-h-[68px] lg:min-w-[220px] lg:h-[125px]"
+            src={image}
+            alt={alt || label || ""}
+            width={220}
+            height={125}
+            loading="lazy"
+          />
+        </a>
+      </li>
     );
   });
   return (
-    <div class="bg-secondary relative w-full overflow-hidden h-11">
-      <div class="animate-sliding absolute top-0 left-0 flex flex-nowrap h-11">
-        {slideContent}
+    <div class="w-full bg-base-300 py-8 lg:py-16">
+      <div class="relative overflow-hidden bg-base-100 w-11/12 max-w-[1300px] mx-auto border border-black border-opacity-10 rounded-3xl h-[99.65px] lg:h-[189px]">
+        <ul class="animate-slide absolute top-4 left-4 flex flex-nowrap lg:top-8 lg:left-8">
+          {slideContent}
+          {slideContent}
+        </ul>
       </div>
     </div>
   );

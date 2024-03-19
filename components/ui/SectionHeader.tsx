@@ -6,6 +6,7 @@ export interface Props {
   description?: string;
   alignment?: "center" | "left";
   colorReverse?: boolean;
+  markupTitle?: boolean;
 }
 
 const fontSizeClasses = {
@@ -20,37 +21,39 @@ function Header(props: Props) {
       {props.title || props.description
         ? (
           <div
-            class={`flex flex-col gap-2 ${
+            class={`flex flex-col gap-2 px-4 ${
               props.alignment === "left" ? "text-left" : "text-center"
             }`}
           >
             {props.title &&
               (
-                <h1
+                <h2
                   class={clx(
-                    "text-2xl font-light leading-8 lg:leading-10",
+                    "text-xl lg:w-max mx-auto italic font-bold leading-6 lg:leading-10",
                     props.colorReverse
                       ? "text-primary-content"
                       : "text-base-content",
+                    props.markupTitle
+                      ? "bg-primary text-white px-2.5 py-2"
+                      : "text-primary-content",
                     fontSizeClasses[props.fontSize || "Normal"],
                   )}
                 >
                   {props.title}
-                </h1>
+                </h2>
               )}
             {props.description &&
               (
-                <h2
+                <p
                   class={clx(
-                    "leading-6 lg:leading-8",
+                    "leading-[18px] italic text-base lg:max-w-[1170px] lg:mx-auto font-normal lg:leading-8",
                     props.colorReverse
                       ? "text-primary-content"
-                      : "text-base-content",
-                    fontSizeClasses[props.fontSize || "Normal"],
+                      : "text-primary-content",
                   )}
                 >
                   {props.description}
-                </h2>
+                </p>
               )}
           </div>
         )

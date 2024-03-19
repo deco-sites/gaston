@@ -106,7 +106,7 @@ function ProductCard({
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="bg-accent flex gap-3 justify-center items-center duration-200 rounded-[500px] px-8 py-3.5 text-sm uppercase lg:hover-bag font-bold text-white lg:w-[165px] lg:bg-transparent lg:border lg:border-primary-content lg:text-primary-content lg:hover:bg-accent lg:hover:text-white lg:hover:border-accent"
+      class="bg-accent flex gap-3 justify-center items-center duration-200 rounded-[500px] px-6 py-3.5 w-full text-sm uppercase lg:hover-bag font-bold text-white lg:w-[165px] lg:bg-transparent lg:border lg:border-primary-content lg:text-primary-content lg:hover:bg-accent lg:hover:text-white lg:hover:border-accent"
     >
       <Icon
         id="bagBuyBtn"

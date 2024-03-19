@@ -1,6 +1,4 @@
 import Header from "$store/components/ui/SectionHeader.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
@@ -44,8 +42,12 @@ function CardText(
       }`}
     >
       {tag && <div class="text-sm text-primary">{tag}</div>}
-      {label && <h3 class="text-lg text-base-content">{label}</h3>}
-      {description && <div class="text-sm text-neutral">{description}</div>}
+      {label && (
+        <h3 class="text-xl leading-6 italic text-primary-content">{label}</h3>
+      )}
+      {description && (
+        <div class="text-sm text-primary-content">{description}</div>
+      )}
     </div>
   );
 }
@@ -116,68 +118,64 @@ function CategoryList(props: Props) {
   } = props;
 
   return (
-    <div
-      id={id}
-      class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content  lg:py-10"
-    >
-      <Header
-        title={header.title}
-        description={header.description || ""}
-        alignment={layout.headerAlignment || "center"}
-      />
+    <div class={`bg-base-300 w-full py-8 lg:py-10`}>
+      <div
+        id={id}
+        class="w-full lg:w-11/12 max-w-[1300px] mx-auto flex flex-col gap-8 lg:gap-10 text-base-content"
+      >
+        <Header
+          title={header.title}
+          description={header.description || ""}
+          alignment={layout.headerAlignment || "center"}
+        />
 
-      <Slider class="carousel carousel-start gap-4 lg:gap-8 row-start-2 row-end-5">
-        {list.map((
-          { tag, label, description, href, image, buttonText },
-          index,
-        ) => (
-          <Slider.Item
-            index={index}
-            class="flex flex-col gap-4 carousel-item first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
-          >
-            <a
-              href={href}
-              class="flex flex-col gap-4 lg:w-[280px] w-40 lg:h-auto"
-            >
-              {layout.categoryCard?.textPosition === "top" &&
-                (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
-                )}
-              {image &&
-                (
-                  <figure>
-                    <Image
-                      class="card w-full"
-                      src={image}
-                      alt={description || label || tag}
-                      width={160}
-                      height={195}
-                      loading="lazy"
+        <ul class="flex gap-6 lg:gap-8 overflow-x-scroll lg:overflow-x-hidden justify-between items-center">
+          {list.map((
+            { tag, label, description, href, image, buttonText },
+          ) => (
+            <li class="flex flex-col gap-4 first:pl-4 sm:first:pl-0 last:pr-4 sm:last:pr-0">
+              <a
+                href={href}
+                class="flex flex-col gap-4 lg:w-[18.8vw] lg:max-w-[287px] w-[250px]"
+              >
+                {layout.categoryCard?.textPosition === "top" &&
+                  (
+                    <CardText
+                      tag={tag}
+                      label={label}
+                      description={description}
+                      alignment={layout?.categoryCard?.textAlignment}
                     />
-                  </figure>
-                )}
-              {layout.categoryCard?.textPosition === "bottom" &&
-                (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
-                )}
-            </a>
-            {buttonText &&
-              <a href={href} class="btn">{buttonText}</a>}
-          </Slider.Item>
-        ))}
-      </Slider>
-
-      <SliderJS rootId={id} />
+                  )}
+                {image &&
+                  (
+                    <figure>
+                      <Image
+                        class="w-full rounded-3xl border border-black border-opacity-10 lg:h-[calc(18.7vw*(410/287))] lg:max-h-[410px]"
+                        src={image}
+                        alt={description || label || tag}
+                        width={250}
+                        height={357}
+                        loading="lazy"
+                      />
+                    </figure>
+                  )}
+                {layout.categoryCard?.textPosition === "bottom" &&
+                  (
+                    <CardText
+                      tag={tag}
+                      label={label}
+                      description={description}
+                      alignment={layout?.categoryCard?.textAlignment}
+                    />
+                  )}
+              </a>
+              {buttonText &&
+                <a href={href} class="btn">{buttonText}</a>}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
