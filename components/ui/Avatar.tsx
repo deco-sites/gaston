@@ -17,7 +17,8 @@ const colors: Record<string, string> = {
 
   // Color variants - only applied when no color as content is passed
   "active": "text-accent ring-1 ring-black rounded-full",
-  "disabled": "line-through text-neutral-content rounded-full",
+  "disabled":
+    "line-through text-neutral-content rounded-full pointer-events-none",
   "default": "text-primary-content bg-base-100 rounded-full",
 };
 
@@ -28,7 +29,8 @@ interface Props {
 
 const variants = {
   active: "text-accent ring-1 ring-black rounded-full",
-  disabled: "line-through text-neutral-content rounded-full",
+  disabled:
+    "line-through text-neutral-content rounded-full pointer-events-none",
   default: "text-primary-content bg-base-100 rounded-full",
 };
 

@@ -12,12 +12,15 @@ export interface Props {
 
 const useAddToCart = ({ eventParams, onAddItem }: Props) => {
   const [loading, setLoading] = useState(false);
-  const { displayCart } = useUI();
+  const { displayCart, skuIDCart } = useUI();
 
   const onClick = async (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-
+    if (!skuIDCart.value) {
+      alert("Selecione um tamanho.");
+      return false;
+    }
     try {
       setLoading(true);
 

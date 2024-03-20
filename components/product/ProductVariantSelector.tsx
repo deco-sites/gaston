@@ -1,16 +1,28 @@
 import Avatar from "$store/components/ui/Avatar.tsx";
+import { useState } from "preact/hooks";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
 import type { Product } from "apps/commerce/types.ts";
-import { relative } from "$store/sdk/url.ts";
+import { useUI } from "deco-sites/gaston/sdk/useUI.ts";
 
 interface Props {
   product: Product;
 }
 
 function VariantSelector({ product }: Props) {
-  const { url, isVariantOf } = product;
+  const { url, isVariantOf, productID } = product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const possibilities = useVariantPossibilities(hasVariant, product);
+  const { skuIDCart } = useUI();
+  // Estado para controlar o estado ativo do Avatar
+  const [activeVariant, setActiveVariant] = useState("");
+
+  // Função para manipular o clique no botão
+  function handleSku(skuID: string, value: string) {
+    skuIDCart.value = skuID;
+    console.log(skuID);
+    // Atualizar o estado ativo
+    setActiveVariant(value);
+  }
 
   return (
     <ul class="flex flex-col-reverse gap-4">
@@ -21,18 +33,19 @@ function VariantSelector({ product }: Props) {
           </span>
           <ul class="flex flex-row gap-3">
             {Object.entries(possibilities[name]).map(([value, link]) => {
-              const relativeUrl = relative(url);
-              const relativeLink = relative(link);
               return (
                 <li>
-                  <button f-partial={relativeLink} f-client-nav>
+                  <button
+                    class={`${
+                      link.available == false ? "pointer-events-none" : ""
+                    }`}
+                    onClick={() => handleSku(link.productID, value)}
+                  >
                     <Avatar
                       content={value}
-                      variant={relativeLink === relativeUrl
-                        ? "active"
-                        : relativeLink
-                        ? "default"
-                        : "disabled"}
+                      variant={link.available == false
+                        ? "disabled"
+                        : (activeVariant === value ? "active" : "default")}
                     />
                   </button>
                 </li>

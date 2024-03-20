@@ -43,7 +43,6 @@ export default function GallerySlider(
     itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
     numberOfItems: breadcrumbList.numberOfItems - 1,
   };
-  console.log(product);
   return (
     <div class={`flex flex-col gap-4 bg-base-300`}>
       <Breadcrumb

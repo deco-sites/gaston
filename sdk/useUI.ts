@@ -19,6 +19,7 @@ const productsChild2 = signal({
 });
 const userEmail = signal("");
 const userLogged = signal(false);
+const skuIDCart = signal("");
 
 const state = {
   displayCart,
@@ -31,6 +32,7 @@ const state = {
   productsChild,
   productsChild2,
   displayMenuProductsChild,
+  skuIDCart,
 };
 
 // Keyboard event listeners

@@ -86,14 +86,14 @@ function ProductCard({
       : "center";
   const relativeUrl = relative(url);
   const skuSelector = variants.map(([value, link]) => {
-    const relativeLink = relative(link);
+    const relativeLink = relative(link.url);
     return (
       <li>
         <a href={relativeLink}>
           <Avatar
             variant={relativeLink === relativeUrl
               ? "active"
-              : relativeLink
+              : link.available
               ? "default"
               : "disabled"}
             content={value}
