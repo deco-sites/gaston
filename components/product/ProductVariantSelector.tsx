@@ -23,15 +23,15 @@ function VariantSelector({ product }: Props) {
     // Atualizar o estado ativo
     setActiveVariant(value);
   }
-
+  console.log(product);
   return (
     <ul class="flex flex-col-reverse gap-4">
       {Object.keys(possibilities).map((name) => (
-        <li class="flex flex-col gap-2">
+        <li class="flex flex-col gap-2 max-w-[100vw]">
           <span class="text-sm leading-4 text-primary-content font-semibold">
             {name == "Tamanho" ? "Selecione o tamanho:" : "Selecione a cor:"}
           </span>
-          <ul class="flex flex-row gap-3">
+          <ul class="flex flex-row gap-3 w-full overflow-x-scroll scrollbar-none pl-1">
             {Object.entries(possibilities[name]).map(([value, link]) => {
               return (
                 <li>
