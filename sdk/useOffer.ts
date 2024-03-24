@@ -35,18 +35,15 @@ const bestInstallment = (
 
 const installmentToString = (
   installment: UnitPriceSpecification,
-  sellingPrice: number,
 ) => {
-  const { billingDuration, billingIncrement, price } = installment;
+  const { billingDuration, billingIncrement } = installment;
 
   if (!billingDuration || !billingIncrement) {
     return "";
   }
 
-  const withTaxes = sellingPrice < price;
-
-  return `${billingDuration}x de R$ ${billingIncrement} ${
-    withTaxes ? "com juros" : "sem juros"
+  return `ou ${billingDuration}x de R$ ${
+    billingIncrement.toString().replace(`.`, ",")
   }`;
 };
 
@@ -66,7 +63,7 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
     availability,
     seller,
     installments: installment && price
-      ? installmentToString(installment, price)
+      ? installmentToString(installment)
       : null,
   };
 };

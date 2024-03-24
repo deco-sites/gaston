@@ -44,7 +44,7 @@ export const useVariantPossibilities = (
           : isSelectable
           ? possibilities[name][value]?.url || url
           : possibilities[name][value]?.url,
-        available: availability == "https://schema.org/InStock", // Assuming availability is represented as a number indicating the quantity available
+        available: availability == "https://schema.org/InStock",
         productID: isSelected
           ? productID
           : possibilities[name][value]?.productID || productID,

@@ -3,6 +3,7 @@ import { sendEvent } from "$store/sdk/analytics.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 import { AddToCartParams } from "apps/commerce/types.ts";
 import { useState } from "preact/hooks";
+import Icon from "deco-sites/gaston/components/ui/Icon.tsx";
 
 export interface Props {
   /** @description: sku name */
@@ -44,8 +45,17 @@ export default function AddToCartButton(props: Props) {
   const btnProps = useAddToCart(props);
 
   return (
-    <Button {...btnProps} class="btn-primary">
-      Adicionar à Sacola
+    <Button
+      {...btnProps}
+      class="bg-accent text-white flex items-center rounded-[500px] leading-none"
+    >
+      <Icon
+        id="bagBuyBtn"
+        width={14}
+        height={16}
+        class={``}
+      />
+      COMPRAR
     </Button>
   );
 }

@@ -28,11 +28,11 @@ function ButtonCommon({
 
   return (
     <Button
-      class={`${
+      class={`absolute right-3 top-3 ${
         variant === "icon"
           ? "btn-circle btn-ghost gap-2"
           : "btn-primary btn-outline gap-2"
-      } bg-base-content h-[30px] min-h-[30px] w-[30px] lg:h-[42px] lg:min-h-[42px] lg:w-[42px]`}
+      } bg-base-content h-11 min-h-11 w-11 lg:h-[42px] lg:min-h-[42px] lg:w-[42px]`}
       loading={fetching.value}
       aria-label="Add to wishlist"
       onClick={async (e) => {
@@ -78,10 +78,10 @@ function ButtonCommon({
       }}
     >
       <Icon
-        id="HeartCard"
-        class={`w-3 h-[11px] lg:w-4 lg:h-[15px] `}
-        strokeWidth={2}
-        fill={inWishlist ? "black" : "none"}
+        id="Heart"
+        stroke-width="1"
+        class="w-5 h-[19px]"
+        fill={inWishlist ? "text-primary" : "none"}
       />
       {variant === "icon" ? null : inWishlist ? "Remover" : "Favoritar"}
     </Button>
