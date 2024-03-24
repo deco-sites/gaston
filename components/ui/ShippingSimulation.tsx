@@ -4,6 +4,7 @@ import Button from "$store/components/ui/Button.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useCart } from "apps/vtex/hooks/useCart.ts";
 import type { SimulationOrderForm, SKU, Sla } from "apps/vtex/utils/types.ts";
+import Icon from "deco-sites/gaston/components/ui/Icon.tsx";
 
 export interface Props {
   items: Array<SKU>;
@@ -43,27 +44,22 @@ function ShippingContent({ simulation }: {
   }
 
   return (
-    <ul class="flex flex-col gap-4 p-4 bg-base-200 rounded-[4px]">
+    <ul class="flex flex-col gap-3 py-3">
       {methods.map((method) => (
         <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
-          <span class="text-button text-center">
-            Entrega {method.name}
+          <span class="text-sm min-w-[110px]">
+            {method.name}
           </span>
-          <span class="text-button">
+          <span class="text-sm min-w-[110px]">
             até {formatShippingEstimate(method.shippingEstimate)}
           </span>
-          <span class="text-base font-semibold text-right">
+          <span class="text-sm text-primary font-semibold min-w-[60px]">
             {method.price === 0 ? "Grátis" : (
               formatPrice(method.price / 100, currencyCode, locale)
             )}
           </span>
         </li>
       ))}
-      <span class="text-base-300">
-        Os prazos de entrega começam a contar a partir da confirmação do
-        pagamento e podem variar de acordo com a quantidade de produtos na
-        sacola.
-      </span>
     </ul>
   );
 }
@@ -92,40 +88,53 @@ function ShippingSimulation({ items }: Props) {
   }, []);
 
   return (
-    <div class="flex flex-col gap-2">
-      <div class="flex flex-col">
-        <span>Calcular frete</span>
-        <span>
-          Informe seu CEP para consultar os prazos de entrega
+    <div class="collapse collapse-arrow text-primary-content border border-black border-opacity-10 rounded-lg">
+      <input type="checkbox" class={`h-[50px] min-h-[50px]`} />
+      <div class="collapse-title min-h-[50px] flex gap-3">
+        <Icon
+          id="TruckFast"
+          width="20"
+          height="17"
+          strokeWidth={1}
+          class={`text-primary`}
+        />
+        <span class={`text-sm font-medium text-primary-content`}>
+          Confira o prazo de entrega
         </span>
       </div>
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSimulation();
-        }}
-      >
-        <input
-          as="input"
-          type="text"
-          class="input input-bordered join-item w-48"
-          placeholder="Seu cep aqui"
-          value={postalCode.value}
-          maxLength={8}
-          size={8}
-          onChange={(e: { currentTarget: { value: string } }) => {
-            postalCode.value = e.currentTarget.value;
+      <div class={`collapse-content flex flex-col gap-3`}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSimulation();
           }}
-        />
-        <Button type="submit" loading={loading.value} class="join-item">
-          Calcular
-        </Button>
-      </form>
+          class={`relative flex`}
+        >
+          <input
+            as="input"
+            type="text"
+            class="input input-bordered join-item rounded-[100px] bg-transparent border-black border-opacity-10 w-full"
+            placeholder="Informe seu CEP"
+            value={postalCode.value}
+            maxLength={8}
+            size={8}
+            onChange={(e: { currentTarget: { value: string } }) => {
+              postalCode.value = e.currentTarget.value;
+            }}
+          />
+          <Button
+            type="submit"
+            loading={loading.value}
+            class="join-item absolute right-2.5 top-1.5 bg-primary rounded-full w-9 h-9 min-h-9"
+          >
+            OK
+          </Button>
+        </form>
 
-      <div>
         <div>
-          <ShippingContent simulation={simulateResult} />
+          <div>
+            <ShippingContent simulation={simulateResult} />
+          </div>
         </div>
       </div>
     </div>

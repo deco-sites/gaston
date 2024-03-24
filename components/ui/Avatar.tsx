@@ -16,8 +16,9 @@ const colors: Record<string, string> = {
   "vermelha": "bg-[#FF0000] ring-[#FF0000]",
 
   // Color variants - only applied when no color as content is passed
-  "active": "text-accent ring-1 ring-black rounded-full",
-  "disabled": "line-through text-neutral-content rounded-full",
+  "active": "text-primary-content bg-base-100 ring-2 ring-primary",
+  "disabled":
+    "line-through text-primary-content opacity-50 pointer-events-none",
   "default": "text-primary-content bg-base-100 rounded-full",
 };
 
@@ -27,16 +28,18 @@ interface Props {
 }
 
 const variants = {
-  active: "text-accent ring-1 ring-black rounded-full",
-  disabled: "line-through text-neutral-content rounded-full",
-  default: "text-primary-content bg-base-100 rounded-full",
+  active: "text-primary-content bg-base-100 ring-2 ring-primary",
+  disabled: "line-through text-primary-content opacity-50 pointer-events-none",
+  default: "text-primary-content",
 };
 
 function Avatar({ content, variant = "default" }: Props) {
   return (
-    <div class="avatar placeholder text-sm font-light h-6">
+    <div class="avatar placeholder text-sm font-light h-12 py-1">
       <div
-        class={`${colors[content] ?? colors[variant]} ${variants[variant]}`}
+        class={`h-10 w-10 border border-black border-opacity-10 rounded-full ${
+          colors[content] ?? colors[variant]
+        } ${variants[variant]}`}
       >
         <span class="uppercase ">
           {colors[content] ? "" : content.substring(0, 2)}

@@ -54,8 +54,15 @@
     background-color: #000;
     opacity: 12%;
   }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll-menu{
+    scrollbar-width: unset;
+  }
   .scroll-menu::-webkit-scrollbar {
     width: 4px;
+    display: block !important;
   }
   .scroll-menu::-webkit-scrollbar-thumb {
     background-color: #E30613;

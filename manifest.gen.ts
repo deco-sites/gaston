@@ -48,9 +48,9 @@ import * as $$$$$$38 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$39 from "./sections/Miscellaneous/Slide.tsx";
 import * as $$$$$$40 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$41 from "./sections/Product/ImageGalleryFrontBack.tsx";
-import * as $$$$$$42 from "./sections/Product/ImageGallerySlider.tsx";
-import * as $$$$$$43 from "./sections/Product/NotFound.tsx";
-import * as $$$$$$44 from "./sections/Product/NotFoundChallenge.tsx";
+import * as $$$$$$42 from "./sections/Product/NotFound.tsx";
+import * as $$$$$$43 from "./sections/Product/NotFoundChallenge.tsx";
+import * as $$$$$$44 from "./sections/Product/ProductDetails.tsx";
 import * as $$$$$$45 from "./sections/Product/ProductInfo.tsx";
 import * as $$$$$$46 from "./sections/Product/ProductShelf.tsx";
 import * as $$$$$$48 from "./sections/Product/ProductShelffWithImage.tsx";
@@ -110,9 +110,9 @@ const manifest = {
     "deco-sites/gaston/sections/Miscellaneous/Slide.tsx": $$$$$$39,
     "deco-sites/gaston/sections/Newsletter/Newsletter.tsx": $$$$$$40,
     "deco-sites/gaston/sections/Product/ImageGalleryFrontBack.tsx": $$$$$$41,
-    "deco-sites/gaston/sections/Product/ImageGallerySlider.tsx": $$$$$$42,
-    "deco-sites/gaston/sections/Product/NotFound.tsx": $$$$$$43,
-    "deco-sites/gaston/sections/Product/NotFoundChallenge.tsx": $$$$$$44,
+    "deco-sites/gaston/sections/Product/NotFound.tsx": $$$$$$42,
+    "deco-sites/gaston/sections/Product/NotFoundChallenge.tsx": $$$$$$43,
+    "deco-sites/gaston/sections/Product/ProductDetails.tsx": $$$$$$44,
     "deco-sites/gaston/sections/Product/ProductInfo.tsx": $$$$$$45,
     "deco-sites/gaston/sections/Product/ProductShelf.tsx": $$$$$$46,
     "deco-sites/gaston/sections/Product/ProductShelffWithImage.tsx": $$$$$$48,

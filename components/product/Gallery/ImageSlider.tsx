@@ -1,58 +1,38 @@
-import Icon from "$store/components/ui/Icon.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
 import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
-import { ProductDetailsPage } from "apps/commerce/types.ts";
+import { ImageObject } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import WishlistButtonVtex from "$store/islands/WishlistButton/vtex.tsx";
 
 export interface Props {
-  /** @title Integration */
-  page: ProductDetailsPage | null;
-
-  layout: {
-    width: number;
-    height: number;
-  };
+  images: ImageObject[];
+  productID: string;
+  productGroupID: string;
 }
 
-/**
- * @title Product Image Slider
- * @description Creates a three columned grid on destkop, one for the dots preview, one for the image slider and the other for product info
- * On mobile, there's one single column with 3 rows. Note that the orders are different from desktop to mobile, that's why
- * we rearrange each cell with col-start- directives
- */
-export default function GallerySlider(props: Props) {
+export default function GallerySlider(
+  { images, productID, productGroupID }: Props,
+) {
   const id = useId();
 
-  if (!props.page) {
-    throw new Error("Missing Product Details Page Info");
-  }
-
-  const {
-    page: { product: { image: images = [] } },
-    layout: { width, height },
-  } = props;
-  const aspectRatio = `${width} / ${height}`;
-
   return (
-    <div id={id} class="grid grid-flow-row sm:grid-flow-col">
+    <div id={id} class="grid grid-flow-row sm:grid-flow-col lg:gap-6">
       {/* Image Slider */}
       <div class="relative order-1 sm:order-2">
-        <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
+        <Slider class="carousel carousel-center gap-6 w-screen lg:w-[40vw] lg:max-w-[520px]">
           {images.map((img, index) => (
             <Slider.Item
               index={index}
               class="carousel-item w-full"
             >
               <Image
-                class="w-full"
-                sizes="(max-width: 640px) 100vw, 40vw"
-                style={{ aspectRatio }}
+                class="w-full lg:max-w-[520px] lg:max-h-[520px] lg:mx-auto lg:border lg:border-black lg:border-opacity-15 lg:rounded-xl"
                 src={img.url!}
                 alt={img.alternateName}
-                width={width}
-                height={height}
+                width={520}
+                height={520}
                 // Preload LCP image for better web vitals
                 preload={index === 0}
                 loading={index === 0 ? "eager" : "lazy"}
@@ -61,39 +41,29 @@ export default function GallerySlider(props: Props) {
           ))}
         </Slider>
 
-        <Slider.PrevButton
-          class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
-          disabled
-        >
-          <Icon size={24} id="ChevronLeft" strokeWidth={3} />
-        </Slider.PrevButton>
-
-        <Slider.NextButton
-          class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
-          disabled={images.length < 2}
-        >
-          <Icon size={24} id="ChevronRight" strokeWidth={3} />
-        </Slider.NextButton>
-
         <div class="absolute top-2 right-2 bg-base-100 rounded-full">
           <ProductImageZoom
             images={images}
             width={700}
-            height={Math.trunc(700 * height / width)}
+            height={Math.trunc(700)}
           />
         </div>
+        <WishlistButtonVtex
+          variant="icon"
+          productID={productID}
+          productGroupID={productGroupID}
+        />
       </div>
 
       {/* Dots */}
-      <ul class="carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1">
+      <ul class="carousel carousel-center gap-3 p-4 lg:p-0 lg:gap-3.5 sm:flex-col order-2 sm:order-1 lg:overflow-y-scroll lg:min-w-[120px] lg:h-[40vw] lg:max-h-[540px] lg:scroll-menu lg:pr-3">
         {images.map((img, index) => (
           <li class="carousel-item min-w-[63px] sm:min-w-[100px]">
             <Slider.Dot index={index}>
               <Image
-                style={{ aspectRatio }}
-                class="group-disabled:border-base-300 border rounded "
-                width={63}
-                height={87.5}
+                class="group-disabled:border-primary border-2 rounded-lg w-[86px] h-[86px] lg:w-[120px] aspect-square lg:h-auto"
+                width={120}
+                height={120}
                 src={img.url!}
                 alt={img.alternateName}
               />
@@ -101,8 +71,9 @@ export default function GallerySlider(props: Props) {
           </li>
         ))}
       </ul>
-
-      <SliderJS rootId={id} />
+      <div class={`absolute`}>
+        <SliderJS rootId={id} />
+      </div>
     </div>
   );
 }
