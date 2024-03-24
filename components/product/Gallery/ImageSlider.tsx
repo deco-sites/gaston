@@ -41,17 +41,20 @@ export default function GallerySlider(
           ))}
         </Slider>
 
-        <div class="absolute top-2 right-2 bg-base-100 rounded-full">
+        {
+          /* <div class="absolute top-2 right-2 bg-base-100 rounded-full">
           <ProductImageZoom
             images={images}
             width={700}
             height={Math.trunc(700)}
           />
-        </div>
+        </div> */
+        }
         <WishlistButtonVtex
           variant="icon"
           productID={productID}
           productGroupID={productGroupID}
+          _class={`h-11 min-h-11 w-11 absolute right-3 top-3`}
         />
       </div>
 
