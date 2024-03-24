@@ -77,7 +77,7 @@ function Header({
   const id = useId();
   return (
     <>
-      <header class="xl:h-[173px] h-[160px]">
+      <header class=" h-[160px] lg:h-[173px]">
         <Drawers
           menu={{ items: navItems }}
           logo={logo}
