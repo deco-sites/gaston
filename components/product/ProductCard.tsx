@@ -173,6 +173,7 @@ function ProductCard({
               <WishlistButtonVtex
                 productGroupID={productGroupID}
                 productID={productID}
+                _class={`h-[30px] min-h-[30px] w-[30px]`}
               />
             )}
           </div>

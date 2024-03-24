@@ -12,6 +12,7 @@ export interface Props {
   loading: boolean;
   inWishlist: boolean;
   isUserLoggedIn: boolean;
+  _class?: string;
 }
 
 function ButtonCommon({
@@ -21,6 +22,7 @@ function ButtonCommon({
   loading,
   inWishlist,
   isUserLoggedIn,
+  _class,
   removeItem,
   addItem,
 }: Props) {
@@ -28,11 +30,11 @@ function ButtonCommon({
 
   return (
     <Button
-      class={`absolute right-3 top-3 ${
+      class={`${_class} ${
         variant === "icon"
           ? "btn-circle btn-ghost gap-2"
           : "btn-primary btn-outline gap-2"
-      } bg-base-content h-11 min-h-11 w-11 lg:h-[42px] lg:min-h-[42px] lg:w-[42px]`}
+      } bg-base-content h-[30px] min-h-[30px] w-[30px] lg:h-[42px] lg:min-h-[42px] lg:w-[42px]`}
       loading={fetching.value}
       aria-label="Add to wishlist"
       onClick={async (e) => {
