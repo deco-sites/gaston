@@ -104,7 +104,7 @@ function ProductCard({
   });
   const cta = (
     <a
-      href={url && relative(url)}
+      href={url?.split("?sku")[0]}
       aria-label="view product"
       class="bg-accent flex gap-3 justify-center items-center duration-200 rounded-[500px] px-6 py-3.5 w-full text-sm uppercase lg:hover-bag font-bold text-white lg:w-[165px] lg:bg-transparent lg:border lg:border-primary-content lg:text-primary-content lg:hover:bg-accent lg:hover:text-white lg:hover:border-accent"
     >
@@ -195,7 +195,7 @@ function ProductCard({
 
         {/* Product Images */}
         <a
-          href={url && relative(url)}
+          href={url?.split("?sku")[0]}
           aria-label="view product"
           class="grid grid-cols-1 grid-rows-1 w-full"
         >
