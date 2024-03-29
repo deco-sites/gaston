@@ -41,7 +41,7 @@ export interface Props {
   };
 }
 
-function Section(
+function Flex(
   { gap, direction, align, justify, wrap, children, sectionChildrens }: Props,
 ) {
   return (
@@ -73,4 +73,4 @@ function Section(
   );
 }
 
-export default Section;
+export default Flex;
