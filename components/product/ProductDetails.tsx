@@ -22,9 +22,9 @@ import type { SectionProps } from "deco/types.ts";
 import GallerySlider from "$store/islands/ProductImageSlider.tsx";
 import ProductName from "$store/islands/ProductName.tsx";
 import { Section } from "deco/blocks/section.ts";
-import ProductTags from "$store/components/product/ProductTags.tsx"
-import ProductDescription from "$store/components/product/ProductDescription.tsx"
-import type { Tag } from "$store/components/product/ProductTags.tsx"
+import ProductTags from "$store/components/product/ProductTags.tsx";
+import ProductDescription from "$store/components/product/ProductDescription.tsx";
+import type { Tag } from "$store/components/product/ProductTags.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -32,7 +32,9 @@ interface Props {
   tags?: Tag[];
 }
 
-function ProductInfo({ page, device, section, tags }: SectionProps<typeof loader>) {
+function ProductInfo(
+  { page, device, section, tags }: SectionProps<typeof loader>,
+) {
   const platform = usePlatform();
   const id = useId();
 
@@ -266,11 +268,9 @@ function ProductInfo({ page, device, section, tags }: SectionProps<typeof loader
         <section.Component {...section.props} />}
       {/* Description card */}
       <div class="flex flex-col w-11/12 mx-auto mt-6 mb-10 p-4 gap-8 bg-white border border-black border-opacity-10 rounded-xl max-w-[850px] lg:p-8">
-        <ProductTags tags={tags}/>
+        <ProductTags tags={tags} />
         <span class="text-sm">
-          {description && (
-            <ProductDescription description={description}/>
-          )}
+          {description && <ProductDescription description={description} />}
         </span>
       </div>
     </div>
