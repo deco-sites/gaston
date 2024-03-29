@@ -2,8 +2,9 @@
  * This file takes care of global app side effects,
  * like clicking on add to cart and the cart modal being displayed
  */
-
 import { signal } from "@preact/signals";
+import type { Product } from "apps/commerce/types.ts";
+import { ImageObject } from "apps/commerce/types.ts";
 
 const displayCart = signal(false);
 const displayMenu = signal(false);
@@ -20,6 +21,11 @@ const productsChild2 = signal({
 const userEmail = signal("");
 const userLogged = signal(false);
 const skuIDCart = signal("");
+const urlSkuVariant = signal("");
+const productSimilar = signal<Product | undefined>(undefined);
+const imagesProductSimilar = signal<ImageObject[] | []>([]);
+const productNameSimilar = signal("");
+const productModelSimilar = signal("");
 
 const state = {
   displayCart,
@@ -33,6 +39,11 @@ const state = {
   productsChild2,
   displayMenuProductsChild,
   skuIDCart,
+  urlSkuVariant,
+  productSimilar,
+  imagesProductSimilar,
+  productNameSimilar,
+  productModelSimilar,
 };
 
 // Keyboard event listeners

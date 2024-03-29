@@ -1,10 +1,10 @@
 import Slider from "$store/components/ui/Slider.tsx";
-import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import { ImageObject } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import WishlistButtonVtex from "$store/islands/WishlistButton/vtex.tsx";
+import { useUI } from "deco-sites/gaston/sdk/useUI.ts";
 
 export interface Props {
   images: ImageObject[];
@@ -16,13 +16,20 @@ export default function GallerySlider(
   { images, productID, productGroupID }: Props,
 ) {
   const id = useId();
+  const { imagesProductSimilar, skuIDCart } = useUI();
+
+  const newImages = imagesProductSimilar.value.length > 0
+    ? imagesProductSimilar.value
+    : images;
+  const newProductId = skuIDCart.value ?? productID;
+  const newProductGroupId = skuIDCart.value ?? productGroupID;
 
   return (
     <div id={id} class="grid grid-flow-row sm:grid-flow-col lg:gap-6">
       {/* Image Slider */}
       <div class="relative order-1 sm:order-2">
         <Slider class="carousel carousel-center gap-6 w-screen lg:w-[40vw] lg:max-w-[520px]">
-          {images.map((img, index) => (
+          {newImages.map((img, index) => (
             <Slider.Item
               index={index}
               class="carousel-item w-full"
@@ -52,15 +59,15 @@ export default function GallerySlider(
         }
         <WishlistButtonVtex
           variant="icon"
-          productID={productID}
-          productGroupID={productGroupID}
+          productID={newProductId}
+          productGroupID={newProductGroupId}
           _class={`h-11 min-h-11 w-11 absolute right-3 top-3`}
         />
       </div>
 
       {/* Dots */}
       <ul class="carousel carousel-center gap-3 p-4 lg:p-0 lg:gap-3.5 sm:flex-col order-2 sm:order-1 lg:overflow-y-scroll lg:min-w-[120px] lg:h-[40vw] lg:max-h-[540px] lg:scroll-menu lg:pr-3">
-        {images.map((img, index) => (
+        {newImages.map((img, index) => (
           <li class="carousel-item min-w-[63px] sm:min-w-[100px]">
             <Slider.Dot index={index}>
               <Image
