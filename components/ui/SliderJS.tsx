@@ -94,8 +94,6 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
 
       return;
     }
-    console.log(item.offsetLeft);
-    console.log(root.offsetLeft);
     slider.scrollTo({
       top: 0,
       behavior: scroll,

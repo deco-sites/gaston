@@ -19,7 +19,8 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import ProductSelector from "./ProductVariantSelector.tsx";
 import { AppContext } from "$store/apps/site.ts";
 import type { SectionProps } from "deco/types.ts";
-import GallerySlider from "deco-sites/gaston/components/product/Gallery/ImageSlider.tsx";
+import GallerySlider from "$store/islands/ProductImageSlider.tsx";
+import ProductName from "$store/islands/ProductName.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -82,14 +83,11 @@ function ProductInfo({ page, layout, device }: SectionProps<typeof loader>) {
               itemListElement={breadcrumb.itemListElement}
               _class={`w-11/12 mx-auto max-w-[1300px]`}
             />
-            <div class="w-11/12 mx-auto sm:mt-8">
-              <h1 class={`text-xl leading-6 font-bold text-primary-content`}>
-                {isVariantOf?.name}
-              </h1>
-              {model && (
-                <span class="text-xs text-primary-content">Ref: {model}</span>
-              )}
-            </div>
+            <ProductName
+              name={isVariantOf?.name || ""}
+              device={device}
+              model={model}
+            />
           </>
         )}
       <div
@@ -115,18 +113,11 @@ function ProductInfo({ page, layout, device }: SectionProps<typeof loader>) {
           {device == "desktop" &&
             (
               <>
-                <div class="flex flex-col gap-4">
-                  {model && (
-                    <span class="text-sm text-primary-content">
-                      Ref: {model}
-                    </span>
-                  )}
-                  <h1
-                    class={`text-2xl leading-7 font-bold text-primary-content`}
-                  >
-                    {isVariantOf?.name}
-                  </h1>
-                </div>
+                <ProductName
+                  name={isVariantOf?.name || ""}
+                  device={device}
+                  model={model}
+                />
                 <div class="flex flex-col gap-2 border-b border-black border-opacity-15 pb-4">
                   <div class={`flex gap-2 items-end`}>
                     {(listPrice ?? 0) > price && (
