@@ -57,7 +57,7 @@ export default function Benefits(
     <>
       {!layout?.variation || layout?.variation === "Simple"
         ? (
-          <div class="w-full pl-4 py-3 flex flex-col gap-8 lg:gap-10 lg:py-7 lg:px-0">
+          <div class="w-full pl-4 py-3 flex flex-col gap-8 lg:gap-10 lg:py-7 lg:px-0 bg-white">
             <div class="w-full flex justify-center">
               <div class="flex gap-4 w-full h-[52px] overflow-x-scroll scrollbar-none lg:overflow-hidden lg:flex-wrap lg:justify-center lg:h-auto lg:gap-8 text-primary-content">
                 {listOfBenefits}
