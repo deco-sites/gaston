@@ -208,7 +208,7 @@ common UI patterns with HTML and CSS only in a simpler context, take a look at
 The best practices for managing the project on the long run rely around
 respecting folder structure. This means:
 
-1. Add `.tsx` files on `components` folder only
+1. Add `.tsx` files on `components` folder only.
 1. Add preact hooks on `sdk` folder.
 1. To make a component editable, create it on the `components` folder and add an
    `export { default }` on the `sections` folder
