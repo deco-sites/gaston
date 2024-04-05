@@ -62,6 +62,7 @@ export type AvailableIcons =
   | "TruckFast"
   | "Medal"
   | "File"
+  | "MapIcon"
   | "sacola";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
