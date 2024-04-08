@@ -13,7 +13,7 @@ export default function LayoutInstitucional({ sections }: Props) {
   return (
     <div class={`w-full lg:py-16 bg-base-300`}>
       <div
-        class={`w-11/12 max-w-[1300px] mx-auto grid grid-cols-[26.3%73.7%] justify-between `}
+        class={`flex flex-col w-11/12 max-w-[1300px] mx-auto md:grid md:grid-cols-[26.3%73.7%] md:justify-between `}
       >
         {sections.map((sections) => {
           return <sections.section.Component {...sections.section.props} />;

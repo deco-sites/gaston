@@ -63,6 +63,7 @@ export type AvailableIcons =
   | "Medal"
   | "File"
   | "MapIcon"
+  | "ArrowInstitucional"
   | "sacola";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
