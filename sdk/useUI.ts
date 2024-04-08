@@ -8,6 +8,7 @@ import { ImageObject } from "apps/commerce/types.ts";
 
 const displayCart = signal(false);
 const displayMenu = signal(false);
+const displayMenuInstitucional = signal(false);
 const displaySearchPopup = signal(false);
 const displaySearchDrawer = signal(false);
 const displayMenuProducts = signal(false);
@@ -44,6 +45,7 @@ const state = {
   imagesProductSimilar,
   productNameSimilar,
   productModelSimilar,
+  displayMenuInstitucional,
 };
 
 // Keyboard event listeners

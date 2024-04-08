@@ -30,14 +30,14 @@ export default function BannerGridText({ title, description, cards }: Props) {
   return (
     <ContainerContent>
       <TitleContent title={title} />
-      <h2 class={`text-lg font-medium text-black text-opacity-60`}>
+      <h2 class={`text-base md:text-lg font-medium text-black text-opacity-60`}>
         {description}
       </h2>
       <div class={`flex flex-wrap justify-center gap-6`}>
         {cards.map((card) => {
           return (
             <div
-              class={`w-2/5 min-w-64 max-w-[275px] min-h-[332px] flex flex-col p-4 gap-4 rounded-2xl border border-black border-opacity-15`}
+              class={`w-2/5 min-w-[311px] md:min-w-64 max-w-[275px] min-h-[332px] flex flex-col p-4 gap-4 rounded-2xl border border-black border-opacity-15`}
             >
               <Image
                 class="rounded-lg w-full object-cover h-[144px]"

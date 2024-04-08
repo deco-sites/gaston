@@ -1,6 +1,7 @@
 import { Section } from "deco/blocks/section.ts";
 import type { SectionProps } from "deco/types.ts";
 import { AppContext } from "deco-sites/gaston/apps/site.ts";
+import DrawerInstitucional from "$store/islands/DrawerInstitucional.tsx";
 
 /**
  * @title {{{text}}}
@@ -22,13 +23,9 @@ export interface Props {
   menu: Menu[];
 }
 
-function Menu({
-  menu,
-  url,
-  device,
-}: SectionProps<typeof loader>) {
+export function Links({ menu, url, device }: SectionProps<typeof loader>) {
   return (
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-6 p-4 md:p-0">
       {menu.map(({ links, title }) => (
         <div class="flex flex-col gap-6">
           <h2 class="text-primary-content text-xl font-bold">
@@ -55,6 +52,23 @@ function Menu({
         </div>
       ))}
     </div>
+  );
+}
+
+function Menu({
+  menu,
+  url,
+  device,
+}: SectionProps<typeof loader>) {
+  return (
+    <>
+      <DrawerInstitucional
+        children={<Links menu={menu} url={url} device={device} />}
+      />
+      <div class={`hidden md:flex`}>
+        <Links menu={menu} url={url} device={device} />
+      </div>
+    </>
   );
 }
 

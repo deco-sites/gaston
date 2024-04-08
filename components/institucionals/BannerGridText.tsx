@@ -25,15 +25,15 @@ export default function BannerGridText({ title, gridImages, text }: Props) {
   return (
     <ContainerContent>
       <TitleContent title={title} />
-      <div class={`flex flex-col items-center justify-center gap-8`}>
+      <div class={`flex flex-col items-center justify-center gap-4 md:gap-8`}>
         <Picture
-          class={`w-full lg:h-[calc(60.7vw*(434/873))] lg:max-h-[434px]`}
+          class={`w-full h-[calc(83vw*(200/311))] md:h-[calc(60.7vw*(434/873))] md:max-h-[434px]`}
         >
           <Source
             media="(max-width: 767px)"
             src={gridImages.imageRow.imageMobile}
-            width={300}
-            height={300}
+            width={311}
+            height={200}
           />
           <Source
             media="(min-width: 768px)"
@@ -49,15 +49,15 @@ export default function BannerGridText({ title, gridImages, text }: Props) {
             loading="eager"
           />
         </Picture>
-        <div class={`w-full flex gap-8 items-center justify-center`}>
+        <div class={`w-full flex gap-4 md:gap-8 items-center justify-center`}>
           <Picture
-            class={`w-full lg:h-[calc(29.2vw*(326/420))] lg:max-h-[326px]`}
+            class={`w-full h-[calc(39.2vw*(143/147))] md:h-[calc(29.2vw*(326/420))] md:max-h-[326px]`}
           >
             <Source
               media="(max-width: 767px)"
               src={gridImages.imageCol1.imageMobile}
-              width={300}
-              height={300}
+              width={147}
+              height={143}
             />
             <Source
               media="(min-width: 768px)"
@@ -74,13 +74,13 @@ export default function BannerGridText({ title, gridImages, text }: Props) {
             />
           </Picture>
           <Picture
-            class={`w-full lg:h-[calc(29.2vw*(326/420))] lg:max-h-[326px]`}
+            class={`w-full h-[calc(39.2vw*(143/147))] md:h-[calc(29.2vw*(326/420))] md:max-h-[326px]`}
           >
             <Source
               media="(max-width: 767px)"
               src={gridImages.imageCol2.imageMobile}
-              width={300}
-              height={300}
+              width={147}
+              height={143}
             />
             <Source
               media="(min-width: 768px)"
@@ -99,7 +99,7 @@ export default function BannerGridText({ title, gridImages, text }: Props) {
         </div>
       </div>
       <div
-        class={`text-lg flex flex-col gap-4 leading-[22.5px] font-medium text-black text-opacity-60`}
+        class={`text-base md:text-lg flex flex-col gap-4 leading-[22.5px] font-medium text-black text-opacity-60`}
         dangerouslySetInnerHTML={{ __html: text }}
       />
     </ContainerContent>
