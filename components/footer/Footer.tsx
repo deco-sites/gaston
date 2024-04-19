@@ -309,7 +309,7 @@ function Footer({
                 dangerouslySetInnerHTML={{ __html: grupo.textFooter }}
               />
               <div
-                class={`flex items-center justify-center gap-2 bg-[#F7F7F7] py-1.5 px-4 rounded-lg lg:w-full`}
+                class={`flex max-w-[340px] items-center justify-center gap-2 bg-[#F7F7F7] py-1.5 px-4 rounded-lg lg:w-full`}
               >
                 <div class={`text-sm text-primary-content font-normal`}>
                   UMA EMPRESA INTEGRANTE
@@ -345,10 +345,10 @@ function Footer({
               </div>
             </div>
             <Divider />
-            <div class="flex flex-col md:flex-row lg:justify-start gap-10 md:items-center">
+            <div class="flex flex-col md:flex-row lg:justify-start gap-4 lg:gap-0 md:items-center">
               <a
                 href=""
-                class={`flex gap-2 tems-center justify-start text-primary-content`}
+                class={`flex gap-2 tems-center pr-5 justify-start text-primary-content`}
               >
                 Tecnologia de e-commerce
                 <img
@@ -361,7 +361,7 @@ function Footer({
               </a>
               <a
                 href=""
-                class={`flex gap-2 h-[18px] items-center justify-start text-primary-content`}
+                class={`flex gap-2 h-[18px] lg:px-5 lg:border-l lg:border-black lg:border-opacity-15 items-center justify-start text-primary-content`}
               >
                 Desenvolvido por
                 <img
@@ -373,7 +373,7 @@ function Footer({
                 />
               </a>
               <div
-                class={`flex gap-2 items-center justify-start text-primary-content`}
+                class={`flex gap-2 items-center lg:pl-5 lg:border-l lg:border-black lg:border-opacity-15 justify-start text-primary-content`}
               >
                 Powered by <PoweredByDeco color="Black" />
               </div>

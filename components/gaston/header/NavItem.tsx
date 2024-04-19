@@ -24,12 +24,12 @@ function NavItem({ item }: { item: MenuNavItem; lastIndex: boolean }) {
         href={href}
         class={`px-8 py-2 ${
           destaque
-            ? "text-secondary border border-secondary rounded-full py-1.5 px-5 "
+            ? "text-white border border-white rounded-full py-1.5 px-5 "
             : " text-white"
         }`}
       >
         <span
-          class={`${href ? "group-hover:underline" : ""} font-thin text-base`}
+          class={`${href ? "group-hover:underline" : ""} ${destaque ? "font-bold" : "font-thin"}  text-base`}
         >
           {label}
         </span>

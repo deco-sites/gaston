@@ -33,7 +33,7 @@ export default function Benefits(
       <div
         class={`flex gap-4 items-center last:pr-4 lg:last:pr-0 border-right`}
       >
-        <div class="flex pl-4 border-l border-l-black border-opacity-10">
+        <div class="flex pl-4 border-l border-l-black border-opacity-15">
           <Icon
             id={benefit.icon}
             class={"text-primary-content"}

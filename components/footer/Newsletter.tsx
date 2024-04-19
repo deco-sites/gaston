@@ -71,12 +71,12 @@ function Newsletter(
           <div class="flex flex-wrap gap-3 justify-center lg:justify-start 2xl:flex-nowrap">
             <input
               name="name"
-              class="flex-auto md:flex-none input input-bordered border-black border-opacity-[12%] rounded-3xl md:w-[311px] text-base-content"
+              class="flex-auto md:flex-none input input-bordered border-black border-opacity-[12%] rounded-3xl md:w-[311px] text-primary-content"
               placeholder={content?.form?.placeholderNome || "Name"}
             />
             <input
               name="email"
-              class="flex-auto md:flex-none input input-bordered border-black border-opacity-[12%] rounded-3xl md:w-[311px] text-base-content"
+              class="flex-auto md:flex-none input input-bordered border-black border-opacity-[12%] rounded-3xl md:w-[311px] text-primary-content"
               placeholder={content?.form?.placeholderEmail ||
                 "Digite seu email"}
             />

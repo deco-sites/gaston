@@ -89,7 +89,7 @@ const Aside = (
               />
             </Button>
             <div class="px-4 py-3">
-              <span class="font-medium text-[13px] text-primary-content opacity-60">
+              <span class="font-medium text-base text-primary-content opacity-60">
                 {title}
               </span>
             </div>
@@ -150,7 +150,7 @@ const Aside = (
             class="min-h-[40px] "
           >
             <input
-              className="w-full p-2 text-base text-black h-[41px] bg-base-300 rounded-full border border-solid border-gray-200"
+              className="w-full px-4 py-3 placeholder:text-primary-content text-base text-black h-[41px] bg-base-300 rounded-full border border-solid border-gray-200"
               type="text"
               name="q" // Adicione o atributo 'name' com o valor 'q'
               placeholder="Busque por tênis, mochila..."
