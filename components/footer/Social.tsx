@@ -26,7 +26,9 @@ export default function Social(
           >
             {content.items.map((item) => {
               return (
-                <li class={`last:border-x last:border-black last:border-opacity-15 first:border-x first:border-black first:border-opacity-15`}>
+                <li
+                  class={`last:border-x last:border-black last:border-opacity-15 first:border-x first:border-black first:border-opacity-15`}
+                >
                   <a
                     href={item.link}
                     target="_blank"

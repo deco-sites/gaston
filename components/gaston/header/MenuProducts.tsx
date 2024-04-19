@@ -14,7 +14,7 @@ function MenuProducts() {
   return (
     <div>
       <ul class="w-full h-full flex flex-col bg-white">
-      <li class="w-full">
+        <li class="w-full">
           <Button
             class="py-3 border-none w-full text-primary bg-white hover:bg-inherit text-left"
             onClick={() => {

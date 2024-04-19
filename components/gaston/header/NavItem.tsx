@@ -29,7 +29,9 @@ function NavItem({ item }: { item: MenuNavItem; lastIndex: boolean }) {
         }`}
       >
         <span
-          class={`${href ? "group-hover:underline" : ""} ${destaque ? "font-bold" : "font-thin"}  text-base`}
+          class={`${href ? "group-hover:underline" : ""} ${
+            destaque ? "font-bold" : "font-thin"
+          }  text-base`}
         >
           {label}
         </span>
