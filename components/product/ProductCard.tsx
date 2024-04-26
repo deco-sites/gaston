@@ -321,13 +321,16 @@ function ProductCard({
                     : "justify-start items-center"
                 }`}
               >
-                <div
-                  class={`line-through text-primary-content text-sm font-medium ${
-                    l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
-                  }`}
-                >
-                  {formatPrice(listPrice, offers?.priceCurrency)}
-                </div>
+                {listPrice && price && listPrice > price &&
+                  (
+                    <div
+                      class={`line-through text-primary-content text-sm font-medium ${
+                        l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
+                      }`}
+                    >
+                      {formatPrice(listPrice, offers?.priceCurrency)}
+                    </div>
+                  )}
                 <div class="text-primary lg:text-xl font-bold">
                   {formatPrice(price, offers?.priceCurrency)}
                 </div>
