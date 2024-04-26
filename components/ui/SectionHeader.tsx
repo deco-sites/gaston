@@ -29,7 +29,7 @@ function Header(props: Props) {
               (
                 <h2
                   class={clx(
-                    "text-xl lg:w-max mx-auto italic font-bold leading-6 lg:leading-10",
+                    "text-xl lg:w-max mx-auto italic font-bold leading-6 lg:leading-none",
                     props.colorReverse
                       ? "text-primary-content"
                       : "text-base-content",

@@ -14,6 +14,27 @@ function MenuProducts() {
             : "w-full h-full"
         }`}
       >
+        <li
+          class={`w-full ${
+            productsChild2.value.children[0].type == "sizeItem" && "hidden"
+          }`}
+        >
+          <Button
+            class="py-3 border-none w-full text-primary-content bg-white hover:bg-inherit text-left"
+            onClick={() => {
+              displayMenuProducts.value = false;
+            }}
+          >
+            {productsChild2.value.href && (
+              <a
+                class="font-bold w-full text-primary"
+                href={productsChild2.value.href}
+              >
+                {`Ver tudo em ${productsChild2.value.label}`}
+              </a>
+            )}
+          </Button>
+        </li>
         {productsChild2.value.children.map((node: any) => (
           <li
             class={`${
@@ -34,27 +55,6 @@ function MenuProducts() {
             </a>
           </li>
         ))}
-        <li
-          class={`w-full ${
-            productsChild2.value.children[0].type == "sizeItem" && "hidden"
-          }`}
-        >
-          <Button
-            class="py-3 border-none uppercase w-full text-primary-content bg-white hover:bg-inherit text-left"
-            onClick={() => {
-              displayMenuProducts.value = false;
-            }}
-          >
-            {productsChild2.value.href && (
-              <a
-                class="uppercase font-bold w-full text-primary"
-                href={productsChild2.value.href}
-              >
-                {`Ver tudo em ${productsChild2.value.label}`}
-              </a>
-            )}
-          </Button>
-        </li>
       </ul>
     </div>
   );

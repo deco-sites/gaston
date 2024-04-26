@@ -146,7 +146,7 @@ function Header({
                     class="min-h-[40px] "
                   >
                     <input
-                      className="w-full p-2 text-base text-black h-[41px] bg-base-300 rounded-full border border-solid border-gray-200"
+                      className="w-full py-3 px-4 placeholder:text-primary-content text-base text-black h-[41px] bg-base-300 rounded-full border border-solid border-gray-200"
                       type="text"
                       name="q" // Adicione o atributo 'name' com o valor 'q'
                       placeholder="Busque por tênis, mochila..."

@@ -25,9 +25,9 @@ function ValueItem(
         aria-checked={selected}
         class="checkbox border-black border-opacity-60 w-4 h-4 [--chkbg:theme(colors.primary)] [--chkfg:white]"
       />
-      <span class="text-sm">{label}</span>
+      <span class="text-sm text-black text-opacity-60">{label}</span>
       {quantity > 0 && (
-        <span class="text-sm text-primary-content">({quantity})</span>
+        <span class="text-sm text-black text-opacity-60">({quantity})</span>
       )}
     </a>
   );
@@ -81,7 +81,9 @@ function Filters({ filters }: Props) {
         .map((filter) => (
           <li class="collapse collapse-plus bg-base-200 border border-black border-opacity-10 rounded-lg">
             <input type="checkbox" class={`h-10 min-h-10`} />
-            <span class={`collapse-title text-sm font-bold p-3 min-h-10`}>
+            <span
+              class={`collapse-title text-sm font-bold p-3 min-h-10 text-primary-content`}
+            >
               {filter.label}
             </span>
             <FilterValues {...filter} />

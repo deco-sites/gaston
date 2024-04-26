@@ -84,7 +84,7 @@ function Navbar({ paths, logo, device }: {
           class="min-h-[40px] relative w-1/2"
         >
           <input
-            className="w-full p-2 text-base text-black h-[51px] bg-base-300 rounded-full border border-solid border-gray-200"
+            className="w-full placeholder:text-primary-content p-2 text-base pl-5 text-black h-[51px] bg-base-300 rounded-full border border-solid border-gray-200"
             type="text"
             name="q" // Adicione o atributo 'name' com o valor 'q'
             placeholder="Busque por tênis, mochila..."
@@ -92,7 +92,7 @@ function Navbar({ paths, logo, device }: {
           <button
             type="submit"
             aria-label="Search"
-            class={`absolute right-8 top-3.5`}
+            class={`absolute right-8 top-4`}
           >
             <Icon
               id={"MagnifyingGlass"}

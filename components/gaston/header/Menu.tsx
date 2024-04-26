@@ -36,13 +36,13 @@ function Menu({ items }: Props) {
 
   return (
     <div class="flex flex-col h-auto w-full bg-white">
-      <ul class="flex flex-col uppercase text-xs">
+      <ul class="flex flex-col text-xs">
         {items.map((item, index) => (
           <li class="font-medium">
             {item.children !== undefined && item.children?.length > 0
               ? (
                 <Button
-                  class={`flex border-b-[1px] items-center justify-between py-3 m-auto w-full bg-white font-thin text-[14px] leading-[17.5px] ${
+                  class={`flex border-b-[1px] items-center justify-between py-3 m-auto w-full bg-white font-normal text-[14px] leading-[17.5px] ${
                     items.length - 1 === index
                       ? "text-primary bg-secondary"
                       : "text-primary-content"
@@ -65,7 +65,7 @@ function Menu({ items }: Props) {
               : (
                 <a
                   href={item.href}
-                  class={`flex border-b-[1px] items-center justify-between px-4 py-4 m-auto w-full font-bold text-[14px] leading-[17.5px] ${
+                  class={`flex border-b-[1px] items-center justify-between px-4 py-4 m-auto w-full font-normal text-[14px] leading-[17.5px] ${
                     index === items.length - 1
                       ? "text-primary bg-secondary"
                       : "text-primary-content"

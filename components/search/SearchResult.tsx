@@ -92,7 +92,7 @@ function Result({
                   id="ChevronLeft"
                   size={20}
                   strokeWidth={1}
-                  class="text-primary-content"
+                  class="text-primary-content opacity-60"
                 />
               </a>
               <span class="flex items-center text-primary-content justify-center px-4 gap-2">
@@ -111,7 +111,7 @@ function Result({
                   id="ChevronRightFilter"
                   size={20}
                   strokeWidth={2}
-                  class="text-primary-content"
+                  class="text-primary-content opacity-60"
                 />
               </a>
             </div>
