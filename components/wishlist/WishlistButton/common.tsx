@@ -43,7 +43,7 @@ function ButtonCommon({
 
         if (!isUserLoggedIn) {
           globalThis.window.alert(
-            "Please log in before adding to your wishlist",
+            "Por favor, realize o login antes de favoritar um produto.",
           );
 
           return;

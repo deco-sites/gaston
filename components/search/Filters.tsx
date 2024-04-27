@@ -66,8 +66,15 @@ function FilterValues({ key, values }: FilterToggle) {
     </ul>
   );
 }
+const portugueseMappings = {
+  "Departments": "Departamentos",
+  "PriceRanges": "Preço",
+  "Categories": "Categorias",
+  "Brands": "Marcas",
+};
 
 function Filters({ filters }: Props) {
+  console.log(filters)
   return (
     <ul class="flex flex-col gap-6 p-4 text-primary-content lg:rounded-2xl bg-white lg:border lg:border-black lg:border-opacity-10 lg:drop-shadow-md">
       <h3
@@ -78,17 +85,20 @@ function Filters({ filters }: Props) {
       <FiltersSelected filters={filters} />
       {filters
         .filter(isToggle)
-        .map((filter) => (
-          <li class="collapse collapse-plus bg-base-200 border border-black border-opacity-10 rounded-lg">
-            <input type="checkbox" class={`h-10 min-h-10`} />
-            <span
-              class={`collapse-title text-sm font-bold p-3 min-h-10 text-primary-content`}
-            >
-              {filter.label}
-            </span>
-            <FilterValues {...filter} />
-          </li>
-        ))}
+        .map((filter) => {if(filter.quantity > 0){
+          return(
+            <li class="collapse collapse-plus bg-base-200 border border-black border-opacity-10 rounded-lg">
+              <input type="checkbox" class={`h-10 min-h-10`} />
+              <span
+                class={`collapse-title text-sm font-bold p-3 min-h-10 text-primary-content`}
+                >
+                {portugueseMappings[filter.label as keyof typeof portugueseMappings] ?? filter.label}
+              </span>
+              <FilterValues {...filter} />
+            </li>
+            )
+        }(<></>
+        )})}
     </ul>
   );
 }
