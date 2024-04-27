@@ -129,7 +129,7 @@ function CategoryList(props: Props) {
           alignment={layout.headerAlignment || "center"}
         />
 
-        <ul class="flex gap-6 lg:gap-8 overflow-x-scroll lg:overflow-x-hidden justify-between items-center">
+        <ul class="flex gap-6 lg:gap-8 pb-5 lg:pb-0 overflow-x-scroll lg:overflow-x-hidden justify-between items-center">
           {list.map((
             { tag, label, description, href, image, buttonText },
           ) => (

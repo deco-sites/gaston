@@ -142,7 +142,7 @@ function Result({
 }
 
 function SearchResult({ page, ...props }: Props) {
-  if (!page) {
+  if (!page || page.pageInfo.records == 0) {
     return <NotFound />;
   }
 

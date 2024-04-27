@@ -66,6 +66,12 @@ function FilterValues({ key, values }: FilterToggle) {
     </ul>
   );
 }
+const portugueseMappings = {
+  "Departments": "Departamentos",
+  "PriceRanges": "Preço",
+  "Categories": "Categorias",
+  "Brands": "Marcas",
+};
 
 function Filters({ filters }: Props) {
   return (
@@ -78,17 +84,24 @@ function Filters({ filters }: Props) {
       <FiltersSelected filters={filters} />
       {filters
         .filter(isToggle)
-        .map((filter) => (
-          <li class="collapse collapse-plus bg-base-200 border border-black border-opacity-10 rounded-lg">
-            <input type="checkbox" class={`h-10 min-h-10`} />
-            <span
-              class={`collapse-title text-sm font-bold p-3 min-h-10 text-primary-content`}
-            >
-              {filter.label}
-            </span>
-            <FilterValues {...filter} />
-          </li>
-        ))}
+        .map((filter) => {
+          if (filter.quantity > 0) {
+            return (
+              <li class="collapse collapse-plus bg-base-200 border border-black border-opacity-10 rounded-lg">
+                <input type="checkbox" class={`h-10 min-h-10`} />
+                <span
+                  class={`collapse-title text-sm font-bold p-3 min-h-10 text-primary-content`}
+                >
+                  {portugueseMappings[
+                    filter.label as keyof typeof portugueseMappings
+                  ] ?? filter.label}
+                </span>
+                <FilterValues {...filter} />
+              </li>
+            );
+          }
+          <></>;
+        })}
     </ul>
   );
 }
