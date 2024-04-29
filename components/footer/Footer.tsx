@@ -347,7 +347,7 @@ function Footer({
             <Divider />
             <div class="flex flex-col md:flex-row lg:justify-start gap-4 lg:gap-0 md:items-center">
               <a
-                href=""
+                href="https://vtex.com/br-pt" target={'_blank'}
                 class={`flex gap-2 tems-center pr-5 justify-start text-primary-content`}
               >
                 Tecnologia de e-commerce
@@ -360,7 +360,8 @@ function Footer({
                 />
               </a>
               <a
-                href=""
+                href="https://www.tec4udigital.com/"
+                target={"_blank"}
                 class={`flex gap-2 h-[18px] lg:px-5 lg:border-l lg:border-black lg:border-opacity-15 items-center justify-start text-primary-content`}
               >
                 Desenvolvido por
