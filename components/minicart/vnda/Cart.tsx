@@ -19,6 +19,8 @@ function Cart() {
   return (
     <BaseCart
       items={items.map((item) => ({
+        skuID: "",
+        productGroupID: "",
         image: {
           src: normalizeUrl(item.image_url ?? ""),
           alt: item.product_name,

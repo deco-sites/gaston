@@ -15,7 +15,7 @@ import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+// import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
 import { AppContext } from "$store/apps/site.ts";
 import type { SectionProps } from "deco/types.ts";
@@ -25,7 +25,7 @@ import { Section } from "deco/blocks/section.ts";
 import ProductTags from "$store/components/product/ProductTags.tsx";
 import ProductDescription from "$store/components/product/ProductDescription.tsx";
 import type { Tag } from "$store/components/product/ProductTags.tsx";
-
+import { mapProductToAnalyticsItem } from "$store/sdk/productAnalytics.ts";
 interface Props {
   page: ProductDetailsPage | null;
   section?: Section;
@@ -75,123 +75,76 @@ function ProductInfo(
   });
 
   return (
-    <div class={`flex flex-col gap-4 bg-base-300`}>
-      {device == "mobile" &&
-        (
-          <>
-            <Breadcrumb
-              itemListElement={breadcrumb.itemListElement}
-              _class={`w-11/12 mx-auto max-w-[1300px]`}
-            />
-            <ProductName
-              name={isVariantOf?.name || ""}
-              device={device}
-              model={model}
-            />
-          </>
-        )}
-      <div
-        class={`flex flex-col gap-3 lg:flex-row lg:justify-between lg:w-11/12 lg:mx-auto lg:max-w-[1300px] lg:gap-10`}
-      >
-        <div class={`flex flex-col gap-3`}>
-          {device == "desktop" &&
-            (
-              <>
-                <Breadcrumb
-                  itemListElement={breadcrumb.itemListElement}
-                  _class={`mt-9 pt-0 pb-2.5 mb-2.5 border-b border-black border-opacity-15`}
-                />
-              </>
-            )}
-          <GallerySlider
-            images={images}
-            productID={productID}
-            productGroupID={productGroupID}
-          />
-        </div>
-        <div class={`flex flex-col gap-3 lg:w-[45%] lg:max-w-[530px] lg:mt-9`}>
-          {device == "desktop" &&
-            (
-              <>
-                <ProductName
-                  name={isVariantOf?.name || ""}
-                  device={device}
-                  model={model}
-                />
-                <div class="flex flex-col gap-2 border-b border-black border-opacity-15 pb-4">
-                  <div class={`flex gap-2 items-end`}>
-                    {(listPrice ?? 0) > price && (
-                      <span class="line-through text-primary-content text-sm font-semibold leading-4">
-                        {formatPrice(listPrice, offers?.priceCurrency)}
-                      </span>
-                    )}
-                    <span class="font-bold text-2xl text-primary leading-7">
-                      {formatPrice(price, offers?.priceCurrency)}
-                    </span>
-                  </div>
-                  <span class="text-sm text-primary-content font-bold leading-4">
-                    {installments}
-                  </span>
-                </div>
-              </>
-            )}
-          {/* Sku Selector */}
-          <div class="w-11/12 mx-auto lg:w-full">
-            <ProductSelector product={product} />
-          </div>
-          {device == "desktop" &&
-            (
-              <>
-                {availability === "https://schema.org/InStock"
-                  ? (
-                    <>
-                      {platform === "vtex" && (
-                        <>
-                          <AddToCartButtonVTEX
-                            eventParams={{ items: [eventItem] }}
-                            productID={productID}
-                            seller={seller}
-                          />
-                        </>
-                      )}
-                    </>
-                  )
-                  : <OutOfStock productID={productID} />}
-              </>
-            )}
-          {/* Shipping Simulation */}
-          <div class="w-11/12 mx-auto lg:w-full">
-            {platform === "vtex" && (
-              <ShippingSimulation
-                items={[
-                  {
-                    id: Number(product.sku),
-                    quantity: 1,
-                    seller: seller,
-                  },
-                ]}
+    <>
+      <div class={`flex flex-col gap-4 bg-base-300`}>
+        {device == "mobile" &&
+          (
+            <>
+              <Breadcrumb
+                itemListElement={breadcrumb.itemListElement}
+                _class={`w-11/12 mx-auto max-w-[1300px]`}
               />
-            )}
+              <ProductName
+                name={isVariantOf?.name || ""}
+                device={device}
+                model={model}
+              />
+            </>
+          )}
+        <div
+          class={`flex flex-col gap-3 lg:flex-row lg:justify-between lg:w-11/12 lg:mx-auto lg:max-w-[1300px] lg:gap-10`}
+        >
+          <div class={`flex flex-col gap-3`}>
+            {device == "desktop" &&
+              (
+                <>
+                  <Breadcrumb
+                    itemListElement={breadcrumb.itemListElement}
+                    _class={`mt-9 pt-0 pb-2.5 mb-2.5 border-b border-black border-opacity-15`}
+                  />
+                </>
+              )}
+            <GallerySlider
+              images={images}
+              productID={productID}
+              productGroupID={productGroupID}
+            />
           </div>
-          {device == "mobile" &&
-            (
-              <>
-                {/* Add to Cart and Favorites button */}
-                <div class="z-40 fixed bottom-0 w-full bg-white border-t border-black border-opacity-10 flex flex-col gap-4 p-4">
-                  {/* Prices */}
-                  <div class="flex flex-row gap-2 items-center">
-                    {(listPrice ?? 0) > price && (
-                      <span class="line-through text-primary-content text-sm font-semibold leading-4">
-                        {formatPrice(listPrice, offers?.priceCurrency)}
+          <div
+            class={`flex flex-col gap-3 lg:w-[45%] lg:max-w-[530px] lg:mt-9`}
+          >
+            {device == "desktop" &&
+              (
+                <>
+                  <ProductName
+                    name={isVariantOf?.name || ""}
+                    device={device}
+                    model={model}
+                  />
+                  <div class="flex flex-col gap-2 border-b border-black border-opacity-15 pb-4">
+                    <div class={`flex gap-2 items-end`}>
+                      {(listPrice ?? 0) > price && (
+                        <span class="line-through text-primary-content text-sm font-semibold leading-4">
+                          {formatPrice(listPrice, offers?.priceCurrency)}
+                        </span>
+                      )}
+                      <span class="font-bold text-2xl text-primary leading-7">
+                        {formatPrice(price, offers?.priceCurrency)}
                       </span>
-                    )}
-                    <span class="font-bold text-2xl text-primary leading-7">
-                      {formatPrice(price, offers?.priceCurrency)}
-                    </span>
-                    <span class="border-l border-black border-opacity-15 pl-3 text-sm text-primary-content font-bold leading-4">
+                    </div>
+                    <span class="text-sm text-primary-content font-bold leading-4">
                       {installments}
                     </span>
                   </div>
+                </>
+              )}
+            {/* Sku Selector */}
+            <div class="w-11/12 mx-auto lg:w-full">
+              <ProductSelector product={product} />
+            </div>
+            {device == "desktop" &&
+              (
+                <>
                   {availability === "https://schema.org/InStock"
                     ? (
                       <>
@@ -204,76 +157,139 @@ function ProductInfo(
                             />
                           </>
                         )}
-                        {platform === "wake" && (
-                          <>
-                            <AddToCartButtonWake
-                              eventParams={{ items: [eventItem] }}
-                              productID={productID}
-                            />
-                            <WishlistButtonWake
-                              variant="full"
-                              productID={productID}
-                              productGroupID={productGroupID}
-                            />
-                          </>
-                        )}
-                        {platform === "linx" && (
-                          <AddToCartButtonLinx
-                            eventParams={{ items: [eventItem] }}
-                            productID={productID}
-                            productGroupID={productGroupID}
-                          />
-                        )}
-                        {platform === "vnda" && (
-                          <AddToCartButtonVNDA
-                            eventParams={{ items: [eventItem] }}
-                            productID={productID}
-                            additionalProperty={additionalProperty}
-                          />
-                        )}
-                        {platform === "shopify" && (
-                          <AddToCartButtonShopify
-                            eventParams={{ items: [eventItem] }}
-                            productID={productID}
-                          />
-                        )}
-                        {platform === "nuvemshop" && (
-                          <AddToCartButtonNuvemshop
-                            productGroupID={productGroupID}
-                            eventParams={{ items: [eventItem] }}
-                            additionalProperty={additionalProperty}
-                          />
-                        )}
                       </>
                     )
                     : <OutOfStock productID={productID} />}
-                </div>
-              </>
-            )}
-          {/* Analytics Event */}
-          <SendEventOnView
-            id={id}
-            event={{
-              name: "view_item",
-              params: {
-                item_list_id: "product",
-                item_list_name: "Product",
-                items: [eventItem],
-              },
-            }}
-          />
+                </>
+              )}
+            {/* Shipping Simulation */}
+            <div class="w-11/12 mx-auto lg:w-full">
+              {platform === "vtex" && (
+                <ShippingSimulation
+                  items={[
+                    {
+                      id: Number(product.sku),
+                      quantity: 1,
+                      seller: seller,
+                    },
+                  ]}
+                />
+              )}
+            </div>
+            {device == "mobile" &&
+              (
+                <>
+                  {/* Add to Cart and Favorites button */}
+                  <div class="z-40 fixed bottom-0 w-full bg-white border-t border-black border-opacity-10 flex flex-col gap-4 p-4">
+                    {/* Prices */}
+                    <div class="flex flex-row gap-2 items-center">
+                      {(listPrice ?? 0) > price && (
+                        <span class="line-through text-primary-content text-sm font-semibold leading-4">
+                          {formatPrice(listPrice, offers?.priceCurrency)}
+                        </span>
+                      )}
+                      <span class="font-bold text-2xl text-primary leading-7">
+                        {formatPrice(price, offers?.priceCurrency)}
+                      </span>
+                      <span class="border-l border-black border-opacity-15 pl-3 text-sm text-primary-content font-bold leading-4">
+                        {installments}
+                      </span>
+                    </div>
+                    {availability === "https://schema.org/InStock"
+                      ? (
+                        <>
+                          {platform === "vtex" && (
+                            <>
+                              <AddToCartButtonVTEX
+                                eventParams={{ items: [eventItem] }}
+                                productID={productID}
+                                seller={seller}
+                              />
+                            </>
+                          )}
+                          {platform === "wake" && (
+                            <>
+                              <AddToCartButtonWake
+                                eventParams={{ items: [eventItem] }}
+                                productID={productID}
+                              />
+                              <WishlistButtonWake
+                                variant="full"
+                                productID={productID}
+                                productGroupID={productGroupID}
+                              />
+                            </>
+                          )}
+                          {platform === "linx" && (
+                            <AddToCartButtonLinx
+                              eventParams={{ items: [eventItem] }}
+                              productID={productID}
+                              productGroupID={productGroupID}
+                            />
+                          )}
+                          {platform === "vnda" && (
+                            <AddToCartButtonVNDA
+                              eventParams={{ items: [eventItem] }}
+                              productID={productID}
+                              additionalProperty={additionalProperty}
+                            />
+                          )}
+                          {platform === "shopify" && (
+                            <AddToCartButtonShopify
+                              eventParams={{ items: [eventItem] }}
+                              productID={productID}
+                            />
+                          )}
+                          {platform === "nuvemshop" && (
+                            <AddToCartButtonNuvemshop
+                              productGroupID={productGroupID}
+                              eventParams={{ items: [eventItem] }}
+                              additionalProperty={additionalProperty}
+                            />
+                          )}
+                        </>
+                      )
+                      : <OutOfStock productID={productID} />}
+                  </div>
+                </>
+              )}
+            {/* Analytics Event */}
+            <SendEventOnView
+              id={id}
+              event={{
+                name: "view_item",
+                params: {
+                  currency: "BRL",
+                  value: price,
+                  items: [
+                    mapProductToAnalyticsItem({
+                      item_list_name: "Product",
+                      item_list_id: "product",
+                      productGroupID: productGroupID,
+                      skuID: productID,
+                      product,
+                      breadcrumbList: breadcrumb,
+                      price,
+                      listPrice,
+                      index: 0,
+                    }),
+                  ],
+                },
+              }}
+            />
+          </div>
+        </div>
+        {section &&
+          <section.Component {...section.props} />}
+        {/* Description card */}
+        <div class="flex flex-col w-11/12 mx-auto mt-6 mb-10 p-4 gap-8 bg-white border border-black border-opacity-10 rounded-xl max-w-[850px] lg:p-8">
+          <ProductTags tags={tags} />
+          <span class="text-sm">
+            {description && <ProductDescription description={description} />}
+          </span>
         </div>
       </div>
-      {section &&
-        <section.Component {...section.props} />}
-      {/* Description card */}
-      <div class="flex flex-col w-11/12 mx-auto mt-6 mb-10 p-4 gap-8 bg-white border border-black border-opacity-10 rounded-xl max-w-[850px] lg:p-8">
-        <ProductTags tags={tags} />
-        <span class="text-sm">
-          {description && <ProductDescription description={description} />}
-        </span>
-      </div>
-    </div>
+    </>
   );
 }
 

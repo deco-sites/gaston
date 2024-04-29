@@ -8,6 +8,8 @@ import Image from "apps/website/components/Image.tsx";
 import { useCallback, useState } from "preact/hooks";
 
 export interface Item {
+  skuID: string;
+  productGroupID: string;
   image: {
     src: string;
     alt: string;
@@ -41,7 +43,14 @@ function CartItem(
     itemToAnalyticsItem,
   }: Props,
 ) {
-  const { image, name, price: { sale, list }, quantity } = item;
+  const {
+    image,
+    name,
+    price: { sale, list },
+    quantity,
+    skuID,
+    productGroupID,
+  } = item;
   const isGift = sale < 0.01;
   const [loading, setLoading] = useState(false);
 
@@ -87,7 +96,12 @@ function CartItem(
 
               analyticsItem && sendEvent({
                 name: "remove_from_cart",
-                params: { items: [analyticsItem] },
+                params: {
+                  items: [{
+                    ...analyticsItem,
+                    item_id: `${productGroupID}_${skuID}`,
+                  }],
+                },
               });
             })}
           >

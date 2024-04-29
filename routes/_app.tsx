@@ -31,8 +31,19 @@ export default defineApp(async (_req, ctx) => {
         <link rel="manifest" href={asset("/site.webmanifest")} />
 
         {/* OmniChat */}
-        <script defer dangerouslySetInnerHTML={{ __html: 'window.omnichatConfig = { retailerId: "1f28lzUSCu" };'}}  />
-        <script defer dangerouslySetInnerHTML={{__html: '!function() { var t = document.createElement("script"); t.type = "text/javascript"; t.defer = true; t.src = "https://static.omni.chat/web-chat/web-chat.min.js"; t.onload = function() { OmniChatWebChat.init(window.omnichatConfig); }; var e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(t, e); }();'}} />
+        <script
+          defer
+          dangerouslySetInnerHTML={{
+            __html: 'window.omnichatConfig = { retailerId: "1f28lzUSCu" };',
+          }}
+        />
+        <script
+          defer
+          dangerouslySetInnerHTML={{
+            __html:
+              '!function() { var t = document.createElement("script"); t.type = "text/javascript"; t.defer = true; t.src = "https://static.omni.chat/web-chat/web-chat.min.js"; t.onload = function() { OmniChatWebChat.init(window.omnichatConfig); }; var e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(t, e); }();',
+          }}
+        />
       </Head>
 
       {/* Rest of Preact tree */}
