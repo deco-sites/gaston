@@ -14,6 +14,7 @@ const Searchbar = lazy(() => import("$store/components/search/Searchbar.tsx"));
 
 export interface Props {
   menu: MenuProps;
+  ShippingPrice: number;
   searchbar?: SearchbarProps;
   /**
    * @ignore_gen true
@@ -52,7 +53,7 @@ const Aside = (
   </div>
 );
 
-function Drawers({ menu, searchbar, children, platform }: Props) {
+function Drawers({ menu, searchbar, children, platform, ShippingPrice }: Props) {
   const { displayCart, displayMenu, displaySearchDrawer } = useUI();
 
   return (
@@ -91,7 +92,7 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
             title="Minha sacola"
             onClose={() => displayCart.value = false}
           >
-            <Cart platform={platform} />
+            <Cart platform={platform} freeShippingTarget={ShippingPrice} />
           </Aside>
         }
       >

@@ -192,7 +192,9 @@ const Aside = (
   </div>
 );
 
-function Drawers({ menu, logo, children, platform, device }: Props) {
+function Drawers(
+  { menu, logo, children, platform, device, ShippingPrice }: Props,
+) {
   const {
     displayMenu,
     displayMenuProducts,
@@ -272,7 +274,10 @@ function Drawers({ menu, logo, children, platform, device }: Props) {
                   id={id}
                   isMiniCart={true}
                 >
-                  <Cart platform={platform} />
+                  <Cart
+                    platform={platform}
+                    freeShippingTarget={ShippingPrice || 200}
+                  />
                 </Aside>
               }
             >
@@ -316,7 +321,10 @@ function Drawers({ menu, logo, children, platform, device }: Props) {
               id={id}
               isMiniCart={true}
             >
-              <Cart platform={platform} />
+              <Cart
+                platform={platform}
+                freeShippingTarget={ShippingPrice || 200}
+              />
             </Aside>
           }
         >
