@@ -47,12 +47,25 @@ function ShippingContent({ simulation }: {
     <ul class="flex flex-col gap-3 py-3">
       {methods.map((method) => (
         <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
-          <span class="text-sm min-w-[110px]">
-            {method.name}
+          <span class="text-xs lg:text-sm min-w-[130px] max-w-[130px] lg:min-w-[220px] lg:max-w-[220px]">
+            {method.pickupStoreInfo.friendlyName || method.name}
           </span>
-          <span class="text-sm min-w-[110px]">
-            até {formatShippingEstimate(method.shippingEstimate)}
-          </span>
+          {method.deliveryChannel == "pickup-in-point" &&
+              method.shippingEstimate == "0bd"
+            ? (
+              <>
+                <span class="text-xs lg:text-sm min-w-[110px]">
+                  Retire no mesmo dia
+                </span>
+              </>
+            )
+            : (
+              <>
+                <span class="text-xs lg:text-sm min-w-[110px]">
+                  até {formatShippingEstimate(method.shippingEstimate)}
+                </span>
+              </>
+            )}
           <span class="text-sm text-primary font-semibold min-w-[60px]">
             {method.price === 0 ? "Grátis" : (
               formatPrice(method.price / 100, currencyCode, locale)
@@ -70,8 +83,10 @@ function ShippingSimulation({ items }: Props) {
   const simulateResult = useSignal<SimulationOrderForm | null>(null);
   const { simulate, cart } = useCart();
 
-  const handleSimulation = useCallback(async () => {
-    if (postalCode.value.length !== 8) {
+  const handleSimulation = useCallback(async (e: Event) => {
+    e.preventDefault(); // Prevenir o comportamento padrão do formulário
+
+    if (postalCode.value.length !== 9) {
       return;
     }
 
@@ -79,13 +94,14 @@ function ShippingSimulation({ items }: Props) {
       loading.value = true;
       simulateResult.value = await simulate({
         items: items,
-        postalCode: postalCode.value,
+        postalCode: postalCode.value.replace("-", ""),
         country: cart.value?.storePreferencesData.countryCode || "BRA",
       });
     } finally {
       loading.value = false;
+      console.log(simulateResult);
     }
-  }, []);
+  }, [postalCode, simulateResult, simulate, items, cart, loading]);
 
   return (
     <div class="collapse collapse-arrow text-primary-content border border-black border-opacity-10 rounded-lg">
@@ -104,22 +120,30 @@ function ShippingSimulation({ items }: Props) {
       </div>
       <div class={`collapse-content flex flex-col gap-3`}>
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSimulation();
-          }}
+          onSubmit={handleSimulation} // Passando a função 'handleSimulation' diretamente
           class={`relative flex`}
         >
           <input
-            as="input"
             type="text"
             class="input input-bordered join-item rounded-[100px] bg-transparent border-black border-opacity-10 w-full"
             placeholder="Informe seu CEP"
             value={postalCode.value}
-            maxLength={8}
-            size={8}
+            maxLength={9} // Permitindo 9 caracteres (incluindo o traço)
             onChange={(e: { currentTarget: { value: string } }) => {
-              postalCode.value = e.currentTarget.value;
+              // Limpar qualquer caractere não numérico e aplicar a máscara de CEP
+              const cleanedValue = e.currentTarget.value.replace(/\D/g, "");
+              const formattedValue = cleanedValue.replace(
+                /^(\d{5})(\d{3})?$/,
+                "$1-$2",
+              );
+              postalCode.value = formattedValue;
+            }}
+            onKeyPress={(e: KeyboardEvent) => {
+              // Permitir apenas números
+              const charCode = e.charCode;
+              if (charCode < 48 || charCode > 57) {
+                e.preventDefault();
+              }
             }}
           />
           <Button

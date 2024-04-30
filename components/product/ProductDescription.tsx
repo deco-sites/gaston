@@ -5,7 +5,6 @@ interface Props {
 export default function ProductDescription({ description }: Props) {
   const tableInfo = description?.split("</h3>")[1];
   const descriptionProduct = description?.split("<h3")[0];
-  console.log(descriptionProduct);
   return (
     <>
       <div class={`flex flex-col gap-4 text-primary-content`}>

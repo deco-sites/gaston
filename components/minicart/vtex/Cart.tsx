@@ -1,7 +1,11 @@
 import { itemToAnalyticsItem, useCart } from "apps/vtex/hooks/useCart.ts";
 import BaseCart from "../common/Cart.tsx";
 
-function Cart() {
+export interface Props {
+  freeShippingTarget: number;
+}
+
+function Cart({ freeShippingTarget }: Props) {
   const { cart, loading, updateItems, addCouponsToCart } = useCart();
   const { items, totalizers } = cart.value ?? { items: [] };
   const total = totalizers?.find((item) => item.id === "Items")?.value || 0;
@@ -30,7 +34,7 @@ function Cart() {
       locale={locale}
       currency={currency}
       loading={loading.value}
-      freeShippingTarget={1000}
+      freeShippingTarget={freeShippingTarget}
       coupon={coupon}
       onAddCoupon={(text) => addCouponsToCart({ text })}
       onUpdateQuantity={(quantity, index) =>
