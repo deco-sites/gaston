@@ -21,16 +21,8 @@ export interface Banner {
   mobile: ImageWidget;
   /** @description Image's alt text */
   alt: string;
-  action?: {
-    /** @description when user clicks on the image, go to this link */
-    href: string;
-    /** @description Image text title */
-    title: string;
-    /** @description Image text subtitle */
-    subTitle: string;
-    /** @description Button label */
-    label: string;
-  };
+  /** @description when user clicks on the image, go to this link */
+  href: string;
 }
 
 export interface Props {
@@ -60,12 +52,7 @@ const DEFAULT_PROPS = {
   images: [
     {
       alt: "/feminino",
-      action: {
-        title: "New collection",
-        subTitle: "Main title",
-        label: "Explore collection",
-        href: "/",
-      },
+      href: "/",
       mobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
@@ -73,12 +60,7 @@ const DEFAULT_PROPS = {
     },
     {
       alt: "/feminino",
-      action: {
-        title: "New collection",
-        subTitle: "Main title",
-        label: "Explore collection",
         href: "/",
-      },
       mobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
@@ -86,12 +68,7 @@ const DEFAULT_PROPS = {
     },
     {
       alt: "/feminino",
-      action: {
-        title: "New collection",
-        subTitle: "Main title",
-        label: "Explore collection",
         href: "/",
-      },
       mobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
@@ -108,14 +85,14 @@ function BannerItem(
     alt,
     mobile,
     desktop,
-    action,
+    href,
   } = image;
 
   return (
     <a
       id={id}
-      href={action?.href ?? "#"}
-      aria-label={action?.label}
+      href={href ?? "#"}
+      aria-label={alt}
       class="relative overflow-y-hidden w-full"
     >
       <Picture preload={lcp}>
