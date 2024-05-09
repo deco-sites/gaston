@@ -19,7 +19,6 @@ export interface Layout {
     ctaText?: string;
   };
   elementsPositions?: {
-    skuSelector?: "Top" | "Bottom";
     favoriteIcon?: "Top right" | "Top left";
   };
   hide?: {
@@ -36,7 +35,6 @@ export interface Layout {
     image?: "Change image" | "Zoom image";
     card?: "None" | "Move up";
     showFavoriteIcon?: boolean;
-    showSkuSelector?: boolean;
     showCardShadow?: boolean;
     showCta?: boolean;
   };
@@ -232,23 +230,23 @@ function ProductCard({
         <figcaption
           class={`
           absolute bottom-1 left-0 w-full flex flex-col gap-3 p-2 ${
-            l?.onMouseOver?.showSkuSelector || l?.onMouseOver?.showCta
+            l?.onMouseOver?.showCta
               ? "transition-opacity opacity-0 lg:group-hover:opacity-100"
               : "lg:hidden"
           }`}
         >
-          {/* SKU Selector */}
+          {/* SKU Selector
           {l?.onMouseOver?.showSkuSelector && (
             <ul class="flex justify-center items-center gap-2 w-full">
               {skuSelector}
             </ul>
-          )}
+          )} */}
           {l?.onMouseOver?.showCta && cta}
         </figcaption>
       </figure>
       {/* Prices & Name */}
       <div class="flex-auto flex flex-col p-2 gap-3">
-        {/* SKU Selector */}
+        {/* SKU Selector
         {(!l?.elementsPositions?.skuSelector ||
           l?.elementsPositions?.skuSelector === "Top") && (
           <>
@@ -266,7 +264,7 @@ function ProductCard({
                 </ul>
               )}
           </>
-        )}
+        )} */}
 
         {l?.hide?.productName && l?.hide?.productDescription
           ? (
@@ -351,7 +349,7 @@ function ProductCard({
                 )} */
         }
 
-        {/* SKU Selector */}
+        {/* SKU Selector
         {l?.elementsPositions?.skuSelector === "Bottom" && (
           <>
             <ul
@@ -370,7 +368,7 @@ function ProductCard({
                 )}
             </ul>
           </>
-        )}
+        )} */}
         {!l?.hide?.cta
           ? (
             <div
