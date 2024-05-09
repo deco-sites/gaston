@@ -53,7 +53,9 @@ const Aside = (
   </div>
 );
 
-function Drawers({ menu, searchbar, children, platform, ShippingPrice }: Props) {
+function Drawers(
+  { menu, searchbar, children, platform, ShippingPrice }: Props,
+) {
   const { displayCart, displayMenu, displaySearchDrawer } = useUI();
 
   return (

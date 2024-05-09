@@ -235,18 +235,21 @@ function ProductCard({
               : "lg:hidden"
           }`}
         >
-          {/* SKU Selector
+          {
+            /* SKU Selector
           {l?.onMouseOver?.showSkuSelector && (
             <ul class="flex justify-center items-center gap-2 w-full">
               {skuSelector}
             </ul>
-          )} */}
+          )} */
+          }
           {l?.onMouseOver?.showCta && cta}
         </figcaption>
       </figure>
       {/* Prices & Name */}
       <div class="flex-auto flex flex-col p-2 gap-3">
-        {/* SKU Selector
+        {
+          /* SKU Selector
         {(!l?.elementsPositions?.skuSelector ||
           l?.elementsPositions?.skuSelector === "Top") && (
           <>
@@ -264,7 +267,8 @@ function ProductCard({
                 </ul>
               )}
           </>
-        )} */}
+        )} */
+        }
 
         {l?.hide?.productName && l?.hide?.productDescription
           ? (
@@ -349,7 +353,8 @@ function ProductCard({
                 )} */
         }
 
-        {/* SKU Selector
+        {
+          /* SKU Selector
         {l?.elementsPositions?.skuSelector === "Bottom" && (
           <>
             <ul
@@ -368,7 +373,8 @@ function ProductCard({
                 )}
             </ul>
           </>
-        )} */}
+        )} */
+        }
         {!l?.hide?.cta
           ? (
             <div
