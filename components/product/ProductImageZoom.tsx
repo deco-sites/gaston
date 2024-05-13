@@ -52,16 +52,29 @@ function ProductImageZoom({ images, width, height }: Props) {
             </Slider>
 
             <Slider.PrevButton class="absolute left-3 lg:left-8 top-[45%] h-8 w-8 lg:h-11 lg:w-11 rounded-full bg-white flex border items-center justify-center border-black border-opacity-15 text-base">
-              <Icon size={16} id="ChevronLeft" strokeWidth={3} class={`text-primary-content`} />
+              <Icon
+                size={16}
+                id="ChevronLeft"
+                strokeWidth={3}
+                class={`text-primary-content`}
+              />
             </Slider.PrevButton>
 
             <Slider.NextButton class="absolute right-3 lg:right-8 top-[45%] h-8 w-8 lg:h-11 lg:w-11 rounded-full bg-white flex border items-center justify-center border-black border-opacity-15 text-base">
-              <Icon size={16} id="ChevronRightFilter" strokeWidth={3} class={`text-primary-content`} />
+              <Icon
+                size={16}
+                id="ChevronRightFilter"
+                strokeWidth={3}
+                class={`text-primary-content`}
+              />
             </Slider.NextButton>
 
             <SliderJS rootId={id} />
-            <button class={`absolute top-3 right-3 rounded-full p-3`} onClick={() => open.value = false}>
-              <Icon id="XMark" size={20} class={`text-primary-content`}/>
+            <button
+              class={`absolute top-3 right-3 rounded-full p-3`}
+              onClick={() => open.value = false}
+            >
+              <Icon id="XMark" size={20} class={`text-primary-content`} />
             </button>
           </div>
         </Modal>
