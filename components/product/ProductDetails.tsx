@@ -122,7 +122,13 @@ function ProductInfo(
                     device={device}
                     model={model}
                   />
-                  <ProductPrice prodlistPrice={listPrice} prodprice={price} prodinstallments={installments} priceCurrency={offers?.priceCurrency} device={device}/>
+                  <ProductPrice
+                    prodlistPrice={listPrice}
+                    prodprice={price}
+                    prodinstallments={installments}
+                    priceCurrency={offers?.priceCurrency}
+                    device={device}
+                  />
                 </>
               )}
             {/* Sku Selector */}
@@ -169,7 +175,13 @@ function ProductInfo(
                   {/* Add to Cart and Favorites button */}
                   <div class="z-40 fixed bottom-0 w-full bg-white border-t border-black border-opacity-10 flex flex-col gap-4 p-4">
                     {/* Prices */}
-                    <ProductPrice prodlistPrice={listPrice} prodprice={price} prodinstallments={installments} priceCurrency={offers?.priceCurrency} device={device}/>
+                    <ProductPrice
+                      prodlistPrice={listPrice}
+                      prodprice={price}
+                      prodinstallments={installments}
+                      priceCurrency={offers?.priceCurrency}
+                      device={device}
+                    />
                     {availability === "https://schema.org/InStock"
                       ? (
                         <>

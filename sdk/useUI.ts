@@ -3,7 +3,7 @@
  * like clicking on add to cart and the cart modal being displayed
  */
 import { signal } from "@preact/signals";
-import type { Product, AggregateOffer } from "apps/commerce/types.ts";
+import type { AggregateOffer, Product } from "apps/commerce/types.ts";
 import { ImageObject } from "apps/commerce/types.ts";
 
 const displayCart = signal(false);

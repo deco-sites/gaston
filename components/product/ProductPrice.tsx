@@ -7,19 +7,23 @@ export interface Props {
   prodprice?: number;
   prodinstallments?: string | null;
   priceCurrency?: string;
-  device?: "mobile" | "tablet" | "desktop"
+  device?: "mobile" | "tablet" | "desktop";
 }
 
-export default function ProductPrice({ prodlistPrice, prodprice, prodinstallments, priceCurrency, device}: Props) {
+export default function ProductPrice(
+  { prodlistPrice, prodprice, prodinstallments, priceCurrency, device }: Props,
+) {
   const { productOfferSimilar } = useUI();
   let newPrice, newListPrice, newInstallments;
 
-  if(productOfferSimilar.value){
-    const { price, listPrice, installments} = useOffer(productOfferSimilar.value)
+  if (productOfferSimilar.value) {
+    const { price, listPrice, installments } = useOffer(
+      productOfferSimilar.value,
+    );
     newPrice = price;
     newListPrice = listPrice;
     newInstallments = installments;
-  }else{
+  } else {
     newPrice = prodprice;
     newListPrice = prodlistPrice;
     newInstallments = prodinstallments;
@@ -30,7 +34,7 @@ export default function ProductPrice({ prodlistPrice, prodprice, prodinstallment
       <>
         <div class="flex flex-col gap-2 border-b border-black border-opacity-15 pb-4">
           <div class={`flex gap-2 items-end`}>
-            {newPrice  && (newListPrice ?? 0) > newPrice && (
+            {newPrice && (newListPrice ?? 0) > newPrice && (
               <span class="line-through text-primary-content text-sm font-semibold leading-4">
                 {formatPrice(newListPrice, priceCurrency)}
               </span>

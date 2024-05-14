@@ -60,8 +60,7 @@ function VariantSelector({ product }: Props) {
                                   ? "pointer-events-none"
                                   : ""
                               }`}
-                                  onClick={() =>
-                                    handleSku(link.productID, value)}
+                              onClick={() => handleSku(link.productID, value)}
                             >
                               <Avatar
                                 content={value}
@@ -82,41 +81,42 @@ function VariantSelector({ product }: Props) {
             )
             : (
               <>
-              { Object.entries(possibilities[name]).length != 1 &&
-                <li class="flex flex-col gap-2 max-w-[100vw]">
-                  <span class="text-sm leading-4 text-primary-content font-semibold">
-                    Selecione a cor:
-                  </span>
-                  <ul class="flex flex-row gap-3 w-full overflow-x-scroll scrollbar-none pl-1">
-                    {Object.entries(possibilities[name]).map(
-                      ([value, link]) => {
-                        return (
-                          <li>
-                            <button
-                              class={`${
-                                link.available == false
-                                  ? "pointer-events-none"
-                                  : ""
-                              }`}
-                              onClick={() =>
-                                handleSku(link.productID, value)}
-                            >
-                              <Avatar
-                                content={value}
-                                variant={link.available == false
-                                  ? "disabled"
-                                  : (activeVariant === value
-                                    ? "active"
-                                    : "default")}
-                              />
-                            </button>
-                          </li>
-                        );
-                      },
-                    )}
-                  </ul>
-                </li>
-              }
+                {Object.entries(possibilities[name]).length != 1 &&
+                  (
+                    <li class="flex flex-col gap-2 max-w-[100vw]">
+                      <span class="text-sm leading-4 text-primary-content font-semibold">
+                        Selecione a cor:
+                      </span>
+                      <ul class="flex flex-row gap-3 w-full overflow-x-scroll scrollbar-none pl-1">
+                        {Object.entries(possibilities[name]).map(
+                          ([value, link]) => {
+                            return (
+                              <li>
+                                <button
+                                  class={`${
+                                    link.available == false
+                                      ? "pointer-events-none"
+                                      : ""
+                                  }`}
+                                  onClick={() =>
+                                    handleSku(link.productID, value)}
+                                >
+                                  <Avatar
+                                    content={value}
+                                    variant={link.available == false
+                                      ? "disabled"
+                                      : (activeVariant === value
+                                        ? "active"
+                                        : "default")}
+                                  />
+                                </button>
+                              </li>
+                            );
+                          },
+                        )}
+                      </ul>
+                    </li>
+                  )}
               </>
             )}
         </>
