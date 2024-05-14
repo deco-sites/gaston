@@ -17,6 +17,7 @@ function VariantSelector({ product }: Props) {
     imagesProductSimilar,
     productNameSimilar,
     productModelSimilar,
+    productOfferSimilar,
   } = useUI();
   const { url, isVariantOf, isSimilarTo } = product;
   const hasVariant = productSimilar.value?.isVariantOf?.hasVariant ??
@@ -27,19 +28,20 @@ function VariantSelector({ product }: Props) {
   );
   // Estado para controlar o estado ativo do Avatar
   const [activeVariant, setActiveVariant] = useState("");
-
+  console.log(productOfferSimilar.value);
   // Função para manipular o clique no botão
   function handleSku(skuID: string, value: string) {
     skuIDCart.value = skuID;
     // Atualizar o estado ativo
     setActiveVariant(value);
   }
+  console.log(Object.keys(possibilities).length);
   return (
     <ul class="flex flex-col-reverse gap-4">
       {Object.keys(possibilities).map((name) => (
         <>
-          {name != "Cor" &&
-            (
+          {name != "Cor"
+            ? (
               <>
                 <li class="flex flex-col gap-2 max-w-[100vw]">
                   <span class="text-sm leading-4 text-primary-content font-semibold">
@@ -58,7 +60,8 @@ function VariantSelector({ product }: Props) {
                                   ? "pointer-events-none"
                                   : ""
                               }`}
-                              onClick={() => handleSku(link.productID, value)}
+                                  onClick={() =>
+                                    handleSku(link.productID, value)}
                             >
                               <Avatar
                                 content={value}
@@ -75,6 +78,45 @@ function VariantSelector({ product }: Props) {
                     )}
                   </ul>
                 </li>
+              </>
+            )
+            : (
+              <>
+              { Object.entries(possibilities[name]).length != 1 &&
+                <li class="flex flex-col gap-2 max-w-[100vw]">
+                  <span class="text-sm leading-4 text-primary-content font-semibold">
+                    Selecione a cor:
+                  </span>
+                  <ul class="flex flex-row gap-3 w-full overflow-x-scroll scrollbar-none pl-1">
+                    {Object.entries(possibilities[name]).map(
+                      ([value, link]) => {
+                        return (
+                          <li>
+                            <button
+                              class={`${
+                                link.available == false
+                                  ? "pointer-events-none"
+                                  : ""
+                              }`}
+                              onClick={() =>
+                                handleSku(link.productID, value)}
+                            >
+                              <Avatar
+                                content={value}
+                                variant={link.available == false
+                                  ? "disabled"
+                                  : (activeVariant === value
+                                    ? "active"
+                                    : "default")}
+                              />
+                            </button>
+                          </li>
+                        );
+                      },
+                    )}
+                  </ul>
+                </li>
+              }
               </>
             )}
         </>
@@ -97,7 +139,16 @@ function VariantSelector({ product }: Props) {
                               (
                                 <>
                                   <button
-                                    class={`w-full flex`}
+                                    class={`w-full flex ${
+                                      urlSkuVariant.value != ""
+                                        ? urlSkuVariant.value ==
+                                            product.url?.split("?")[0]
+                                          ? "pointer-events-none"
+                                          : ""
+                                        : url?.split("?")[0] ==
+                                            product.url?.split("?")[0] &&
+                                          "pointer-events-none"
+                                    }`}
                                     onClick={() => {
                                       urlSkuVariant.value =
                                         product.url?.split("?")[0] || "";
@@ -111,6 +162,8 @@ function VariantSelector({ product }: Props) {
                                         product.isVariantOf?.name || "";
                                       productModelSimilar.value =
                                         product.isVariantOf?.model || "";
+                                      productOfferSimilar.value =
+                                        product.offers;
                                       setActiveVariant("");
                                     }}
                                   >
