@@ -21,6 +21,7 @@ import { AppContext } from "$store/apps/site.ts";
 import type { SectionProps } from "deco/types.ts";
 import GallerySlider from "$store/islands/ProductImageSlider.tsx";
 import ProductName from "$store/islands/ProductName.tsx";
+import ProductPrice from "$store/islands/ProductPrice.tsx";
 import { Section } from "deco/blocks/section.ts";
 import ProductTags from "$store/components/product/ProductTags.tsx";
 import ProductDescription from "$store/components/product/ProductDescription.tsx";
@@ -121,21 +122,13 @@ function ProductInfo(
                     device={device}
                     model={model}
                   />
-                  <div class="flex flex-col gap-2 border-b border-black border-opacity-15 pb-4">
-                    <div class={`flex gap-2 items-end`}>
-                      {(listPrice ?? 0) > price && (
-                        <span class="line-through text-primary-content text-sm font-semibold leading-4">
-                          {formatPrice(listPrice, offers?.priceCurrency)}
-                        </span>
-                      )}
-                      <span class="font-bold text-2xl text-primary leading-7">
-                        {formatPrice(price, offers?.priceCurrency)}
-                      </span>
-                    </div>
-                    <span class="text-sm text-primary-content font-bold leading-4">
-                      {installments}
-                    </span>
-                  </div>
+                  <ProductPrice
+                    prodlistPrice={listPrice}
+                    prodprice={price}
+                    prodinstallments={installments}
+                    priceCurrency={offers?.priceCurrency}
+                    device={device}
+                  />
                 </>
               )}
             {/* Sku Selector */}
@@ -182,19 +175,13 @@ function ProductInfo(
                   {/* Add to Cart and Favorites button */}
                   <div class="z-40 fixed bottom-0 w-full bg-white border-t border-black border-opacity-10 flex flex-col gap-4 p-4">
                     {/* Prices */}
-                    <div class="flex flex-row gap-2 items-center">
-                      {(listPrice ?? 0) > price && (
-                        <span class="line-through text-primary-content text-sm font-semibold leading-4">
-                          {formatPrice(listPrice, offers?.priceCurrency)}
-                        </span>
-                      )}
-                      <span class="font-bold text-2xl text-primary leading-7">
-                        {formatPrice(price, offers?.priceCurrency)}
-                      </span>
-                      <span class="border-l border-black border-opacity-15 pl-3 text-sm text-primary-content font-bold leading-4">
-                        {installments}
-                      </span>
-                    </div>
+                    <ProductPrice
+                      prodlistPrice={listPrice}
+                      prodprice={price}
+                      prodinstallments={installments}
+                      priceCurrency={offers?.priceCurrency}
+                      device={device}
+                    />
                     {availability === "https://schema.org/InStock"
                       ? (
                         <>
