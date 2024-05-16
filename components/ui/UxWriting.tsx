@@ -1,11 +1,12 @@
 import type { SectionProps } from "deco/types.ts";
+import { HTMLWidget } from "apps/admin/widgets.ts";
 
 export interface UxWriting {
   /** @description RegExp to enable this banner on the current URL. Use /feminino/* to display this banner on feminino category  */
   matcher: string;
   title: string;
   markupTitle?: boolean;
-  description: string;
+  description: HTMLWidget;
 }
 
 const DEFAULT_PROPS = {
@@ -44,11 +45,10 @@ function UxWriting(props: SectionProps<ReturnType<typeof loader>>) {
           >
             {title}
           </h2>
-          <p
-            class={`text-sm leading-[18px] text-primary-content font-normal text-center`}
-          >
-            {description}
-          </p>
+          <div
+            class={`text-sm uxWritingHref leading-[18px] text-primary-content font-normal text-center`}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         </div>
       </div>
     </>

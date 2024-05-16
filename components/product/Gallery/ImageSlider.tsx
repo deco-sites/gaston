@@ -5,7 +5,7 @@ import { ImageObject } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import WishlistButtonVtex from "$store/islands/WishlistButton/vtex.tsx";
 import { useUI } from "deco-sites/gaston/sdk/useUI.ts";
-
+import ImageZoom from "deco-sites/gaston/islands/ProductImageZoom.tsx";
 export interface Props {
   images: ImageObject[];
   productID: string;
@@ -32,7 +32,7 @@ export default function GallerySlider(
           {newImages.map((img, index) => (
             <Slider.Item
               index={index}
-              class="carousel-item w-full"
+              class="carousel-item w-full relative"
             >
               <Image
                 class="w-full lg:max-w-[520px] lg:max-h-[520px] lg:mx-auto lg:border lg:border-black lg:border-opacity-15 lg:rounded-xl"
@@ -44,6 +44,7 @@ export default function GallerySlider(
                 preload={index === 0}
                 loading={index === 0 ? "eager" : "lazy"}
               />
+              <ImageZoom images={newImages} width={520} height={520} />
             </Slider.Item>
           ))}
         </Slider>

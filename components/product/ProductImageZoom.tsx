@@ -21,7 +21,7 @@ function ProductImageZoom({ images, width, height }: Props) {
   return (
     <>
       <Button
-        class="hidden sm:inline-flex btn-ghost"
+        class="absolute top-2 left-2 lg:top-3 lg:left-3 text-primary-content btn-ghost h-9 min-h-9 px-2.5"
         onClick={() => open.value = true}
       >
         <Icon id="Zoom" size={24} />
@@ -32,7 +32,7 @@ function ProductImageZoom({ images, width, height }: Props) {
           open={open.value}
           onClose={() => open.value = false}
         >
-          <div class="modal-box w-11/12 max-w-7xl grid grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center">
+          <div class="modal-box relative w-11/12 max-w-7xl grid grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center">
             <Slider class="carousel col-span-full col-start-1 row-start-1 row-span-full h-full w-full">
               {images.map((image, index) => (
                 <Slider.Item
@@ -51,15 +51,31 @@ function ProductImageZoom({ images, width, height }: Props) {
               ))}
             </Slider>
 
-            <Slider.PrevButton class="btn btn-circle btn-outline col-start-1 col-end-2 row-start-1 row-span-full">
-              <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+            <Slider.PrevButton class="absolute left-3 lg:left-8 top-[45%] h-8 w-8 lg:h-11 lg:w-11 rounded-full bg-white flex border items-center justify-center border-black border-opacity-15 text-base">
+              <Icon
+                size={16}
+                id="ChevronLeft"
+                strokeWidth={3}
+                class={`text-primary-content`}
+              />
             </Slider.PrevButton>
 
-            <Slider.NextButton class="btn btn-circle btn-outline col-start-3 col-end-4 row-start-1 row-span-full">
-              <Icon size={24} id="ChevronRight" strokeWidth={3} />
+            <Slider.NextButton class="absolute right-3 lg:right-8 top-[45%] h-8 w-8 lg:h-11 lg:w-11 rounded-full bg-white flex border items-center justify-center border-black border-opacity-15 text-base">
+              <Icon
+                size={16}
+                id="ChevronRightFilter"
+                strokeWidth={3}
+                class={`text-primary-content`}
+              />
             </Slider.NextButton>
 
             <SliderJS rootId={id} />
+            <button
+              class={`absolute top-3 right-3 rounded-full p-3`}
+              onClick={() => open.value = false}
+            >
+              <Icon id="XMark" size={20} class={`text-primary-content`} />
+            </button>
           </div>
         </Modal>
       </div>
