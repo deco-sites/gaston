@@ -88,6 +88,11 @@
   .paddingLeftUnset p{
     padding-left: 0 !important;
   }
+  .uxWritingHref a{
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 600;
+  }
 }
 @keyframes sliding {
   0% {
