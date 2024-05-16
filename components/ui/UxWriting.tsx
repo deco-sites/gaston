@@ -46,8 +46,8 @@ function UxWriting(props: SectionProps<ReturnType<typeof loader>>) {
             {title}
           </h2>
           <div
-              class={`text-sm uxWritingHref leading-[18px] text-primary-content font-normal text-center`}
-              dangerouslySetInnerHTML={{ __html: description }}
+            class={`text-sm uxWritingHref leading-[18px] text-primary-content font-normal text-center`}
+            dangerouslySetInnerHTML={{ __html: description }}
           />
         </div>
       </div>
