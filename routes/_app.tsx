@@ -30,18 +30,11 @@ export default defineApp(async (_req, ctx) => {
         {/* Web Manifest */}
         <link rel="manifest" href={asset("/site.webmanifest")} />
 
-        {/* OmniChat */}
-        <script
-          defer
-          dangerouslySetInnerHTML={{
-            __html: 'window.omnichatConfig = { retailerId: "1f28lzUSCu" };',
-          }}
-        />
         <script
           defer
           dangerouslySetInnerHTML={{
             __html:
-              '!function() { var t = document.createElement("script"); t.type = "text/javascript"; t.defer = true; t.src = "https://static.omni.chat/web-chat/web-chat.min.js"; t.onload = function() { OmniChatWebChat.init(window.omnichatConfig); }; var e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(t, e); }();',
+              `!function(){function e(){var e;t&&((e=document.createElement("script")).src="https://tagloader.connectly.ai/?v=0.48.0",e.type="text/javascript",t.appendChild(e))}var t=document.getElementsByTagName("head")[0];window.__connectlyai={bId:"f3ac5d2a-4c4e-4aa4-9841-31435c72f539",loaded:!1,modules:{widget:{position:"fixed",parentElementClass:"connectlyai-widget-parent",positionRight:"8px"}}};"complete"!==document.readyState&&"interactive"!==document.readyState||e(),window.addEventListener("DOMContentLoaded",e)}();`,
           }}
         />
       </Head>
