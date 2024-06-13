@@ -48,6 +48,7 @@ import * as $$$$$$38 from "./sections/Layout/Grid.tsx";
 import * as $$$$$$39 from "./sections/Layout/GridItem.tsx";
 import * as $$$$$$40 from "./sections/Links/LinkTree.tsx";
 import * as $$$$$$41 from "./sections/Links/Shortcuts.tsx";
+import * as $$$$$$60 from "./sections/meta-tag/meta-tag.tsx";
 import * as $$$$$$42 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$43 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$44 from "./sections/Miscellaneous/Slide.tsx";
@@ -116,6 +117,7 @@ const manifest = {
     "deco-sites/gaston/sections/Layout/GridItem.tsx": $$$$$$39,
     "deco-sites/gaston/sections/Links/LinkTree.tsx": $$$$$$40,
     "deco-sites/gaston/sections/Links/Shortcuts.tsx": $$$$$$41,
+    "deco-sites/gaston/sections/meta-tag/meta-tag.tsx": $$$$$$60,
     "deco-sites/gaston/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$42,
     "deco-sites/gaston/sections/Miscellaneous/CookieConsent.tsx": $$$$$$43,
     "deco-sites/gaston/sections/Miscellaneous/Slide.tsx": $$$$$$44,
