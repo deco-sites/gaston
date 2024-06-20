@@ -342,6 +342,7 @@ function Footer({
                     </a>
                   );
                 })}
+                <a id="seloEbit" class={`w-12`} href="http://www.ebit.com.br/78316" target="_blank" data-noop="redir(this.href);"> </a>
               </div>
             </div>
             <Divider />
