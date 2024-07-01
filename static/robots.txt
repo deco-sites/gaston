@@ -1,12 +1,13 @@
 User-agent: *
+Disallow: /
 
-Sitemap: https://www.gaston.com.br/sitemap.xml
-
-Allow: /*.css
-Allow: /*.js
+User-agent: Googlebot
+Allow: /
 Disallow: /account/
 Disallow: /checkout
 Disallow: *s?q=*
 Disallow: *?utm*
 Disallow: *filter.*
 Disallow: *?sort*
+
+Sitemap: https://www.gaston.com.br/sitemap.xml
