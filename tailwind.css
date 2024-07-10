@@ -93,6 +93,9 @@
     text-decoration: underline;
     font-weight: 600;
   }
+  #connectlyai_widget_container{
+    z-index: 10 !important;
+  }
 }
 @keyframes sliding {
   0% {
