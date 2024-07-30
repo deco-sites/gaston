@@ -39,10 +39,43 @@ export default defineApp(async (_req, ctx) => {
         />
         <script
           defer
-          type="text/javascript" 
-          id="getSelo" 
+          type="text/javascript"
+          id="getSelo"
           src="https://imgs.ebit.com.br/ebitBR/selo-ebit/js/getSelo.js?78316"
         />
+
+        <style type="text/css"
+          dangerouslySetInnerHTML={{
+            __html:
+              `@supports not(color: oklch(0 0 0)) {
+              :root {
+                    color-scheme: light;
+                  --fallback-p: #e30613;
+                  --fallback-pc: #1e1e1e;
+                  --fallback-s: #ffed00;
+                  --fallback-sc: #fffbc2;
+                  --fallback-a: #21c05e;
+                  --fallback-ac: #00100d;
+                  --fallback-n: #f9f9f9;
+                  --fallback-nc: #f9f9f9;
+                  --fallback-b1: #ffffff;
+                  --fallback-b2: #ffffff;
+                  --fallback-b3: #f7f7f7;
+                  --fallback-bc: #f1d9d9;
+                  --fallback-in: #00b3f0;
+                  --fallback-inc: #000000;
+                  --fallback-su: #00ca92;
+                  --fallback-suc: #000000;
+                  --fallback-wa: #e08e00;
+                  --fallback-wac: #000000;
+                  --fallback-er: #ff6f70;
+                  --fallback-erc: #000000;
+                }`
+          }}
+        >
+
+        </style>
+
       </Head>
 
       {/* Rest of Preact tree */}
