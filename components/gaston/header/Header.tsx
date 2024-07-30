@@ -11,6 +11,7 @@ import NavBar from "./NavBar.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import NavItem from "./NavItem.tsx";
 import ScrollableContainer from "$store/components/gaston/header/ScrollableContainer.tsx";
+import { _request } from "https://esm.sh/v135/@supabase/gotrue-js@2.57.0/dist/module/lib/fetch.js";
 
 export interface lastChild {
   type: "navItem" | "sizeItem";
@@ -57,8 +58,15 @@ export interface Props {
    */
   navItems: MenuNavItem[];
 
-  /** @title Logo */
-  logo?: { src: ImageWidget; alt: string };
+  /**
+   * @title Logo
+   * @description The h1 will only appear on the website's home page, default: Gaston
+   */
+  logo?: {
+    src: ImageWidget;
+    alt: string;
+    h1?: string;
+  };
 
   paths: { loginHref: string; favouriteHref: string };
   ShippingPrice: number;
@@ -72,6 +80,7 @@ function Header({
   paths,
   ShippingPrice,
   device,
+  isHome,
 }: SectionProps<typeof loader>) {
   const platform = usePlatform();
   const id = useId();
@@ -121,7 +130,12 @@ function Header({
             </ScrollableContainer>
 
             <div class="w-full lg:relative lg:bg-white lg:z-20">
-              <NavBar paths={paths} logo={logo} device={device} />
+              <NavBar
+                paths={paths}
+                logo={logo}
+                device={device}
+                isHome={isHome}
+              />
             </div>
             {navItems.length > 0 && device == "desktop" &&
               (
@@ -183,7 +197,11 @@ function Header({
 }
 
 export const loader = (props: Props, _req: Request, ctx: AppContext) => {
-  return { ...props, device: ctx.device };
+  const url = new URL(_req.url);
+
+  const isHome = url.pathname == "/";
+
+  return { ...props, device: ctx.device, isHome };
 };
 
 export default Header;

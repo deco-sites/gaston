@@ -7,11 +7,16 @@ import { useId } from "$store/sdk/useId.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import LoginButton from "$store/islands/Gaston/LoginButton.tsx";
 import Icon from "deco-sites/gaston/components/ui/Icon.tsx";
+import {
+  LogoDesktop,
+  LogoMobile,
+} from "deco-sites/gaston/components/gaston/header/LogoHeadingTag.tsx";
 
-function Navbar({ paths, logo, device }: {
+function Navbar({ paths, logo, device, isHome }: {
   logo?: { src: LiveImage; alt: string };
   paths: { loginHref: string; favouriteHref: string };
   device: "mobile" | "desktop" | "tablet";
+  isHome: boolean;
 }) {
   const id = useId();
 
@@ -25,23 +30,12 @@ function Navbar({ paths, logo, device }: {
         >
           <div class="w-11/12 m-auto flex flex-row justify-between items-center gap-4">
             <MenuButton />
-
-            {logo && (
-              <a
-                href="/"
-                class="flex-grow justify-center flex items-center h-[42px] w-[238px] object-contain"
-                style={{ minHeight: navbarHeight }}
-                aria-label="Store logo"
-              >
-                <ImageComponent
-                  class="object-contain"
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={110}
-                  height={28}
-                />
-              </a>
-            )}
+            <LogoMobile
+              isHome={isHome}
+              src={logo?.src}
+              alt={logo?.alt}
+              h1="Gaston"
+            />
 
             <div class="flex gap-1">
               <a
@@ -62,21 +56,12 @@ function Navbar({ paths, logo, device }: {
   return (
     <>
       <div class="hidden lg:flex py-4 items-center m-auto w-11/12  max-w-[1300px] justify-between gap-8 max-h-[85px]">
-        {logo && (
-          <a
-            href="/"
-            aria-label="Store logo"
-            class="flex items-center py-3 h-[30px] w-[117px]"
-          >
-            <ImageComponent
-              class="w-full"
-              src={logo.src}
-              alt={logo.alt}
-              width={117}
-              height={30}
-            />
-          </a>
-        )}
+        <LogoDesktop
+          isHome={isHome}
+          src={logo?.src}
+          alt={logo?.alt}
+          h1="Gaston"
+        />
         <form
           action="/s"
           method="GET"
