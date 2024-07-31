@@ -1,10 +1,18 @@
 import { RichText } from "apps/admin/widgets.ts";
 
 interface Props {
+    /**
+     * @title Tag Headintag
+     */
     headingTag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+    /**
+ * @title Texto
+ */
     text?: RichText;
     /**
      * @format color-input
+     * @title Cor de fundo
+     * @description Padrão: "#f8f8f8"
      */
     bgText?: string;
 }
