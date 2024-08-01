@@ -55,9 +55,9 @@ function Newsletter(
     >
       <div class="flex flex-col gap-4">
         {content?.title && (
-          <h4 class={tiled ? "text-2xl font-bold lg:text-3xl" : "text-lg"}>
+          <h2 class={tiled ? "text-2xl font-bold lg:text-3xl" : "text-lg"}>
             {content?.title}
-          </h4>
+          </h2>
         )}
         {content?.description && (
           <p class={`text-sm font-normal`}>{content?.description}</p>

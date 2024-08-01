@@ -19,16 +19,15 @@ export default function FooterItems(
         <>
           {/* Tablet and Desktop view */}
           <ul
-            class={`hidden md:flex flex-row gap-6 lg:gap-12 lg:w-full ${
-              justify && "lg:justify-between"
-            }`}
+            class={`hidden md:flex flex-row gap-6 lg:gap-12 lg:w-full ${justify && "lg:justify-between"
+              }`}
           >
             {sections.map((section) => (
               <li class={`border-l border-gray-200 pl-10`}>
                 <div class="flex flex-col gap-2">
-                  <span class="font-bold text-lg text-primary-content">
+                  <h4 class="font-bold text-lg text-primary-content">
                     {section.label}
-                  </span>
+                  </h4>
                   <ul class={`flex flex-col gap-2 flex-wrap text-sm`}>
                     {section.items?.map((item) => (
                       <li>
@@ -50,9 +49,9 @@ export default function FooterItems(
           <ul class="flex flex-col md:hidden gap-10">
             {sections.map((section) => (
               <li>
-                <span class={"text-base text-primary-content font-bold"}>
+                <h4 class={"text-base text-primary-content font-bold"}>
                   {section.label}
-                </span>
+                </h4>
                 <ul class={`flex flex-col gap-1 pt-2`}>
                   {section.items?.map((item) => (
                     <li>
