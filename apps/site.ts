@@ -78,12 +78,11 @@ export default function Site(
   }
 
   return {
-    state: { firstByteThresholdMS: false },
+    state,
     manifest,
     dependencies: [
       commerce({
         ...state,
-        firstByteThresholdMS: false,
         global: theme ? [...(state.global ?? []), theme] : state.global,
       }),
     ],
