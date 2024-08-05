@@ -49,9 +49,9 @@ export default function FooterItems(
           <ul class="flex flex-col md:hidden gap-10">
             {sections.map((section) => (
               <li>
-                <h4 class={"text-base text-primary-content font-bold"}>
+                <h6 class={"text-base text-primary-content font-bold"}>
                   {section.label}
-                </h4>
+                </h6>
                 <ul class={`flex flex-col gap-1 pt-2`}>
                   {section.items?.map((item) => (
                     <li>
