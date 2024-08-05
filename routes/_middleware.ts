@@ -7,14 +7,11 @@ export async function handler(
 
     const resp = await ctx.next();
 
-    console.log("req", req.headers)
-
     if (req.headers.get("upgrade") === "websocket") {
         return resp;
     }
 
     action(resp);
-    setLogger(null);
 
     return resp;
 }
@@ -23,9 +20,4 @@ export async function handler(
 function action(response: Response) {
     // Modifica a resposta de alguma forma
     response.headers.set("Strict-Transport-Security", "max-age=604800; includeSubDomains; preload");
-}
-
-function setLogger(logger: any) {
-    // Configura ou desativa o logger
-    console.log("Logger set to:", logger);
 }
