@@ -31,11 +31,23 @@ export interface Props {
      */
     noIndexing?: boolean;
     noFollow?: boolean;
+
+    /**
+ * @title Disable indexing in Filter
+ * @description In testing, you can use this to prevent search engines from indexing your site
+ */
+    noIndexingFilter?: boolean;
+    noFollowFilter?: boolean;
+
     configJsonLD?: ConfigJsonLD;
 }
 
 /** @title Product listing */
 export function loader(_props: Props, _req: Request, ctx: AppContext) {
+
+    const url = new URL(_req.url)
+    const isFilter = url.search != ""
+
     const props = _props as Partial<Props>;
     const {
         titleTemplate = "",
@@ -67,6 +79,9 @@ export function loader(_props: Props, _req: Request, ctx: AppContext) {
 
     const noFollow = props.noFollow;
 
+    const noFollowFilter = props.noFollowFilter
+    const noIndexingFilter = props.noIndexingFilter
+
     if (props.configJsonLD?.removeVideos) {
         jsonLD?.products.forEach((product) => {
             product.video = undefined;
@@ -84,6 +99,9 @@ export function loader(_props: Props, _req: Request, ctx: AppContext) {
         jsonLDs: [jsonLD],
         noIndexing,
         noFollow,
+        noFollowFilter,
+        noIndexingFilter,
+        isFilter
     };
 }
 

@@ -40,6 +40,16 @@ export interface Props {
      */
     noIndexing?: boolean;
     noFollow?: boolean;
+    /**
+     * @title Disable indexing
+     * @description In testing, you can use this to prevent search engines from indexing your site
+     */
+    noIndexingFilter?: boolean;
+    noFollowFilter?: boolean;
+    /**
+     * @hidde true
+     */
+    isFilter?: boolean;
 
     jsonLDs?: unknown[];
 }
@@ -50,6 +60,17 @@ function Robots({ noIndexing, noFollow }: Props) {
     } else if (!noIndexing && noFollow) {
         return <meta name="robots" content="index, nofollow" />
     } else if (noIndexing && !noFollow) {
+        return <meta name="robots" content="noindex, follow" />
+    } else {
+        return <meta name="robots" content="index, follow" />
+    }
+}
+function RobotsFilter({ noIndexingFilter, noFollowFilter }: Props) {
+    if (noIndexingFilter && noFollowFilter) {
+        return <meta name="robots" content="noindex, nofollow" />
+    } else if (!noIndexingFilter && noFollowFilter) {
+        return <meta name="robots" content="index, nofollow" />
+    } else if (noIndexingFilter && !noFollowFilter) {
         return <meta name="robots" content="noindex, follow" />
     } else {
         return <meta name="robots" content="index, follow" />
@@ -69,6 +90,9 @@ function Component({
     noIndexing,
     jsonLDs = [],
     noFollow,
+    noFollowFilter,
+    noIndexingFilter,
+    isFilter,
 }: Props) {
     const twitterCard = type === "website" ? "summary" : "summary_large_image";
     const description = stripHTML(desc || "");
@@ -100,7 +124,11 @@ function Component({
             {canonical && <link rel="canonical" href={canonical} />}
 
             {/* No index, no follow */}
-            <Robots noFollow={noFollow} noIndexing={noIndexing} />
+            {isFilter ?
+                <RobotsFilter noFollowFilter={noFollowFilter} noIndexingFilter={noIndexingFilter} />
+                :
+                <Robots noFollow={noFollow} noIndexing={noIndexing} />
+            }
 
             {jsonLDs.map((json) => (
                 <script
