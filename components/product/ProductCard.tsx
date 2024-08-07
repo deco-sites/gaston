@@ -282,16 +282,16 @@ function ProductCard({
                 )
                 : (
                   <>
-                    <h2 class="lg:hidden text-base leading-5 h-10 max-h-10 overflow-hidden text-primary-content font-normal">
+                    <h3 class="lg:hidden text-base leading-5 h-10 max-h-10 overflow-hidden text-primary-content font-normal">
                       {name && name.length > 35
                         ? name?.slice(0, 30) + "..."
                         : name}
-                    </h2>
-                    <h2 class="hidden lg:flex text-base leading-5 min-h-[42px] h-[42px] overflow-hidden text-primary-content font-normal">
+                    </h3>
+                    <h3 class="hidden lg:flex text-base leading-5 min-h-[42px] h-[42px] overflow-hidden text-primary-content font-normal">
                       {name && name.length > 60
                         ? name?.slice(0, 60) + "..."
                         : name}
-                    </h2>
+                    </h3>
                   </>
                 )}
               {l?.hide?.productDescription

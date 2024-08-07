@@ -22,16 +22,14 @@ function NavItem({ item }: { item: MenuNavItem; lastIndex: boolean }) {
     <li class="group flex items-center relative">
       <a
         href={href}
-        class={`px-8 py-2 ${
-          destaque
-            ? "text-white border border-white rounded-full py-1.5 px-5 "
-            : " text-white"
-        }`}
+        class={`px-8 py-2 ${destaque
+          ? "text-white border border-white rounded-full py-1.5 px-5 "
+          : " text-white"
+          }`}
       >
         <span
-          class={`${href ? "group-hover:underline" : ""} ${
-            destaque ? "font-bold" : "font-thin"
-          }  text-base`}
+          class={`${href ? "group-hover:underline" : ""} ${destaque ? "font-bold" : "font-thin"
+            }  text-base`}
         >
           {label}
         </span>
@@ -59,13 +57,12 @@ function NavItem({ item }: { item: MenuNavItem; lastIndex: boolean }) {
                     <span class="text-primary-content">{node.label}</span>
                   </a>
                   <ul
-                    class={`${
-                      node.children !== undefined && node.children.length > 0
-                        ? node.children[0].type == "sizeItem"
-                          ? "flex-row flex-wrap h-auto gap-2 pr-0"
-                          : "flex-col gap-2.5 h-full"
+                    class={`${node.children !== undefined && node.children.length > 0
+                      ? node.children[0].type == "sizeItem"
+                        ? "flex-row flex-wrap h-auto gap-2 pr-0"
                         : "flex-col gap-2.5 h-full"
-                    } hidden absolute overflow-y-scroll scroll-menu w-1/2 right-0 hover:flex top-0 p-4`}
+                      : "flex-col gap-2.5 h-full"
+                      } hidden absolute overflow-y-scroll scroll-menu w-1/2 right-0 hover:flex top-0 p-4`}
                   >
                     {node.children !== undefined && node.children.length > 0 &&
                       (
@@ -74,11 +71,10 @@ function NavItem({ item }: { item: MenuNavItem; lastIndex: boolean }) {
                             (
                               <li>
                                 <a class="hover:underline" href={node.href}>
-                                  <h3>
-                                    <span class="text-sm font-bold text-primary">
-                                      Ver tudo em {node.label}
-                                    </span>
-                                  </h3>
+
+                                  <span class="text-sm font-bold text-primary">
+                                    Ver tudo em {node.label}
+                                  </span>
                                 </a>
                               </li>
                             )}
@@ -102,11 +98,9 @@ function NavItem({ item }: { item: MenuNavItem; lastIndex: boolean }) {
                           : (
                             <li>
                               <a class="hover:underline" href={leaf.href}>
-                                <h3>
-                                  <span class="text-sm text-primary-content">
-                                    {leaf.label}
-                                  </span>
-                                </h3>
+                                <span class="text-sm text-primary-content">
+                                  {leaf.label}
+                                </span>
                               </a>
                             </li>
                           )}

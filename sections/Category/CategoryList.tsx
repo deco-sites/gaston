@@ -43,7 +43,7 @@ function CardText(
     >
       {tag && <div class="text-sm text-primary">{tag}</div>}
       {label && (
-        <h3 class="text-xl leading-6 italic text-primary-content">{label}</h3>
+        <h2 class="text-xl leading-6 italic text-primary-content">{label}</h2>
       )}
       {description && (
         <div class="text-sm text-primary-content">{description}</div>
