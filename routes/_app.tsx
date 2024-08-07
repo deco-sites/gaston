@@ -11,6 +11,11 @@ const sw = () =>
 export default defineApp(async (_req, ctx) => {
   const revision = await Context.active().release?.revision();
 
+  const url = new URL(ctx.url.href);
+  const isSeacrh = url.search != "";
+
+  const robots = isSeacrh ? "noindex, follow" : "index, follow";
+
   return (
     <>
       {/* Include default fonts and css vars */}
@@ -20,6 +25,7 @@ export default defineApp(async (_req, ctx) => {
       <Head>
         {/* Enable View Transitions API */}
         <meta name="view-transition" content="same-origin" />
+        <meta name="robots" content={robots} />
         {/* Tailwind v3 CSS file */}
         <link
           href={asset(`/styles.css?revision=${revision}`)}
@@ -43,10 +49,10 @@ export default defineApp(async (_req, ctx) => {
           src="https://imgs.ebit.com.br/ebitBR/selo-ebit/js/getSelo.js?78316"
         />
 
-        <style type="text/css"
+        <style
+          type="text/css"
           dangerouslySetInnerHTML={{
-            __html:
-              `@supports not(color: oklch(0 0 0)) {
+            __html: `@supports not(color: oklch(0 0 0)) {
               :root {
                     color-scheme: light;
                   --fallback-p: #e30613;
@@ -69,12 +75,10 @@ export default defineApp(async (_req, ctx) => {
                   --fallback-wac: #000000;
                   --fallback-er: #ff6f70;
                   --fallback-erc: #000000;
-                }`
+                }`,
           }}
         >
-
         </style>
-
       </Head>
 
       {/* Rest of Preact tree */}
