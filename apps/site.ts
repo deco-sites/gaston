@@ -72,18 +72,18 @@ export default function Site(
   if (firstRun) {
     firstRun = false;
     console.info(
-      ` 🐁 ${rgb24("Storefront", color("deco"))} | ${
-        rgb24(_platform, color(_platform))
+      ` 🐁 ${rgb24("Storefront", color("deco"))} | ${rgb24(_platform, color(_platform))
       } \n`,
     );
   }
 
   return {
-    state,
+    state: { firstByteThresholdMS: false },
     manifest,
     dependencies: [
       commerce({
         ...state,
+        firstByteThresholdMS: false,
         global: theme ? [...(state.global ?? []), theme] : state.global,
       }),
     ],

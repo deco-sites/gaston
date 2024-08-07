@@ -48,6 +48,8 @@ export function loader(_props: Props, _req: Request, ctx: AppContext) {
     const url = new URL(_req.url)
     const isFilter = url.search != ""
 
+
+
     const props = _props as Partial<Props>;
     const {
         titleTemplate = "",
@@ -55,6 +57,8 @@ export function loader(_props: Props, _req: Request, ctx: AppContext) {
         ...seoSiteProps
     } = ctx.seo ?? {};
     const { title: titleProp, description: descriptionProp, jsonLD } = props;
+
+    console.log("url", _req, isFilter, props.jsonLD?.breadcrumb)
 
     const title = renderTemplateString(
         titleTemplate,
@@ -72,10 +76,7 @@ export function loader(_props: Props, _req: Request, ctx: AppContext) {
                 ? canonicalFromBreadcrumblist(jsonLD?.breadcrumb)
                 : undefined;
 
-    const noIndexing = props.noIndexing ||
-        !jsonLD ||
-        !jsonLD.products.length ||
-        jsonLD.seo?.noIndexing;
+    const noIndexing = props.noIndexing
 
     const noFollow = props.noFollow;
 

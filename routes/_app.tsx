@@ -11,6 +11,11 @@ const sw = () =>
 export default defineApp(async (_req, ctx) => {
   const revision = await Context.active().release?.revision();
 
+  const url = new URL(ctx.url.href)
+  const isSeacrh = url.search != ""
+
+  const robots = isSeacrh ? "noindex, follow" : "index, follow"
+
   return (
     <>
       {/* Include default fonts and css vars */}
@@ -21,6 +26,7 @@ export default defineApp(async (_req, ctx) => {
         {/* Enable View Transitions API */}
         <meta name="view-transition" content="same-origin" />
         <link rel="canonical" href={ctx.url.href || ""} />
+        <meta name="robots" content={robots} />
         {/* Tailwind v3 CSS file */}
         <link
           href={asset(`/styles.css?revision=${revision}`)}

@@ -98,6 +98,8 @@ function Component({
     const description = stripHTML(desc || "");
     const title = stripHTML(t);
 
+    console.log("prosp", isFilter, noFollowFilter, noIndexingFilter)
+
     return (
         <Head>
             <title>{renderTemplateString(titleTemplate, title)}</title>
