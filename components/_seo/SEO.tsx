@@ -49,7 +49,7 @@ export interface Props {
     /**
      * @hidde true
      */
-    isFilter?: boolean
+    isFilter?: boolean;
 
     jsonLDs?: unknown[];
 }
@@ -125,7 +125,7 @@ function Component({
 
             {/* No index, no follow */}
             {isFilter ?
-                <RobotsFilter noFollow={noFollowFilter} noIndexing={noIndexingFilter} />
+                <RobotsFilter noFollowFilter={noFollowFilter} noIndexingFilter={noIndexingFilter} />
                 :
                 <Robots noFollow={noFollow} noIndexing={noIndexing} />
             }

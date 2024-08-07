@@ -46,7 +46,7 @@ export interface Props {
 export function loader(_props: Props, _req: Request, ctx: AppContext) {
 
     const url = new URL(_req.url)
-    const isSearch = url.search != ""
+    const isFilter = url.search != ""
 
     const props = _props as Partial<Props>;
     const {
@@ -101,7 +101,7 @@ export function loader(_props: Props, _req: Request, ctx: AppContext) {
         noFollow,
         noFollowFilter,
         noIndexingFilter,
-        isSearch
+        isFilter
     };
 }
 
